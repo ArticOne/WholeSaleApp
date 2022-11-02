@@ -13,7 +13,7 @@ namespace WholeSaleApp.Shared.Model.CodeBook
         public decimal Value { get; set; }
         public int VatTypeId { get; set; }
         public VatType VatType { get; set; }
-        public DateOnly StartDate { get; set; }
-        public DateOnly EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

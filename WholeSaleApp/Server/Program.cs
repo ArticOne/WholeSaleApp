@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+using WholeSaleApp.Server.Data;
 
 namespace WholeSaleApp
 {
@@ -12,7 +15,7 @@ namespace WholeSaleApp
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
-
+            builder.Services.AddDbContext<WsDbContext>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,6 +41,7 @@ namespace WholeSaleApp
             app.MapRazorPages();
             app.MapControllers();
             app.MapFallbackToFile("index.html");
+
 
             app.Run();
         }
