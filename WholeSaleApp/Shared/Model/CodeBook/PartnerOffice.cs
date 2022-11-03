@@ -12,7 +12,7 @@ namespace WholeSaleApp.Shared.Model.CodeBook
         public int Name { get; set; }
         public int PartnerId { get; set; }
         public Partner Partner { get; set; }
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
         public Location Location { get; set; }
         public string Address { get; set; }
     }

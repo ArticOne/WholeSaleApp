@@ -35,14 +35,13 @@ namespace WholeSaleApp.Server.Data
                 .IsRequired();
             modelBuilder.Entity<PartnerOffice>()
                 .HasOne<Location>(po => po.Location)
-                .WithOne()
-                .IsRequired();
+                .WithOne();
             modelBuilder.Entity<PartnerOffice>()
                 .HasOne<Partner>(po => po.Partner)
                 .WithOne()
                 .IsRequired();
             modelBuilder.Entity<Vat>()
-                .HasOne<VatType>(v => v.VatType)
+                .HasOne<Good>(v => v.VatType)
                 .WithOne()
                 .IsRequired();
         }
