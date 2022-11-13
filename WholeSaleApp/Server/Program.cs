@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using WholeSaleApp.Server.Data;
+using WholeSaleApp.Server.Interfaces;
+using WholeSaleApp.Server.Services;
 
 namespace WholeSaleApp
 {
@@ -16,6 +18,7 @@ namespace WholeSaleApp
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<WsDbContext>();
+            builder.Services.AddScoped<IMapperService,MapperService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

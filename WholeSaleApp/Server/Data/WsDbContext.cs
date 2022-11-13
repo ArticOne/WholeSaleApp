@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
+using WholeSaleApp.Shared.DTOs.Documents.Invoices;
 using WholeSaleApp.Shared.Model.CodeBook;
 using WholeSaleApp.Shared.Model.Documents.Invoices;
 
