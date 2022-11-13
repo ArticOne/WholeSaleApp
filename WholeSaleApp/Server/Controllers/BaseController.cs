@@ -12,48 +12,50 @@ namespace WholeSaleApp.Server.Controllers
     [ApiController]
     public class BaseController<TDto, TModel> : ControllerBase where TDto : BaseDto where TModel : BaseModel
     {
-        private readonly WsDbContext db;
-        private readonly IMapperService mapperService;
+        private readonly WsDbContext _db;
+        private readonly IMapperService _mapperService;
 
 
 
         public BaseController(IMapperService mapperService, WsDbContext db)
         {
-            this.db = db;
-            this.mapperService = mapperService;
+            _db = db;
+            _mapperService = mapperService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TDto>>> Get()
         {
-            return await db.Set<TModel>().Select( x => mapperService.ToDto<TModel,TDto>(x)).ToListAsync();
+            return await _db.Set<TModel>().Select(x => _mapperService.ToDto<TModel, TDto>(x)).ToListAsync();
         }
 
         [HttpGet("/{id}")]
         public async Task<ActionResult<TDto>> Get(int id)
         {
-            var obj = await db.Set<TModel>().FindAsync(id);
-            return mapperService.ToDto<TModel, TDto>(obj);
+            var obj = await _db.Set<TModel>().FindAsync(id);
+            return _mapperService.ToDto<TModel, TDto>(obj);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] TDto newModel)
+        public async Task<ActionResult> Post([FromBody] TDto newDto)
         {
-        //    db.Add<TModel>(newModel);
-            db.SaveChanges();
+            _db.Add<TModel>(_mapperService.ToModel<TModel, TDto>(newDto));
+            _db.SaveChanges();
             return Ok();
         }
 
         [HttpPut("/{id}")]
-        public void Put(int id, [FromBody] TDto updatedModel)
+        public async Task<ActionResult> Put(int id, [FromBody] TDto updatedDto)
         {
-          //  db.Update<TModel>(updatedModel);
+            _db.Update<TModel>(_mapperService.ToModel<TModel,TDto>(updatedDto));
+            return Ok();
         }
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var entityToRemove = db.Set<TModel>().FindAsync(id);
-            db.Remove(entityToRemove);
+            var entityToRemove = await _db.Set<TModel>().FindAsync(id);
+            _db.Remove(entityToRemove).Context.SaveChanges();
+            return Ok();
         }
     }
 }

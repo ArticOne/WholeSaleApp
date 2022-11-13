@@ -8,8 +8,6 @@ namespace WholeSaleApp.Shared.Model.CodeBook
 {
     public class Partner : BaseModel
     {
-        public string NationalId { get; set; }
-        public string TaxId { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
         public int LocationId { get; set; }

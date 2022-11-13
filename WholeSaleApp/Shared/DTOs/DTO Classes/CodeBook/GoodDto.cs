@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WholeSaleApp.Shared.Model;
+
 
 namespace WholeSaleApp.Shared.DTOs.CodeBook
 {
@@ -10,6 +7,8 @@ namespace WholeSaleApp.Shared.DTOs.CodeBook
     {
         public string Code { get; set; }
         public string Name { get; set; }
-        public int UoMId { get; set; }
+        public int UnitOfMeasureId { get; set; }
     }
+
+
 }
