@@ -8,7 +8,7 @@ using WholeSaleApp.Shared.Model;
 
 namespace WholeSaleApp.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/api/[controller]")]
     [ApiController]
     public class BaseController<TDto, TModel> : ControllerBase where TDto : BaseDto where TModel : BaseModel
     {
@@ -23,20 +23,20 @@ namespace WholeSaleApp.Server.Controllers
             _mapperService = mapperService;
         }
 
-        [HttpGet]
+        [HttpGet("/api/[controller]/[action]")]
         public async Task<ActionResult<IEnumerable<TDto>>> Get()
         {
             return await _db.Set<TModel>().Select(x => _mapperService.ToDto<TModel, TDto>(x)).ToListAsync();
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("/api/[controller]/[action]/{id}")]
         public async Task<ActionResult<TDto>> Get(int id)
         {
             var obj = await _db.Set<TModel>().FindAsync(id);
             return _mapperService.ToDto<TModel, TDto>(obj);
         }
 
-        [HttpPost]
+        [HttpPost("/api/[controller]")]
         public async Task<ActionResult> Post([FromBody] TDto newDto)
         {
             _db.Add<TModel>(_mapperService.ToModel<TModel, TDto>(newDto));
@@ -44,13 +44,13 @@ namespace WholeSaleApp.Server.Controllers
             return Ok();
         }
 
-        [HttpPut("/{id}")]
+        [HttpPut("/api/[controller]/{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] TDto updatedDto)
         {
             _db.Update<TModel>(_mapperService.ToModel<TModel,TDto>(updatedDto));
             return Ok();
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("/api/[controller]/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             var entityToRemove = await _db.Set<TModel>().FindAsync(id);

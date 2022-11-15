@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using WholeSaleApp.Client;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Server.Interfaces;
 using WholeSaleApp.Server.Services;
@@ -33,6 +34,8 @@ namespace WholeSaleApp
                 app.UseHsts();
             }
 
+            Zezancija(app);
+
             app.UseHttpsRedirection();
 
             app.UseBlazorFrameworkFiles();
@@ -40,12 +43,46 @@ namespace WholeSaleApp
 
             app.UseRouting();
 
-
             app.MapRazorPages();
-            app.MapControllers();
+            var proba = app.MapControllers();
             app.MapFallbackToFile("index.html");
 
             app.Run();
+        }
+
+        private static void Zezancija(WebApplication app)
+        {
+
+            app.Use(probatest());
+            app.MapGet("/proba", () => "Hello World Proba!");
+        }
+
+        private static Func<HttpContext, RequestDelegate, Task> probatest()
+        {
+            return async (context, next) =>
+            {
+                var currentEndpoint = context.GetEndpoint();
+
+                if (currentEndpoint is null)
+                {
+                    await next(context);
+                    return;
+                }
+
+                Console.WriteLine($"Endpoint: {currentEndpoint.DisplayName}");
+
+                if (currentEndpoint is RouteEndpoint routeEndpoint)
+                {
+                    Console.WriteLine($"  - Route Pattern: {routeEndpoint.RoutePattern}");
+                }
+
+                foreach (var endpointMetadata in currentEndpoint.Metadata)
+                {
+                    Console.WriteLine($"  - Metadata: {endpointMetadata}");
+                }
+
+                await next(context);
+            };
         }
     }
 }
