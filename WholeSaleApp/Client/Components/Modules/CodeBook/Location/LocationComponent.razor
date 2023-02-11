@@ -1,0 +1,9 @@
+﻿<MudPaper Class="pa-4">
+    <MudForm @ref="LocationInputForm">
+        <MudTextField T="string" Label="Poštanski kod" Required="true" RequiredError="Poštanski kod je obavezno polje!" />
+        <MudTextField T="string" Label="Naziv mesta" Required="true" RequiredError="Naziv mesta je obavezno polje!"/>
+        <div class="d-flex align-center justify-space-between">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Sačuvaj</MudButton>
+        </div>
+    </MudForm>
+</MudPaper>

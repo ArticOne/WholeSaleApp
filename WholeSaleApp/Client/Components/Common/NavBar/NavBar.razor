@@ -1,6 +1,6 @@
 ﻿<MudDrawerContainer Class="mud-height-full">
     <MudDrawer Fixed="false"  Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true" Style="z-index:1">
-        <MudNavMenu>
+        @*<MudNavMenu>
             <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Filled.Store" Class="" Style="height:40px">
                 <MudMenu Class="" Style="z-index:5" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopLeft" ActivationEvent="@MouseEvent.MouseOver" >
                     <ActivatorContent>
@@ -16,11 +16,20 @@
             </MudNavLink>
             <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Filled.LibraryBooks"><MudText Class="">Računi</MudText></MudNavLink>
             <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Filled.ShowChart"><MudText Class="">Izveštaji</MudText></MudNavLink>
-        </MudNavMenu>
+        </MudNavMenu>*@
+        <MudTreeView T="string">
+            <MudTreeViewItem Value="@("Getting Started")">
+                <MudTreeViewItem Value="@("Installation")" />
+            </MudTreeViewItem>
+            <MudTreeViewItem Value="@("Components")">
+                <MudTreeViewItem Value="@("Avatar")" />
+                <MudTreeViewItem Value="@("Button")" />
+            </MudTreeViewItem>
+        </MudTreeView>
     </MudDrawer>
 </MudDrawerContainer>
 @code {
-  //  bool open = false;
+   bool open = true;
 
  //   void MouseOver(MouseEventArgs e) { open = true; StateHasChanged(); }
   //  void MouseOut(MouseEventArgs e) { open = true; StateHasChanged(); }
