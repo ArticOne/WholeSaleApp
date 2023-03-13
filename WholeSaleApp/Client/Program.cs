@@ -17,7 +17,6 @@ namespace WholeSaleApp.Client
             builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();
-            //proba
         }
     }
 }
