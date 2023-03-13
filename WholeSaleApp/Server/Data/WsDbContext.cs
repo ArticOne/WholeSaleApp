@@ -42,7 +42,7 @@ namespace WholeSaleApp.Server.Data
                 .WithOne()
                 .IsRequired();
             modelBuilder.Entity<Vat>()
-                .HasOne<Good>(v => v.VatType)
+                .HasOne<VatType>(v => v.VatType)
                 .WithOne()
                 .IsRequired();
         }

@@ -12,8 +12,7 @@ namespace WholeSaleApp.Shared.Model.CodeBook
         public string Name { get; set; }
         public decimal Value { get; set; }
         public int VatTypeId { get; set; }
-        public Good VatType { get; set; }
+        public VatType VatType { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
     }
 }
