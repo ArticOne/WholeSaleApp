@@ -7,7 +7,6 @@ using WholeSaleApp.Shared.Model;
 
 namespace WholeSaleApp.Shared.DTOs
 {   
-    //is it necessary?
     public abstract class BaseDto
     {
         public int Id { get; set; }

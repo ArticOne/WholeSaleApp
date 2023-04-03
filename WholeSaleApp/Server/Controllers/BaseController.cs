@@ -23,13 +23,13 @@ namespace WholeSaleApp.Server.Controllers
             _mapperService = mapperService;
         }
 
-        [HttpGet("/api/[controller]/[action]")]
+        [HttpGet("/api/[controller]")]
         public async Task<ActionResult<IEnumerable<TDto>>> Get()
         {
             return await _db.Set<TModel>().Select(x => _mapperService.ToDto<TModel, TDto>(x)).ToListAsync();
         }
 
-        [HttpGet("/api/[controller]/[action]/{id}")]
+        [HttpGet("/api/[controller]/{id}")]
         public async Task<ActionResult<TDto>> Get(int id)
         {
             var obj = await _db.Set<TModel>().FindAsync(id);
@@ -40,7 +40,7 @@ namespace WholeSaleApp.Server.Controllers
         public async Task<ActionResult> Post([FromBody] TDto newDto)
         {
             _db.Add<TModel>(_mapperService.ToModel<TModel, TDto>(newDto));
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return Ok();
         }
 
@@ -48,6 +48,7 @@ namespace WholeSaleApp.Server.Controllers
         public async Task<ActionResult> Put(int id, [FromBody] TDto updatedDto)
         {
             _db.Update<TModel>(_mapperService.ToModel<TModel,TDto>(updatedDto));
+            await _db.SaveChangesAsync();
             return Ok();
         }
         [HttpDelete("/api/[controller]/{id}")]

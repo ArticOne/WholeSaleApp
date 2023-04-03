@@ -33,5 +33,14 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 ShortName = partner.ShortName
             };
         }
+        public static LocationDto ToDto(this Location location)
+        {
+            return new LocationDto()
+            {
+                Id = location.Id,
+                ZipCode = location.ZipCode,
+                Name = location.Name
+            };
+        }
     }
 }

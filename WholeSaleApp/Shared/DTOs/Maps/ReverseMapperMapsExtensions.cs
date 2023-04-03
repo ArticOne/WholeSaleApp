@@ -20,5 +20,14 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 UnitOfMeasureId = good.UnitOfMeasureId
             };
         }
+        public static Location FromDto(this LocationDto location)
+        {
+            return new Location()
+            {
+                Id = location.Id,
+                Name = location.Name,
+                ZipCode = location.ZipCode
+            };
+        }
     }
 }

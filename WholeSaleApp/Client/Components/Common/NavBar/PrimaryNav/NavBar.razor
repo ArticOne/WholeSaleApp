@@ -1,29 +1,13 @@
-﻿<MudPaper Height="100%" Style="overflow:hidden; position:relative;">
-    <MudDrawerContainer Class="mud-height-full">
-        <MudDrawer @bind-Open="@open" Fixed="false" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false">
-            <MudNavMenu>
-                <MudMenu ActivationEvent="MouseEvent.MouseOver" Label="Matični podaci" Icon="@Icons.Material.Filled.Store" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopLeft">
-                    <ChildContent>
-                        <div class="d-flex flex-column pa-1">
-                            <WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent></WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent>
-                        </div>
-                    </ChildContent>
-                </MudMenu>
-                <MudMenu ActivationEvent="MouseEvent.MouseOver" Label="Računi" Icon="@Icons.Material.Filled.LibraryBooks" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopLeft">
-                    <ChildContent>
-                        <div class="d-flex flex-column pa-1">
-                            <WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent></WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent>
-                        </div>
-                    </ChildContent>
-                </MudMenu>
-                <MudMenu ActivationEvent="MouseEvent.MouseOver" Label="Izveštaji" Icon="@Icons.Material.Filled.ShowChart" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopLeft">
-                    <ChildContent>
-                        <div class="d-flex flex-column pa-1">
-                            <WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent></WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent>
-                        </div>
-                    </ChildContent>
-                </MudMenu>
-            </MudNavMenu>
-        </MudDrawer>
-    </MudDrawerContainer>
-</MudPaper>
+﻿<MudDrawer @bind-Open="@open" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false">
+    <MudNavMenu Style="white-space: nowrap">
+        <MudTooltip Inline="false" Text="Matični podaci" Arrow="true" Placement="Placement.Right">
+            <MudNavLink Href="Locations" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store"></MudNavLink>
+        </MudTooltip>
+        <MudTooltip Inline="false" Text="Računi" Arrow="true" Placement="Placement.Right">
+            <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks"></MudNavLink>
+        </MudTooltip>
+        <MudTooltip Inline="false" Text="Izveštaji" Arrow="true" Placement="Placement.Right">
+            <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShowChart"></MudNavLink>
+        </MudTooltip>
+    </MudNavMenu>
+</MudDrawer>

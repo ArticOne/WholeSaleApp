@@ -1,1 +1,42 @@
-﻿
+﻿@page "/browser"
+
+@using WholeSaleApp.Shared.DTOs.CodeBook
+@using System.Text.Json.Serialization.Metadata
+@using System.Security.Cryptography.X509Certificates
+@typeparam T
+
+<MudPaper Elevation="25" Class="m-3">
+    <MudToolBar Class="p-1">
+        <MudTooltip Text="Unos">
+            <MudIconButton Icon="@Icons.Material.Outlined.Add" />
+        </MudTooltip>
+        <MudTooltip Text="Izmeni">
+        </MudTooltip>
+        <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
+        <MudTooltip Text="Briši">
+            <MudIconButton Icon="@Icons.Material.Outlined.Remove" Color="Color.Inherit" />
+        </MudTooltip>
+    </MudToolBar>
+</MudPaper>
+
+@*<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3">
+    <Columns>
+        @foreach (var property in GetPropertiesForDisplay())
+        {
+            <PropertyColumn Title="@GetTitle(property)" T="T" TProperty="dynamic" Property="o => GetPropertyValue(property,o)"></PropertyColumn>
+        }
+    </Columns>
+</MudDataGrid>
+
+*@
+
+            
+<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3">
+    <Columns>
+        @foreach (var property in GetPropertiesForDisplay())
+        {
+            @CreateComponent(property)
+        }
+    </Columns>
+</MudDataGrid>
+

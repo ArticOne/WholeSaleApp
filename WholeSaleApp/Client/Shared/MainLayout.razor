@@ -2,8 +2,19 @@
 <MudThemeProvider IsDarkMode=true/>
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudLayout Class="mud-height-full position-absolute">
+@*<MudLayout Class="mud-height-full position-absolute">
     <MudMainContent Class="p-0 w-100 h-100">
         @Body
+    </MudMainContent>
+</MudLayout>
+*@
+
+<MudLayout>
+    <WholeSaleApp.Client.Components.Common.NavBar.PrimaryNav.NavBar />
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
+            @Body
+        </MudContainer>
     </MudMainContent>
 </MudLayout>

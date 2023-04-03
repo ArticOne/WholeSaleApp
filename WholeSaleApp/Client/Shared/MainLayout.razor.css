@@ -21,6 +21,7 @@ main {
     align-items: center;
 }
 
+/* ReSharper disable CssNotResolved */
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;
         margin-left: 1.5rem;
@@ -79,3 +80,4 @@ main {
         padding-right: 1.5rem !important;
     }
 }
+/* ReSharper restore CssNotResolved */
