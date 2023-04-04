@@ -1,8 +1,5 @@
 ﻿@page "/browser"
 
-@using WholeSaleApp.Shared.DTOs.CodeBook
-@using System.Text.Json.Serialization.Metadata
-@using System.Security.Cryptography.X509Certificates
 @typeparam T
 
 <MudPaper Elevation="25" Class="m-3">
@@ -19,23 +16,12 @@
     </MudToolBar>
 </MudPaper>
 
-@*<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3">
-    <Columns>
-        @foreach (var property in GetPropertiesForDisplay())
-        {
-            <PropertyColumn Title="@GetTitle(property)" T="T" TProperty="dynamic" Property="o => GetPropertyValue(property,o)"></PropertyColumn>
-        }
-    </Columns>
-</MudDataGrid>
-
-*@
-
-            
+           
 <MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3">
     <Columns>
         @foreach (var property in GetPropertiesForDisplay())
         {
-            @CreateComponent(property)
+            @GetComponent(property)
         }
     </Columns>
 </MudDataGrid>
