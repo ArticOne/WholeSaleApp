@@ -1,23 +1,21 @@
-﻿@page "/browser"
-
-@typeparam T
+﻿@typeparam T
 
 <MudPaper Elevation="25" Class="m-3">
     <MudToolBar Class="p-1">
-        <MudTooltip Text="Unos">
+        <MudTooltip Text="Novi unos">
             <MudIconButton Icon="@Icons.Material.Outlined.Add" />
         </MudTooltip>
         <MudTooltip Text="Izmeni">
+            <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
         </MudTooltip>
-        <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
         <MudTooltip Text="Briši">
-            <MudIconButton Icon="@Icons.Material.Outlined.Remove" Color="Color.Inherit" />
+            <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
         </MudTooltip>
     </MudToolBar>
 </MudPaper>
 
            
-<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3">
+<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3" Hover="true">
     <Columns>
         @foreach (var property in GetPropertiesForDisplay())
         {

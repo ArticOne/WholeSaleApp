@@ -14,7 +14,7 @@ namespace WholeSaleApp.Client.Helpers
                 case Type partnerDto when partnerDto == typeof(PartnerDto):
                     return new Uri("https://localhost:7175/api/Partners");
                 default:
-                    throw new Exception("Url is not configured for type" + typeof(T).Name);
+                    throw new Exception($"Url is not configured for type{typeof(T).Name}");
             }
         }
     }

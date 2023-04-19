@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EfCore.SchemaCompare" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
@@ -18,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CppDLLs\CppDLLs.csproj" />
     <ProjectReference Include="..\Client\WholeSaleApp.Client.csproj" />
     <ProjectReference Include="..\Shared\WholeSaleApp.Shared.csproj" />
   </ItemGroup>

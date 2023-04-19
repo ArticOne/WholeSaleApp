@@ -26,7 +26,7 @@ namespace WholeSaleApp.Client.Services
         }
         public async Task<T> GetAsync(int id)
         {
-            var response = await _httpClient.GetAsync(_url + "/" + id);
+            var response = await _httpClient.GetAsync($"{_url}/{id}");
             var jsonString = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(jsonString);
         }
@@ -51,7 +51,7 @@ namespace WholeSaleApp.Client.Services
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync(_url + "/" + id);
+            var response = await _httpClient.DeleteAsync($"{_url}/{id}");
             return response.IsSuccessStatusCode;
         }
     }

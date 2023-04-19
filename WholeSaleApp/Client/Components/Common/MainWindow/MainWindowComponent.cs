@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using WholeSaleApp.Client.Components.Common.Browser;
+using WholeSaleApp.Client.Services;
 using WholeSaleApp.Shared.DTOs.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Common.MainWindow
@@ -21,9 +22,7 @@ namespace WholeSaleApp.Client.Components.Common.MainWindow
         {
             var dtoType = Type.GetType("WholeSaleApp.Shared.DTOs.CodeBook.LocationDto, WholeSaleApp.Shared");
             builder.OpenComponent(0, typeof(BrowserComponent<>).MakeGenericType(new Type[] { dtoType }));
-            builder.AddAttribute(1, "GridSource", new List<LocationDto>() { new LocationDto() { Id = 1, Name = "AVIONSKIR", ZipCode = "zipkod" } });
             builder.CloseComponent();
-
         };
     }
 }

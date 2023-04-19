@@ -1,8 +1,9 @@
 ﻿using System.Linq.Expressions;
-using System.Numerics;
 using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using WholeSaleApp.Client.Interfaces;
+using WholeSaleApp.Client.Services;
 using WholeSaleApp.Shared.DTOs;
 
 
@@ -10,11 +11,22 @@ namespace WholeSaleApp.Client.Components.Common.Browser
 {
     public partial class BrowserComponent<T> where T : BaseDto
     {
-        [Parameter] public List<T> GridSource { get; set; }
+        [Inject] private IGenericRepository<T> Repository{ get; set; } 
+        private List<T> GridSource { get; set; }
         private MudDataGrid<T> _dataGrid;
         private Dictionary<PropertyInfo, RenderFragment> columnFragments = new();
 
-
+        protected override void OnInitialized()
+        {
+            GridSource = new List<T>();
+            base.OnInitialized();
+        }
+        protected override async Task OnInitializedAsync()
+        {
+            GridSource = await Repository.GetAsync();
+            await base.OnInitializedAsync();
+         //   _dataGrid.Loading = false;
+        }
 
         private IEnumerable<PropertyInfo> GetPropertiesForDisplay()
         {

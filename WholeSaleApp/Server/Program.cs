@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using System.Text.Json;
 using WholeSaleApp.Client;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Server.Interfaces;
@@ -15,8 +16,7 @@ namespace WholeSaleApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<WsDbContext>();
             builder.Services.AddScoped<IMapperService,MapperService>();
