@@ -1,5 +1,6 @@
 ﻿@typeparam T
 
+
 <MudPaper Elevation="25" Class="m-3">
     <MudToolBar Class="p-1">
         <MudTooltip Text="Novi unos">
@@ -15,7 +16,7 @@
 </MudPaper>
 
            
-<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3" Hover="true">
+<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3" Hover="true" ServerData="ServerData" FilterMode="DataGridFilterMode.Simple" Filterable="true">
     <Columns>
         @foreach (var property in GetPropertiesForDisplay())
         {

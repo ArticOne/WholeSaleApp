@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq.Dynamic.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Server.Interfaces;
@@ -34,6 +35,14 @@ namespace WholeSaleApp.Server.Controllers
         {
             var obj = await _db.Set<TModel>().FindAsync(id);
             return _mapperService.ToDto<TModel, TDto>(obj);
+        }
+
+        [HttpGet("/api/[controller]/avion/{proba}")]
+        public async Task<ActionResult<TDto>> Get(string proba = "")
+        {
+            var res = await _db.Set<TModel>().Where(""" Name == "Bg2" """).ToListAsync();
+
+            return Ok(res);
         }
 
         [HttpPost("/api/[controller]")]

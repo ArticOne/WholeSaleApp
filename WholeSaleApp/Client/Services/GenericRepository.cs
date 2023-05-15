@@ -24,6 +24,15 @@ namespace WholeSaleApp.Client.Services
             var deserialisedResult = JsonSerializer.Deserialize<List<T>>(jsonString);
             return deserialisedResult == null ? new List<T>() : deserialisedResult;
         }
+
+        public async Task<List<T>> GetPaginatedAsync()
+        {
+            var response = await _httpClient.GetAsync($"{_url}/avion/ghj");
+            var jsonString = await response.Content.ReadAsStringAsync();
+            var deserialisedResult = JsonSerializer.Deserialize<List<T>>(jsonString);
+            return deserialisedResult == null ? new List<T>() : deserialisedResult;
+        }
+
         public async Task<T> GetAsync(int id)
         {
             var response = await _httpClient.GetAsync($"{_url}/{id}");

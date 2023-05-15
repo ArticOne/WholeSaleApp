@@ -1,12 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="6.1.0" />
+    <PackageReference Include="MudBlazor" Version="6.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enums\" />
   </ItemGroup>
 </Project>

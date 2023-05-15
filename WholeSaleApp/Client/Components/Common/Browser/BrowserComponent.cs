@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using WholeSaleApp.Client.Interfaces;
@@ -11,7 +12,8 @@ namespace WholeSaleApp.Client.Components.Common.Browser
 {
     public partial class BrowserComponent<T> where T : BaseDto
     {
-        [Inject] private IGenericRepository<T> Repository{ get; set; } 
+        [Inject] 
+        private IGenericRepository<T> Repository{ get; set; } 
         private List<T> GridSource { get; set; }
         private MudDataGrid<T> _dataGrid;
         private Dictionary<PropertyInfo, RenderFragment> columnFragments = new();
@@ -25,7 +27,6 @@ namespace WholeSaleApp.Client.Components.Common.Browser
         {
             GridSource = await Repository.GetAsync();
             await base.OnInitializedAsync();
-         //   _dataGrid.Loading = false;
         }
 
         private IEnumerable<PropertyInfo> GetPropertiesForDisplay()
@@ -39,8 +40,8 @@ namespace WholeSaleApp.Client.Components.Common.Browser
             var propertyAccess = Expression.Property(parameterExpression, propInfo.Name);
             var lambdaMethod = typeof(Expression).GetMethod("Lambda", 1, new[] { typeof(Expression), typeof(ParameterExpression[]) }, new ParameterModifier[] { new(2) });
             var func = typeof(Func<,>).MakeGenericType(typeof(T), propInfo.PropertyType);
-            var lamdaMethodInstance = lambdaMethod.MakeGenericMethod(func);
-            var expression = lamdaMethodInstance.Invoke(this, new object[] { propertyAccess, new[] { parameterExpression } });
+            var lambdaMethodInstance = lambdaMethod.MakeGenericMethod(func);
+            var expression = lambdaMethodInstance.Invoke(this, new object[] { propertyAccess, new[] { parameterExpression } });
 
 
             builder.OpenComponent(0, typeof(PropertyColumn<,>).MakeGenericType(new[] { typeof(T), propInfo.PropertyType }));
@@ -62,6 +63,16 @@ namespace WholeSaleApp.Client.Components.Common.Browser
                 columnFragments.Add(property,newRenderFragment);
                 return  newRenderFragment;
             }
+        }
+
+        private async Task<GridData<T>> ServerData(GridState<T> gridState)
+        {
+            var items = await Repository.GetAsync();
+        //    var filterFunctions = gridState.FilterDefinitions.Select(x => x.GenerateFilterFunction());
+
+            var json = JsonSerializer.Serialize(gridState);
+
+            return new GridData<T>() {Items = items};
         }
     }
 

@@ -1,0 +1,18 @@
+﻿<div>
+    <MudContainer @onmouseenter="OpenSubMenu" @onmouseleave="CloseSubMenu" Class="containerGrid">
+
+        <MudDrawer @bind-Open="@open" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false" Class="levo">
+            <MudNavMenu Style="white-space: nowrap">
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store">
+                </MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks">
+                </MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShowChart"></MudNavLink>
+            </MudNavMenu>
+        </MudDrawer>
+        <div class="@($"subMenu desno " + SubNavOpenClass)">
+            <WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent></WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent>
+        </div>
+
+    </MudContainer>
+</div>
