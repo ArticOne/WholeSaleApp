@@ -1,27 +1,31 @@
 ﻿@typeparam T
 
 
-<MudPaper Elevation="25" Class="m-3">
-    <MudToolBar Class="p-1">
-        <MudTooltip Text="Novi unos">
-            <MudIconButton Icon="@Icons.Material.Outlined.Add" />
-        </MudTooltip>
-        <MudTooltip Text="Izmeni">
-            <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
-        </MudTooltip>
-        <MudTooltip Text="Briši">
-            <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
-        </MudTooltip>
-    </MudToolBar>
-</MudPaper>
+<MudContainer MaxWidth="MaxWidth.False" Class="p-1">
+    <MudPaper Elevation="25" MaxWidth="100%">
+        <MudToolBar Class="p-0">
+            <MudTooltip Text="Novi unos">
+                <MudIconButton Icon="@Icons.Material.Outlined.Add" />
+            </MudTooltip>
+            <MudTooltip Text="Izmeni">
+                <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
+            </MudTooltip>
+            <MudTooltip Text="Briši">
+                <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
+            </MudTooltip>
+        </MudToolBar>
+    </MudPaper>
+</MudContainer>
 
-           
-<MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Class="m-3" Hover="true" ServerData="ServerData" FilterMode="DataGridFilterMode.Simple" Filterable="true">
-    <Columns>
-        @foreach (var property in GetPropertiesForDisplay())
-        {
-            @GetComponent(property)
-        }
-    </Columns>
-</MudDataGrid>
+
+<MudContainer Class="p-1" MaxWidth="MaxWidth.False">
+    <MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Hover="true" ServerData="ServerData" FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked">
+        <Columns>
+            @foreach (var property in GetPropertiesForDisplay())
+            {
+                @GetComponent(property)
+            }
+        </Columns>
+    </MudDataGrid>
+</MudContainer>
 

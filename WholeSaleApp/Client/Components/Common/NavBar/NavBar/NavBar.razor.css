@@ -1,5 +1,6 @@
 ﻿.subMenu {
     transform: translateX(-100%);
+    /*transform: translateX(0%);*/
     transition: transform 0.1s ease-in-out 0s !important;
 }
 
@@ -20,16 +21,20 @@
         "levo desno";
     padding: 0;
     width: 56px;
-    margin:0
+    margin: 0;
+    position: absolute
 }
 
 ::deep .levo {
     grid-area: levo;
+    z-index: 2
 }
 
 ::deep .desno {
     grid-area: desno;
     max-width: 450px;
     word-wrap: break-word;
-    margin: 0 !important
+    margin: 0 !important;
+    background-color: aquamarine;
+    z-index: 1
 }

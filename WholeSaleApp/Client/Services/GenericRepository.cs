@@ -9,13 +9,15 @@ namespace WholeSaleApp.Client.Services
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseDto
     {
+        private IConfiguration _configuration;
         protected HttpClient _httpClient;
         private Uri _url;
 
-        public GenericRepository(IHttpClientFactory httpClientFactory)
+        public GenericRepository(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
+            _configuration = configuration;
             _httpClient = httpClientFactory.CreateClient();
-            _url = UrlResolver.GetUrlForType<T>();
+            _url = new Uri(_configuration["BaseApiUrl"] + UrlResolver.GetUrlSectionForType<T>());
         }
         public async Task<List<T>> GetAsync()
         {

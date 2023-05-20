@@ -9,11 +9,11 @@ namespace CppDLLs
 {
     public class CppTestDLLWrapper
     {
-        [DllImport("DLLs/Dll1.dll")]
+        [DllImport("DLLs/TestDLL.dll")]
         public static extern void fibonacci_init();
-        [DllImport("DLLs/Dll1.dll")]
+        [DllImport("DLLs/TestDLL.dll")]
         public static extern bool fibonacci_next();
-        [DllImport("DLLs/Dll1.dll")]
+        [DllImport("DLLs/TestDLL.dll")]
         public static extern long fibonacci_current();
     }
 }

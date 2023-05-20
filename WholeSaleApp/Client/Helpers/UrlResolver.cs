@@ -5,16 +5,16 @@ namespace WholeSaleApp.Client.Helpers
 {
     public class UrlResolver
     {
-        public static Uri GetUrlForType<T>() where T : BaseDto
+        public static string GetUrlSectionForType<T>() where T : BaseDto
         {
             switch (typeof(T))
             {
                 case Type locationDto when locationDto == typeof(LocationDto):
-                    return new Uri("https://localhost:7175/api/Locations");
+                    return "Locations";
                 case Type partnerDto when partnerDto == typeof(PartnerDto):
-                    return new Uri("https://localhost:7175/api/Partners");
+                    return "Partners";
                 default:
-                    throw new Exception($"Url is not configured for type{typeof(T).Name}");
+                    throw new Exception($"Url section is not configured for type{typeof(T).Name}");
             }
         }
     }

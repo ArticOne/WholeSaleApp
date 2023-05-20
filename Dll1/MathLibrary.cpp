@@ -46,7 +46,7 @@ bool fibonacci_next()
 // Get the current value in the sequence.
 unsigned long long fibonacci_current()
 {
-    return 25;
+    return 32; //testing
 }
 
 // Get the current index position in the sequence.

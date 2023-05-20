@@ -7,7 +7,7 @@ using WholeSaleApp.Shared.DTOs.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
 {
-    public partial class LocationComponent
+    public partial class LocationComponent : CrudComponentBase<LocationDto>
     {
         [Parameter]
         public int Id { get; set; }
@@ -26,16 +26,20 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
 
             if (Id != 0)
             {
-                _repo.PutAsync(locationDto);    
-            } else
+                _repo.PutAsync(locationDto);
+            }
+            else
             {
                 _repo.PostAsync(locationDto);
             }
         }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            if (Id != 0) locationDto = _repo.GetAsync(Id).Result;
+            if (Id != 0)
+            {
+                locationDto = await _repo.GetAsync(Id);
+            }
         }
     }
 }

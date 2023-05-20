@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="DLLs\TestDLL.dll" />
+    <Content Include="DLLs\TestDLL.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

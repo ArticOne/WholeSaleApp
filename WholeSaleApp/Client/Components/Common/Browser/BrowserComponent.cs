@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
@@ -13,7 +14,10 @@ namespace WholeSaleApp.Client.Components.Common.Browser
     public partial class BrowserComponent<T> where T : BaseDto
     {
         [Inject] 
-        private IGenericRepository<T> Repository{ get; set; } 
+        private IGenericRepository<T> Repository{ get; set; }
+
+        [Inject] 
+        private NavigationManager NavManager { get; set; }
         private List<T> GridSource { get; set; }
         private MudDataGrid<T> _dataGrid;
         private Dictionary<PropertyInfo, RenderFragment> columnFragments = new();
@@ -73,6 +77,14 @@ namespace WholeSaleApp.Client.Components.Common.Browser
             var json = JsonSerializer.Serialize(gridState);
 
             return new GridData<T>() {Items = items};
+        }
+
+        private void RowClicked(DataGridRowClickEventArgs<T> tArgs)
+        {
+            if (tArgs.MouseEventArgs.Detail > 1)
+            {
+                NavManager.NavigateTo($"/Locations/{tArgs.Item.Id}");
+            }
         }
     }
 

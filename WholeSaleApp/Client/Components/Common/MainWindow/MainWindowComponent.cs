@@ -7,6 +7,11 @@ namespace WholeSaleApp.Client.Components.Common.MainWindow
 {
     public partial class MainWindowComponent
     {
+        [Parameter]
+        public string? TypeName { get; set; }
+
+
+
         private RenderFragment? _customRender;
 
         private RenderFragment? CustomRender
@@ -20,7 +25,12 @@ namespace WholeSaleApp.Client.Components.Common.MainWindow
 
         private RenderFragment CreateComponent() => builder =>
         {
-            var dtoType = Type.GetType("WholeSaleApp.Shared.DTOs.CodeBook.LocationDto, WholeSaleApp.Shared");
+            string proba = "";
+            if (TypeName == "Locations")
+            {
+                proba = "LocationDto";}
+
+            var dtoType = Type.GetType($"WholeSaleApp.Shared.DTOs.CodeBook.{proba}, WholeSaleApp.Shared");
             builder.OpenComponent(0, typeof(BrowserComponent<>).MakeGenericType(new Type[] { dtoType }));
             builder.CloseComponent();
         };

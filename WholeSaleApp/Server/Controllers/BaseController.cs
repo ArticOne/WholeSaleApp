@@ -37,14 +37,6 @@ namespace WholeSaleApp.Server.Controllers
             return _mapperService.ToDto<TModel, TDto>(obj);
         }
 
-        [HttpGet("/api/[controller]/avion/{proba}")]
-        public async Task<ActionResult<TDto>> Get(string proba = "")
-        {
-            var res = await _db.Set<TModel>().Where(""" Name == "Bg2" """).ToListAsync();
-
-            return Ok(res);
-        }
-
         [HttpPost("/api/[controller]")]
         public async Task<ActionResult> Post([FromBody] TDto newDto)
         {
@@ -56,7 +48,7 @@ namespace WholeSaleApp.Server.Controllers
         [HttpPut("/api/[controller]/{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] TDto updatedDto)
         {
-            _db.Update<TModel>(_mapperService.ToModel<TModel,TDto>(updatedDto));
+            _db.Update<TModel>(_mapperService.ToModel<TModel, TDto>(updatedDto));
             await _db.SaveChangesAsync();
             return Ok();
         }
@@ -67,5 +59,17 @@ namespace WholeSaleApp.Server.Controllers
             _db.Remove(entityToRemove).Context.SaveChanges();
             return Ok();
         }
+
+
+        /*********** TESTIRANJE - NEBITNO ***********/
+        [HttpGet("/api/[controller]/CppTest")]
+        public async Task<ActionResult> CppTest()
+        {
+            CppDLLs.CppTestDLLWrapper.fibonacci_init();
+            var proba = CppDLLs.CppTestDLLWrapper.fibonacci_current();
+            return Ok(proba);
+
+        }
+        /*********** TESTIRANJE - NEBITNO ***********/
     }
 }

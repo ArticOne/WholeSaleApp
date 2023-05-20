@@ -1,9 +1,11 @@
-﻿@page "/Locations"
+﻿@page "/Locations/{Id:int}"
+@page "/Locations/New"
+@inherits CrudComponentBase<WholeSaleApp.Shared.DTOs.CodeBook.LocationDto>
 
 <MudPaper Class="pa-4 m-4">
     <MudForm @ref="LocationInputForm">
-        <MudTextField @bind-Text="locationDto.Name" T="string" Label="Naziv mesta" Required="true" RequiredError="Naziv mesta je obavezno polje!" />
-        <MudTextField @bind-Text="locationDto.ZipCode" T="string" Label="Poštanski kod" Required="true" RequiredError="Poštanski kod je obavezno polje!" />
+        <MudTextField @bind-Text="locationDto.Name" T="string" Label="Naziv mesta" Required="true" RequiredError="Naziv mesta je obavezno polje!"/>
+        <MudTextField @bind-Text="locationDto.ZipCode" T="string" Label="Poštanski kod" Required="true" RequiredError="Poštanski kod je obavezno polje!"/>
         <div class="d-flex align-center justify-space-between">
             <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
         </div>
