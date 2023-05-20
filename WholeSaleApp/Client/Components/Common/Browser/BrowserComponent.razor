@@ -1,31 +1,36 @@
 ﻿@typeparam T
 
+<div>
+    <MudContainer MaxWidth="MaxWidth.False" Class="p-1">
+        <MudPaper Elevation="25" MaxWidth="100%">
+            <MudToolBar Class="p-0">
+                <MudTooltip Text="Novi unos">
+                    <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="ToolBarOpenNew" />
+                </MudTooltip>
+                <MudTooltip Text="Izmeni">
+                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" OnClick="ToolBarOpenEdit" />
+                </MudTooltip>
+                <MudTooltip Text="Briši">
+                    <MudIconButton Icon="@Icons.Material.Outlined.Remove" OnClick="ToolBarDelete" />
+                </MudTooltip>
+            </MudToolBar>
+        </MudPaper>
+    </MudContainer>
 
-<MudContainer MaxWidth="MaxWidth.False" Class="p-1">
-    <MudPaper Elevation="25" MaxWidth="100%">
-        <MudToolBar Class="p-0">
-            <MudTooltip Text="Novi unos">
-                <MudIconButton Icon="@Icons.Material.Outlined.Add" />
-            </MudTooltip>
-            <MudTooltip Text="Izmeni">
-                <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
-            </MudTooltip>
-            <MudTooltip Text="Briši">
-                <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
-            </MudTooltip>
-        </MudToolBar>
-    </MudPaper>
-</MudContainer>
 
+    <MudContainer Class="p-1" MaxWidth="MaxWidth.False">
+        <MudDataGrid @ref="_dataGrid" T="T"  Items="@GridSource" Hover="true"
+                     ServerData="ServerData"
+                     FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
+                     
+                     >
+            <Columns>
+                @foreach (var property in GetPropertiesForDisplay())
+                {
+                    @GetComponent(property)
+                }
+            </Columns>
+        </MudDataGrid>
+    </MudContainer>
 
-<MudContainer Class="p-1" MaxWidth="MaxWidth.False">
-    <MudDataGrid @bind-Ref="_dataGrid" T="T" @bind-Items="GridSource" Hover="true" ServerData="ServerData" FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked">
-        <Columns>
-            @foreach (var property in GetPropertiesForDisplay())
-            {
-                @GetComponent(property)
-            }
-        </Columns>
-    </MudDataGrid>
-</MudContainer>
-
+</div>

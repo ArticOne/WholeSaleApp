@@ -1,8 +1,8 @@
 ﻿<div>
-    <MudContainer @onmouseenter="OpenSubMenu" @onmouseleave="CloseSubMenu" Class="containerGrid">
+    <MudContainer Class="containerGrid" @onmouseleave="CloseSubMenu">
 
         <MudDrawer @bind-Open="@open" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false" Class="levo">
-            <MudNavMenu Style="white-space: nowrap">
+            <MudNavMenu Style="white-space: nowrap" @onmouseenter="OpenSubMenu" >
                 <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store">
                 </MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks">
