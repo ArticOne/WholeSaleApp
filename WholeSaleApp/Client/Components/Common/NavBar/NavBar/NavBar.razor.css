@@ -1,40 +1,39 @@
-﻿.subMenu {
-    transform: translateX(-100%);
-    /*transform: translateX(0%);*/
-    transition: transform 0.1s ease-in-out 0s !important;
+﻿::deep .hoverable:hover .sub {
+    transform: translate(0%) !important;
+    left: 100%;
+    pointer-events: auto;
+    opacity: 1;
 }
 
-.open {
-    transform: translateX(0);
+::deep .hoverable {
+    position: relative;
+    padding: 8px 16px 8px 16px;
 }
 
-
-::deep .containerGrid {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    grid-template-rows: 1fr;
-    grid-auto-columns: 1fr;
-    grid-auto-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "levo desno";
+::deep .sub {
+    Position: absolute;
+    transform: translate(-100%);
     padding: 0;
-    width: 56px;
     margin: 0;
-    position: absolute
+    max-width: 200px;
+    top: 0;
+    left: 0;
+    transition: all 0.25s ease-in-out 0s !important;
+    z-index: 1;
+    width: 200px;
+    pointer-events: none;
+    opacity: 0;
+    background: #2e2e36;
+    border-radius: 5px;
+    box-shadow: 0px 10px 22px 6px rgba(0,0,0,0.25);
 }
-
-::deep .levo {
-    grid-area: levo;
-    z-index: 2
-}
-
-::deep .desno {
-    grid-area: desno;
-    max-width: 450px;
-    word-wrap: break-word;
+/*
+::deep .mud-nav-link-text {
     margin: 0 !important;
-    /*background-color: aquamarine;*/
-    z-index: 1
-}
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 100%;
+}*/
+
+ 

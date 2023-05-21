@@ -1,18 +1,63 @@
-﻿<div>
-    <MudContainer Class="containerGrid" @onmouseleave="CloseSubMenu">
+﻿@using WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent
+<div>
+    <MudContainer>
+        <MudDrawer @bind-Open="@open" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false" Style="max-width: 56px; overflow:visible">
+            <MudNavMenu Style="white-space: nowrap; z-index: 5">
+                @* <div>
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store" Class="hoverable">
+                <MudContainer Class="sub">
+                <SubNavComponent>
+                </SubNavComponent>
+                </MudContainer>
+                </MudNavLink>
+                </div>
+                <div>
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks" Class="hoverable">
+                <MudContainer Class="sub">
+                <SubNavComponent>
+                </SubNavComponent>
+                </MudContainer>
+                </MudNavLink>
+                </div>
+                <div>
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShowChart" Class="hoverable">
+                <MudContainer Class="sub">
+                <SubNavComponent>
+                </SubNavComponent>
+                </MudContainer>
+                </MudNavLink>
+                </div>*@
 
-        <MudDrawer @bind-Open="@open" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false" Class="levo">
-            <MudNavMenu Style="white-space: nowrap" @onmouseenter="OpenSubMenu" >
-                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store">
-                </MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks">
-                </MudNavLink>
-                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShowChart"></MudNavLink>
+                <div>
+                    <MudContainer Class="hoverable">
+                        <MudIcon Icon="@Icons.Material.Filled.Store" Style=""></MudIcon>
+                        <MudContainer Class="sub">
+                            <SubNavComponent>
+                            </SubNavComponent>
+                        </MudContainer>
+                    </MudContainer>
+                </div>
+
+                <div>
+                    <MudContainer Class="hoverable">
+                        <MudIcon Icon="@Icons.Material.Filled.LibraryBooks" Style=""></MudIcon>
+                        <MudContainer Class="sub">
+                            <SubNavComponent>
+                            </SubNavComponent>
+                        </MudContainer>
+                    </MudContainer>
+                </div>
+
+                <div>
+                    <MudContainer Class="hoverable">
+                        <MudIcon Icon="@Icons.Material.Filled.ShowChart" Style=""></MudIcon>
+                        <MudContainer Class="sub">
+                            <SubNavComponent>
+                            </SubNavComponent>
+                        </MudContainer>
+                    </MudContainer>
+                </div>
             </MudNavMenu>
         </MudDrawer>
-        <div class="@($"subMenu desno " + SubNavOpenClass)">
-            <WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent></WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent.SubNavComponent>
-        </div>
-
     </MudContainer>
 </div>
