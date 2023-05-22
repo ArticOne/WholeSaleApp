@@ -1,7 +1,7 @@
 ﻿@typeparam T
 
-<div>
-    <MudContainer MaxWidth="MaxWidth.False" Class="p-1">
+<div class="box">
+    <MudContainer MaxWidth="MaxWidth.False" Class="p-1 boxRow boxHeader">
         <MudPaper Elevation="25" MaxWidth="100%">
             <MudToolBar Class="p-0">
                 <MudTooltip Text="Novi unos">
@@ -18,11 +18,12 @@
     </MudContainer>
 
 
-    <MudContainer Class="p-1" MaxWidth="MaxWidth.False">
+    <MudContainer Class="p-1 boxRow boxContent" MaxWidth="MaxWidth.False">
         <MudDataGrid @ref="_dataGrid" T="T"  Items="@GridSource" Hover="true"
                      ServerData="ServerData"
                      FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
-                     
+                     FixedHeader="true"
+                     Style="max-height: 100%"
                      >
             <Columns>
                 @foreach (var property in GetPropertiesForDisplay())
