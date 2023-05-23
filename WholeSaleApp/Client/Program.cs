@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using WholeSaleApp.Client.Interfaces;
-using WholeSaleApp.Client.Services;
+using WholeSaleApp.Client.Services.Repositories;
 
 namespace WholeSaleApp.Client
 {
@@ -17,6 +17,7 @@ namespace WholeSaleApp.Client
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddHttpClient();
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IMenuItemsRepository, MenuItemsRepository>();
             builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();

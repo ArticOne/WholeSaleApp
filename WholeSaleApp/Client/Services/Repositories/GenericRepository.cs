@@ -5,13 +5,13 @@ using WholeSaleApp.Client.Helpers;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Shared.DTOs;
 
-namespace WholeSaleApp.Client.Services
+namespace WholeSaleApp.Client.Services.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseDto
     {
-        private IConfiguration _configuration;
+        protected IConfiguration _configuration;
         protected HttpClient _httpClient;
-        private Uri _url;
+        protected Uri _url;
 
         public GenericRepository(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {

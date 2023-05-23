@@ -1,10 +1,13 @@
-﻿@inherits MudComponentBase
-<div >
-    <MudTreeView T="string" >
-        <MudNavLink Href="/Locations" Icon="@Icons.Material.Filled.LocationCity">Mesto</MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Filled.Business">Partner</MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Filled.Warehouse">Magacin</MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Filled.Edit">Jedinica mere </MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Filled.Inventory">Roba</MudNavLink>
-    </MudTreeView>
-</div>
+﻿@using WholeSaleApp.Client.Helpers
+@inherits MudComponentBase
+@if (MenuItems.Count > 0)
+{
+    <div>
+        <MudTreeView T="string">
+            @foreach (var menuItemDto in MenuItems)
+            {
+                <MudNavLink Href="@menuItemDto.Path" Icon="@TypeHelper.GetConstantValue(menuItemDto.Icon)">@menuItemDto.Caption</MudNavLink>
+            }
+        </MudTreeView>
+    </div>
+}

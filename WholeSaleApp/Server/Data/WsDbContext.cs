@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
-using WholeSaleApp.Shared.DTOs.Documents.Invoices;
 using WholeSaleApp.Shared.Model.CodeBook;
 using WholeSaleApp.Shared.Model.Documents.Invoices;
+using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Server.Data
 {
     public class WsDbContext : DbContext
     {
+        private readonly IConfiguration _config;
+
         public DbSet<Good> Goods { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Partner> Partners { get; set; }
@@ -18,11 +19,19 @@ namespace WholeSaleApp.Server.Data
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<PurchaseInvoice> PurchaseInvoices { get; set; }
         public DbSet<SalesInvoice> SalesInvoices { get; set; }
-        
+        public DbSet<MenuItem> MenuItems { get; set; }
+
+        public WsDbContext(IConfiguration config)
+        {
+            _config = config;
+        }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
-           .UseSqlServer("Data Source=DESKTOP-BUSTMRG;Initial Catalog=WholeSaleApp;Integrated Security=true;User Id=sa;Password=c2");
+           .UseSqlServer(_config.GetConnectionString("Db"), conf =>
+           {
+               conf.UseHierarchyId();
+           });
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

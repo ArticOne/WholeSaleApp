@@ -1,62 +1,21 @@
 ﻿@using WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent
+@using WholeSaleApp.Client.Helpers
 <div>
     <MudContainer Style="box-shadow: 30px 6px 29px -22px rgba(0,0,0,0.2);">
         <MudDrawer @bind-Open="@open" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false" Style="max-width: 56px; overflow:visible">
             <MudNavMenu Style="white-space: nowrap; z-index: 5">
-                @* <div>
-                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store" Class="hoverable">
-                <MudContainer Class="sub">
-                <SubNavComponent>
-                </SubNavComponent>
-                </MudContainer>
-                </MudNavLink>
-                </div>
-                <div>
-                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks" Class="hoverable">
-                <MudContainer Class="sub">
-                <SubNavComponent>
-                </SubNavComponent>
-                </MudContainer>
-                </MudNavLink>
-                </div>
-                <div>
-                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ShowChart" Class="hoverable">
-                <MudContainer Class="sub">
-                <SubNavComponent>
-                </SubNavComponent>
-                </MudContainer>
-                </MudNavLink>
-                </div>*@
-
-                <div>
-                    <MudContainer Class="hoverable">
-                        <MudIcon Icon="@Icons.Material.Filled.Store" Style=""></MudIcon>
-                        <MudContainer Class="sub">
-                            <SubNavComponent>
-                            </SubNavComponent>
+                @foreach (var menuItemDto in MenuItems)
+                {
+                    <div>
+                        <MudContainer Class="hoverable">
+                            <MudIcon Icon="@TypeHelper.GetConstantValue(menuItemDto.Icon)" Style=""></MudIcon>
+                            <MudContainer Class="sub">
+                                <SubNavComponent ParentMenuItemId="menuItemDto.Id">
+                                </SubNavComponent>
+                            </MudContainer>
                         </MudContainer>
-                    </MudContainer>
-                </div>
-
-                <div>
-                    <MudContainer Class="hoverable">
-                        <MudIcon Icon="@Icons.Material.Filled.LibraryBooks" Style=""></MudIcon>
-                        <MudContainer Class="sub">
-                            <SubNavComponent>
-                            </SubNavComponent>
-                        </MudContainer>
-                    </MudContainer>
-                </div>
-
-                <div>
-                    <MudContainer Class="hoverable">
-                        <MudIcon Icon="@Icons.Material.Filled.ShowChart" Style=""></MudIcon>
-                        <MudContainer Class="sub">
-                            <SubNavComponent>
-                            </SubNavComponent>
-                        </MudContainer>
-                    </MudContainer>
-                </div>
+                    </div>
+                }
             </MudNavMenu>
         </MudDrawer>
     </MudContainer>

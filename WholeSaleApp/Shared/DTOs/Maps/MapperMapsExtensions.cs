@@ -6,7 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WholeSaleApp.Shared.DTOs.CodeBook;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
 using WholeSaleApp.Shared.Model.CodeBook;
+using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Shared.DTOs.Maps
 {
@@ -40,6 +42,17 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 Id = location.Id,
                 ZipCode = location.ZipCode,
                 Name = location.Name
+            };
+        }
+
+        public static MenuItemDto ToDto(this MenuItem menuItem)
+        {
+            return new MenuItemDto()
+            {
+                Id = menuItem.Id,
+                Caption = menuItem.Caption,
+                Icon = menuItem.Icon,
+                Path = menuItem.Path
             };
         }
     }

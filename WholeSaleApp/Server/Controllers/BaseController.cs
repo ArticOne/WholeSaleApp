@@ -13,8 +13,8 @@ namespace WholeSaleApp.Server.Controllers
     [ApiController]
     public class BaseController<TDto, TModel> : ControllerBase where TDto : BaseDto where TModel : BaseModel
     {
-        private readonly WsDbContext _db;
-        private readonly IMapperService _mapperService;
+        protected readonly WsDbContext _db;
+        protected readonly IMapperService _mapperService;
 
 
 

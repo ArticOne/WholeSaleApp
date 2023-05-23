@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using WholeSaleApp.Client.Components.Common.Browser;
+using WholeSaleApp.Client.Helpers;
 using WholeSaleApp.Client.Services;
 using WholeSaleApp.Shared.DTOs.CodeBook;
 
@@ -25,12 +26,7 @@ namespace WholeSaleApp.Client.Components.Common.MainWindow
 
         private RenderFragment CreateComponent() => builder =>
         {
-            string proba = "";
-            if (TypeName == "Locations")
-            {
-                proba = "LocationDto";}
-
-            var dtoType = Type.GetType($"WholeSaleApp.Shared.DTOs.CodeBook.{proba}, WholeSaleApp.Shared");
+            var dtoType = Type.GetType($"WholeSaleApp.Shared.DTOs.CodeBook.{UrlResolver.GetTypeForUrl(TypeName).Name}, WholeSaleApp.Shared");
             builder.OpenComponent(0, typeof(BrowserComponent<>).MakeGenericType(new Type[] { dtoType }));
             builder.CloseComponent();
         };
