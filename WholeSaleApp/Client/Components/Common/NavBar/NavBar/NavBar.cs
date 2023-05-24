@@ -12,7 +12,7 @@ namespace WholeSaleApp.Client.Components.Common.NavBar.NavBar
 
         protected override async Task OnInitializedAsync()
         {
-            MenuItems = await Repository.GetMenuItemsAtLevelAsync(1);
+            MenuItems = await Repository.GetAsync();
             await base.OnInitializedAsync();
         }
 

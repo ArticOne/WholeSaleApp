@@ -37,6 +37,7 @@ namespace WholeSaleApp.Shared.DTOs.Maps
             return new MenuItem()
             {
                 Id = menuItemDto.Id,
+                HierarchyId = menuItemDto.HierarchyId,
                 Caption = menuItemDto.Caption,
                 Icon = menuItemDto.Icon,
                 Path = menuItemDto.Path,
