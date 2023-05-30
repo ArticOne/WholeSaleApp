@@ -1,16 +1,18 @@
 ﻿@using WholeSaleApp.Client.Helpers
 @inherits MudComponentBase
-@if (MenuItems.Count > 0)
+@if (Parent.Children.Count > 0)
 {
     <div>
-        @if (MenuItems != null && MenuItems.Count > 0)
+        @if (Parent.Children != null && Parent.Children.Count > 0)
         {
-            <MudTreeView Items="MenuItems" Hover="false" ExpandOnClick="true">
+            <MudCardHeader Class="justify-content-around" >
+                <MudText Typo="Typo.h6">@Parent.Item.Caption</MudText>
+            </MudCardHeader>
+            <MudTreeView Items="Parent.Children" Hover="false" ExpandOnClick="true">
                 <ItemTemplate>
-                    <MudTreeViewItem Items="@context.Children" Value="@context" @bind-Expanded="@context.IsExpanded"
-                                     >
+                    <MudTreeViewItem Items="@context.Children" Value="@context" @bind-Expanded="@context.IsExpanded">
                         <Content>
-                            <MudTreeViewItemToggleButton @bind-Expanded="@context.IsExpanded" Visible="@context.HasChild"/>
+                            <MudTreeViewItemToggleButton @bind-Expanded="@context.IsExpanded" Visible="@context.HasChild" />
                             @if (!@context.HasChild)
                             {
                                 <MudNavLink Icon="@TypeHelper.GetConstantValue(context.Item.Icon)" Href="@context.Item.Path">@context.Item.Caption</MudNavLink>

@@ -1,5 +1,6 @@
 ﻿@using WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent
 @using WholeSaleApp.Client.Helpers
+@using WholeSaleApp.Shared.DTOs.DTO_Classes.UI
 <div>
     <MudContainer Style="box-shadow: 30px 6px 29px -22px rgba(0,0,0,0.2);">
         <MudDrawer @bind-Open="@open" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false" Style="max-width: 56px; overflow:visible">
@@ -12,13 +13,13 @@
                             @if (MenuItems.Any(x => x.HierarchyId.IsDescendantOf(menuItemDto.HierarchyId) && x.Id != menuItemDto.Id))
                             {
                                 <MudContainer Class="sub">
-                                    <SubNavComponent MenuItems="@MenuItemHelper.ConvertToTreeView(MenuItems.Where(x => x.HierarchyId.IsDescendantOf(menuItemDto.HierarchyId) && x.Id != menuItemDto.Id).ToList())">
+                                    <SubNavComponent Parent="new MenuItemTreeViewItem() {Item = menuItemDto, Children = MenuItemHelper.ConvertToTreeView(MenuItems.Where(x => x.HierarchyId.IsDescendantOf(menuItemDto.HierarchyId) && x.Id != menuItemDto.Id).ToList())}">
                                     </SubNavComponent>
                                 </MudContainer>
                             }
-                            @if(menuItemDto.Path != "")
+                            @if (menuItemDto.Path != "")
                             {
-                            <MudNavLink Class="RootMenuItemWithLink" Href="@menuItemDto.Path"></MudNavLink>
+                                <MudNavLink Class="RootMenuItemWithLink" Href="@menuItemDto.Path"></MudNavLink>
                             }
                         </MudContainer>
                     </div>

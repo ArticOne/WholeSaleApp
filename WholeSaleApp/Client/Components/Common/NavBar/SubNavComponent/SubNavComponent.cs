@@ -10,7 +10,12 @@ namespace WholeSaleApp.Client.Components.Common.NavBar.SubNavComponent
 {
     public partial class SubNavComponent : MudComponentBase
     {
-        [Parameter] public HashSet<MenuItemTreeViewItem> MenuItems { get; set; } = new();
+        [Parameter]
+        public MenuItemTreeViewItem Parent
+        {
+            get;
+            set;
+        }
 
         protected override async Task OnInitializedAsync()
         {
