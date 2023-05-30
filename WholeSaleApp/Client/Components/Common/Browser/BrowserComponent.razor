@@ -24,14 +24,18 @@
                      FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
                      FixedHeader="true"
                      Style="max-height: 100%"
-                     >
+        >
             <Columns>
                 @foreach (var property in GetPropertiesForDisplay())
                 {
                     @GetComponent(property)
                 }
             </Columns>
+            <PagerContent>
+                <MudDataGridPager/>
+            </PagerContent>
         </MudDataGrid>
+
     </MudContainer>
 
 </div>

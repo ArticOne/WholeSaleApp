@@ -30,3 +30,23 @@
 ::deep div.mud-table-container {
     max-height: 100%;
 }
+
+::deep .boxRow.boxFooter {
+    flex: 0 1 40px;
+}
+
+::deep .mud-table {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+::deep .mud-table-container {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+::deep .mud-table-pagination {
+    flex-shrink: 0;
+}
