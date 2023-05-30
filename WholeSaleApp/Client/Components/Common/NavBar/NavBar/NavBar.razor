@@ -12,7 +12,7 @@
                             @if (MenuItems.Any(x => x.HierarchyId.IsDescendantOf(menuItemDto.HierarchyId) && x.Id != menuItemDto.Id))
                             {
                                 <MudContainer Class="sub">
-                                    <SubNavComponent MenuItems="MenuItems.Where(x => x.HierarchyId.IsDescendantOf(menuItemDto.HierarchyId) && x.Id != menuItemDto.Id).ToList()">
+                                    <SubNavComponent MenuItems="@MenuItemHelper.ConvertToTreeView(MenuItems.Where(x => x.HierarchyId.IsDescendantOf(menuItemDto.HierarchyId) && x.Id != menuItemDto.Id).ToList())">
                                     </SubNavComponent>
                                 </MudContainer>
                             }

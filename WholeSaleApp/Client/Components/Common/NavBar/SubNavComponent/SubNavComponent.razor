@@ -3,11 +3,26 @@
 @if (MenuItems.Count > 0)
 {
     <div>
-        <MudTreeView T="string">
-            @foreach (var menuItemDto in MenuItems)
-            {
-                <MudNavLink Href="@menuItemDto.Path" Icon="@TypeHelper.GetConstantValue(menuItemDto.Icon)">@menuItemDto.Caption</MudNavLink>
-            }
-        </MudTreeView>
+        @if (MenuItems != null && MenuItems.Count > 0)
+        {
+            <MudTreeView Items="MenuItems" Hover="false" ExpandOnClick="true">
+                <ItemTemplate>
+                    <MudTreeViewItem Items="@context.Children" Value="@context" @bind-Expanded="@context.IsExpanded"
+                                     >
+                        <Content>
+                            <MudTreeViewItemToggleButton @bind-Expanded="@context.IsExpanded" Visible="@context.HasChild"/>
+                            @if (!@context.HasChild)
+                            {
+                                <MudNavLink Icon="@TypeHelper.GetConstantValue(context.Item.Icon)" Href="@context.Item.Path">@context.Item.Caption</MudNavLink>
+                            }
+                            else
+                            {
+                                <MudNavLink Icon="@TypeHelper.GetConstantValue(context.Item.Icon)" ActiveClass="">@context.Item.Caption</MudNavLink>
+                            }
+                        </Content>
+                    </MudTreeViewItem>
+                </ItemTemplate>
+            </MudTreeView>
+        }
     </div>
 }
