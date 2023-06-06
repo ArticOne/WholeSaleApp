@@ -1,0 +1,30 @@
+﻿@typeparam T
+@using WholeSaleApp.Client.Components.Common.Browser
+@using WholeSaleApp.Shared.DTOs.CodeBook
+<div>
+    <MudDialog>
+        <DialogContent>
+            <MudContainer Class="p-1 boxRow boxContent" MaxWidth="MaxWidth.False">
+                <MudDataGrid @ref="_dataGrid" T="T" Items="@GridSource" Hover="true"
+                             FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
+                             FixedHeader="true"
+                             Style="max-height: 100%">
+                    <Columns>
+                        @foreach (var property in GetPropertiesForDisplay())
+                        {
+                            @GetComponent(property)
+                        }
+                    </Columns>
+                    <PagerContent>
+                        <MudDataGridPager />
+                    </PagerContent>
+                </MudDataGrid>
+
+            </MudContainer>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Otkaži</MudButton>
+            <MudButton Color="Color.Primary" OnClick="Submit" Disabled="@(_dataGrid?.SelectedItem == null)">Izaberi</MudButton>
+        </DialogActions>
+    </MudDialog>
+</div>

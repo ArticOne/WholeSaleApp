@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CppDLLs", "CppDLLs\CppDLLs.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3AA373FC-6E02-45DB-8A13-E7423305519F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WholeSaleApp.Tests", "WholeSaleApp.Tests\WholeSaleApp.Tests.csproj", "{CB0CCBF4-17C0-42F1-A537-C96D41BBABBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WholeSaleApp.Tests", "WholeSaleApp.Tests\WholeSaleApp.Tests.csproj", "{CB0CCBF4-17C0-42F1-A537-C96D41BBABBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

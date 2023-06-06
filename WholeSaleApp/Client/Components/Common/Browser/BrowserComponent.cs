@@ -81,12 +81,10 @@ namespace WholeSaleApp.Client.Components.Common.Browser
             {
                 return columnFragments[property];
             }
-            else
-            {
-                var newRenderFragment = CreateComponent(property);
-                columnFragments.Add(property, newRenderFragment);
-                return newRenderFragment;
-            }
+
+            var newRenderFragment = CreateComponent(property);
+            columnFragments.Add(property, newRenderFragment);
+            return newRenderFragment;
         }
 
         private async Task<GridData<T>> ServerData(GridState<T> gridState)

@@ -26,7 +26,7 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
 
             if (Id != 0)
             {
-                _repo.PutAsync(locationDto);
+                _repo.PutAsync(Id, locationDto);
             }
             else
             {

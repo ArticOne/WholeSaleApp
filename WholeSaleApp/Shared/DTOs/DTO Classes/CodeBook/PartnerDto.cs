@@ -13,7 +13,7 @@ namespace WholeSaleApp.Shared.DTOs.CodeBook
         public string Name { get; set; }
         public string ShortName { get; set; }
         public int LocationId { get; set; }
-        public Location Location { get; set; }
+        public LocationDto Location { get; set; }
         public string Address { get; set; }
     }
 }

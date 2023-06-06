@@ -20,7 +20,6 @@
 
     <MudContainer Class="p-1 boxRow boxContent" MaxWidth="MaxWidth.False">
         <MudDataGrid @ref="_dataGrid" T="T"  Items="@GridSource" Hover="true"
-                     ServerData="ServerData"
                      FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
                      FixedHeader="true"
                      Style="max-height: 100%"

@@ -2,6 +2,7 @@
 using System.Reflection;
 using WholeSaleApp.Server.Interfaces;
 using WholeSaleApp.Shared.DTOs;
+using WholeSaleApp.Shared.DTOs.CodeBook;
 using WholeSaleApp.Shared.DTOs.Maps;
 using WholeSaleApp.Shared.Model;
 using WholeSaleApp.Shared.Model.CodeBook;

@@ -11,7 +11,6 @@ namespace WholeSaleApp.Server.Converters
         public override HierarchyId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string id = reader.GetString();
-            //var sqlHierarchyId = (id == null || id == HierarchyId.Null.ToString()) ? SqlHierarchyId.Null : HierarchyId.Parse(id);
             return HierarchyId.Parse(id);
         }
 

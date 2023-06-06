@@ -51,9 +51,9 @@ namespace WholeSaleApp.Client.Services.Repositories
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> PutAsync(T dtoToPut)
+        public async Task<bool> PutAsync(int id, T dtoToPut)
         {
-            var response = await _httpClient.PutAsync(_url,
+            var response = await _httpClient.PutAsync($"{_url}/{id}",
                                                                         new StringContent(JsonSerializer.Serialize(dtoToPut),
                                                                         Encoding.UTF8,
                                                                         "application/json"));
