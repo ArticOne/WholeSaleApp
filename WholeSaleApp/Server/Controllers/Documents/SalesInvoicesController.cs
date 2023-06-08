@@ -1,14 +1,15 @@
-﻿//using WholeSaleApp.Server.Data;
-//using WholeSaleApp.Server.Interfaces;
-//using WholeSaleApp.Shared.DTOs.Documents.Invoices;
-//using WholeSaleApp.Shared.Model.Documents.Invoices;
+﻿using WholeSaleApp.Server.Data;
+using WholeSaleApp.Server.Interfaces;
+using WholeSaleApp.Shared.DTOs.Documents.Invoices;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
+using WholeSaleApp.Shared.Model.Documents.Invoices;
 
-//namespace WholeSaleApp.Server.Controllers.Documents
-//{
-//    public class SalesInvoicesController : BaseController<SalesInvoiceDto,SalesInvoice>
-//    {
-//        public SalesInvoicesController(IMapperService mapperService, WsDbContext db) : base(mapperService, db)
-//        {
-//        }
-//    }
-//}
+namespace WholeSaleApp.Server.Controllers.Documents
+{
+    public class SalesInvoicesController : BaseController<SalesInvoiceDto, VatAddDto, SalesInvoice>
+    {
+        public SalesInvoicesController(IMapperService mapperService, WsDbContext db) : base(mapperService, db)
+        {
+        }
+    }
+}

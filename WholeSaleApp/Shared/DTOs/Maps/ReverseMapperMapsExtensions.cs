@@ -14,16 +14,16 @@ namespace WholeSaleApp.Shared.DTOs.Maps
 {
     public static class ReverseMapperMapsExtensions
     {
-        //public static Good FromRequestDto(this GoodDto goodDto)
-        //{
-        //    return new Good()
-        //    {
-        //        Code = goodDto.Code,
-        //        Id = goodDto.Id,
-        //        Name = goodDto.Name,
-        //        UnitOfMeasureId = goodDto.UnitOfMeasureId
-        //    };
-        //}
+        #region CodeBook
+        public static Good FromRequestDto(this GoodAddDto goodDto)
+        {
+            return new Good()
+            {
+                Code = goodDto.Code,
+                Name = goodDto.Name,
+                UnitOfMeasureId = goodDto.UnitOfMeasureId
+            };
+        }
         public static Location FromRequestDto(this LocationAddDto locationDto)
         {
             return new Location()
@@ -32,7 +32,6 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 ZipCode = locationDto.ZipCode
             };
         }
-
         public static Partner FromRequestDto(this PartnerAddDto partnerDto)
         {
             return new Partner()
@@ -43,7 +42,6 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 ShortName = partnerDto.ShortName
             };
         }
-
         public static MenuItem FromRequestDto(this MenuItemAddDto menuItemDto)
         {
             return new MenuItem()
@@ -54,5 +52,12 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 Path = menuItemDto.Path,
             };
         }
+        #endregion
+
+        #region Documents
+
+        #endregion
+
+
     }
 }

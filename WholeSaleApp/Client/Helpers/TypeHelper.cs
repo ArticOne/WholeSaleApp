@@ -13,7 +13,7 @@ namespace WholeSaleApp.Client.Helpers
             try
             {
                 Type currentType = typeof(Icons); // start with the outermost class
-                for (int i = 1; i < parts.Length - 1; i++) // iterate through the rest of the classes
+                for (int i = 0; i < parts.Length - 1; i++) // iterate through the rest of the classes
                 {
                     // Get the nested Type object for the current part
                     currentType = currentType.GetNestedType(parts[i], BindingFlags.Public | BindingFlags.NonPublic);

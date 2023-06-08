@@ -1,8 +1,9 @@
 ﻿namespace WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook
 {
-    public class LocationAddDto
+    public class GoodAddDto
     {
-        public string ZipCode { get; set; }
+        public string Code { get; set; }
         public string Name { get; set; }
+        public int UnitOfMeasureId { get; set; }
     }
 }

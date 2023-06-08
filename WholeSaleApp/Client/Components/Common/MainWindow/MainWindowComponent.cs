@@ -26,8 +26,9 @@ namespace WholeSaleApp.Client.Components.Common.MainWindow
 
         private RenderFragment CreateComponent() => builder =>
         {
-            var dtoType = Type.GetType($"WholeSaleApp.Shared.DTOs.CodeBook.{UrlResolver.GetTypeForUrl(TypeName).Name}, WholeSaleApp.Shared");
-            builder.OpenComponent(0, typeof(BrowserComponent<>).MakeGenericType(new Type[] { dtoType }));
+            var dtoType = UrlResolver.GetTypeForUrl(TypeName);
+            var dtoAddType = UrlResolver.GetTypeForUrl(TypeName,true);
+            builder.OpenComponent(0, typeof(BrowserComponent<,>).MakeGenericType(new Type[] { dtoType, dtoAddType }));
             builder.CloseComponent();
         };
     }

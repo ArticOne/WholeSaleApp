@@ -16,11 +16,11 @@ using static MudBlazor.CategoryTypes;
 
 namespace WholeSaleApp.Client.Components.Common.Browser
 {
-    public partial class BrowserComponent<T> where T : BaseDto
+    public partial class BrowserComponent<T, TAddDto> where T : BaseDto where TAddDto : class
     {
         [Inject] private IDialogService DialogService { get; set; }
 #warning "FIX THIS!"
-        [Inject] private IGenericRepository<T, PartnerAddDto> Repository { get; set; }
+        [Inject] private IGenericRepository<T, TAddDto> Repository { get; set; }
 
         [Inject] private NavigationManager NavManager { get; set; }
         private ObservableCollection<T> GridSource { get; set; }

@@ -30,12 +30,17 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
             {
                 _repo.PutAsync(Id, new LocationAddDto()
                 {
-
+                    Name = locationDto.Name,
+                    ZipCode = locationDto.ZipCode
                 });
             }
             else
             {
-              //  _repo.PostAsync(locationDto);
+                _repo.PostAsync(new LocationAddDto()
+                {
+                    Name = locationDto.Name,
+                    ZipCode = locationDto.ZipCode
+                });
             }
         }
 
