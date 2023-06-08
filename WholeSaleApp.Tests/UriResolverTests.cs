@@ -1,7 +1,7 @@
 using Microsoft.VisualBasic;
 using MudBlazor;
 using System.Reflection;
-using WholeSaleApp.Client.Components.Modules;
+using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Helpers;
 
 namespace WholeSaleApp.Tests

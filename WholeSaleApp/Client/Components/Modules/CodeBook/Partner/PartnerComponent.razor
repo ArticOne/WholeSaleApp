@@ -2,21 +2,21 @@
 @page "/Partners/New"
 @using WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
 @using WholeSaleApp.Shared.DTOs.CodeBook
-@inherits CrudComponentBase<WholeSaleApp.Shared.DTOs.CodeBook.PartnerDto>
+@using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook
+@using WholeSaleApp.Client.Components.Modules.CrudComponentBase
 
+@inherits CrudComponentBase<PartnerDto>
+<MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
 
-<MudPaper Class="pa-4 m-4">
+<MudPaper Class="pa-4 m-4" MaxWidth="500px">
     <MudForm @ref="partnerInputForm">
         <MudTextField @bind-Text="partnerDto.Name" T="string" Label="Naziv partnera" Required="true" RequiredError="Naziv partnera je obavezno polje!" />
         <MudTextField @bind-Text="partnerDto.ShortName" T="string" Label="Skraćeni naziv partnera" Required="true" RequiredError="Skraćeni naziv partnera je obavezno polje!" />
-        <LookUpComponent Style="max-width: 450px" LookUpComponentTitle="Mesto" DialogTitle="Izaberite Mesto" T="LocationDto" SelectedItem="dto => partnerDto.Location = dto">
-            <MudField Style="padding: 20px" Label="Naziv mesta">@partnerDto?.Location?.Name</MudField>
-            <MudField Style="padding: 20px" Label="PTT Broj">@partnerDto?.Location?.ZipCode</MudField>
+        <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Mesto" DialogTitle="Izaberite Mesto" TResponseDto="LocationDto" TRequestDto="LocationAddDto" SelectedItem="dto => partnerDto.Location = dto">
+            <MudField Style="padding: 5px" Label="Naziv mesta">@partnerDto?.Location?.Name</MudField>
+            <MudField Style="padding: 5px" Label="PTT Broj">@partnerDto?.Location?.ZipCode</MudField>
         </LookUpComponent>
 
         <MudTextField @bind-Text="partnerDto.Address" T="string" Label="Adresa partnera" Required="true" RequiredError="Adresa partnera je obavezno polje!" />
-        <div class="d-flex align-center justify-space-between">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
-        </div>
     </MudForm>
 </MudPaper>

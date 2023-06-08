@@ -54,6 +54,8 @@ namespace WholeSaleApp.Server.Data
                 .HasOne<VatType>(v => v.VatType)
                 .WithOne()
                 .IsRequired();
+
+            modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
         }
     }
 }

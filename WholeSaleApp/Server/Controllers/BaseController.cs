@@ -11,7 +11,9 @@ namespace WholeSaleApp.Server.Controllers
 {
     [Route("/api/[controller]")]
     [ApiController]
-    public class BaseController<TDto, TModel> : ControllerBase where TDto : BaseDto where TModel : BaseModel
+    public class BaseController<TResponseDto, TRequestDto, TModel> : ControllerBase
+        where TResponseDto : BaseDto where TModel : BaseModel where TRequestDto : class
+
     {
         protected readonly WsDbContext _db;
         protected readonly IMapperService _mapperService;
@@ -25,33 +27,36 @@ namespace WholeSaleApp.Server.Controllers
         }
 
         [HttpGet("/api/[controller]")]
-        public async Task<ActionResult<IEnumerable<TDto>>> Get()
+        public async Task<ActionResult<IEnumerable<BaseDto>>> Get()
         {
-            return await _db.Set<TModel>().Select(x => _mapperService.ToDto<TModel, TDto>(x)).ToListAsync();
+            return await _db.Set<TModel>().Select(x => _mapperService.ToDto<TModel, TResponseDto>(x)).ToListAsync();
         }
 
         [HttpGet("/api/[controller]/{id}")]
-        public async Task<ActionResult<TDto>> Get(int id)
+        public async Task<ActionResult<BaseDto>> Get(int id)
         {
             var obj = await _db.Set<TModel>().FindAsync(id);
-            return _mapperService.ToDto<TModel, TDto>(obj);
+            return _mapperService.ToDto<TModel, TResponseDto>(obj);
         }
 
         [HttpPost("/api/[controller]")]
-        public async Task<ActionResult> Post([FromBody] TDto newDto)
+        public async Task<ActionResult> Post([FromBody] TRequestDto newDto)
         {
-            _db.Add<TModel>(_mapperService.ToModel<TModel, TDto>(newDto));
+            _db.Add<TModel>(_mapperService.ToModel<TModel, TRequestDto>(newDto));
             await _db.SaveChangesAsync();
             return Ok();
         }
 
         [HttpPut("/api/[controller]/{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] TDto updatedDto)
+        public async Task<ActionResult> Put(int id, [FromBody] TRequestDto updatedDto)
         {
-            _db.Update<TModel>(_mapperService.ToModel<TModel, TDto>(updatedDto));
+            var modelToUpdate = _mapperService.ToModel<TModel, TRequestDto>(updatedDto);
+            modelToUpdate.Id = id;
+            _db.Update<TModel>(modelToUpdate);
             await _db.SaveChangesAsync();
             return Ok();
         }
+
         [HttpDelete("/api/[controller]/{id}")]
         public async Task<ActionResult> Delete(int id)
         {

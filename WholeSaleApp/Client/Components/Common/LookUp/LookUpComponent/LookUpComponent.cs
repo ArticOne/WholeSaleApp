@@ -6,23 +6,23 @@ using WholeSaleApp.Shared.DTOs.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
 {
-    public partial class LookUpComponent<T> : MudComponentBase where T : BaseDto
+    public partial class LookUpComponent<TResponseDto,TRequestDto> : MudComponentBase where TResponseDto : BaseDto where TRequestDto : class
     {
         private async Task OpenDialog()
         {
             var options = new DialogOptions { CloseOnEscapeKey = true, MaxWidth = MaxWidth.False };
-            var dialog = await DialogService.ShowAsync<LookUpDialogComponent<T>>(DialogTitle, options);
+            var dialog = await DialogService.ShowAsync<LookUpDialogComponent<TResponseDto, TRequestDto>>(DialogTitle, options);
             var result = await dialog.Result;
 
             if (!result.Cancelled)
             {
                 StateHasChanged();
-                await SelectedItem.InvokeAsync(result.Data as T);
+                await SelectedItem.InvokeAsync(result.Data as TResponseDto);
             }
         }
 
         [Parameter]
-        public EventCallback<T> SelectedItem { get; set; }
+        public EventCallback<TResponseDto> SelectedItem { get; set; }
         [Parameter]
         public string LookUpComponentTitle { get; set; }
         [Parameter]

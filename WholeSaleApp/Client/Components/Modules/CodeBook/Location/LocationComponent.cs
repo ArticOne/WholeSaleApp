@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Reflection;
+using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Client.Services;
 using WholeSaleApp.Shared.DTOs.CodeBook;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
 {
@@ -17,7 +19,7 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
 
 
         [Inject]
-        public IGenericRepository<LocationDto> _repo { get; set; }
+        public IGenericRepository<LocationDto, LocationAddDto> _repo { get; set; }
         private void Save()
         {
             LocationInputForm.Validate();
@@ -26,11 +28,14 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
 
             if (Id != 0)
             {
-                _repo.PutAsync(Id, locationDto);
+                _repo.PutAsync(Id, new LocationAddDto()
+                {
+
+                });
             }
             else
             {
-                _repo.PostAsync(locationDto);
+              //  _repo.PostAsync(locationDto);
             }
         }
 

@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Server.Interfaces;
 using WholeSaleApp.Server.Services;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.UI;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
 using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Server.Controllers.Documents
 {
-    public class MenuItemsController : BaseController<MenuItemDto, MenuItem>
+    public class MenuItemsController : BaseController<MenuItemDto, MenuItemAddDto, MenuItem>
     {
         public MenuItemsController(IMapperService mapperService, WsDbContext db) : base(mapperService, db)
         {

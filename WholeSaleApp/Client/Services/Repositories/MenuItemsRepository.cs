@@ -1,11 +1,12 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
 using WholeSaleApp.Client.Interfaces;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.UI;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
 
 namespace WholeSaleApp.Client.Services.Repositories
 {
-    public class MenuItemsRepository : GenericRepository<MenuItemDto>, IMenuItemsRepository
+    public class MenuItemsRepository : GenericRepository<MenuItemDto, MenuItemAddDto>, IMenuItemsRepository
     {
         public MenuItemsRepository(IHttpClientFactory httpClientFactory, IConfiguration configuration) : base(httpClientFactory, configuration)
         {

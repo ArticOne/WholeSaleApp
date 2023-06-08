@@ -14,15 +14,15 @@ namespace WholeSaleApp.Server.Services
     {
         public TDto ToDto<TModel, TDto>(TModel input) where TModel : BaseModel where TDto : BaseDto
         {
-            var mappingMethod = typeof(MapperMapsExtensions).GetMethod("ToDto", new Type[] {typeof(TModel)});
+            var mappingMethod = typeof(MapperMapsExtensions).GetMethod("ToResponseDto", new Type[] {typeof(TModel)});
             var resultDto = mappingMethod.Invoke(null, new TModel[] { input }) as TDto;
             return resultDto;
         }
 
-        public TModel ToModel<TModel, TDto>(TDto dto) where TModel : BaseModel where TDto : BaseDto
+        public TModel ToModel<TModel, TRequestDto>(TRequestDto dto) where TModel : BaseModel where TRequestDto : class
         {
-            var mappingMethod = typeof(ReverseMapperMapsExtensions).GetMethod("FromDto", new Type[] { typeof(TDto) });
-            var resultDto = mappingMethod.Invoke(null, new TDto[] { dto }) as TModel;
+            var mappingMethod = typeof(ReverseMapperMapsExtensions).GetMethod("FromRequestDto", new Type[] { typeof(TRequestDto) });
+            var resultDto = mappingMethod.Invoke(null, new TRequestDto[] { dto }) as TModel;
             return resultDto;
         }
     }

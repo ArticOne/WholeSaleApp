@@ -2,13 +2,13 @@
 
 namespace WholeSaleApp.Client.Interfaces
 {
-    public interface IGenericRepository<T> where T : BaseDto
+    public interface IGenericRepository<TResponseDto, TRequestDto> where TResponseDto : BaseDto where TRequestDto : class
     {
-        Task<List<T>> GetAsync();
-        Task<List<T>> GetPaginatedAsync();
-        Task<T> GetAsync(int id);
-        Task<bool> PostAsync(T dtoToPost);
-        Task<bool> PutAsync(int id, T dtoToPut);
+        Task<List<TResponseDto>> GetAsync();
+        Task<List<TResponseDto>> GetPaginatedAsync();
+        Task<TResponseDto> GetAsync(int id);
+        Task<bool> PostAsync(TRequestDto dtoToPost);
+        Task<bool> PutAsync(int id, TRequestDto dtoToPut);
         Task<bool> DeleteAsync(int id);
     }
 }

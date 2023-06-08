@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Shared.DTOs.CodeBook;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 {
@@ -15,7 +17,7 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 
 
         [Inject]
-        public IGenericRepository<PartnerDto> _repo { get; set; }
+        public IGenericRepository<PartnerDto, PartnerAddDto> _repo { get; set; }
         private void Save()
         {
             partnerInputForm.Validate();
@@ -24,11 +26,23 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 
             if (Id != 0)
             {
-                _repo.PutAsync(Id,partnerDto);
+                _repo.PutAsync(Id, new PartnerAddDto()
+                {
+                    Address = partnerDto.Address,
+                    LocationId = partnerDto.Location.Id,
+                    Name = partnerDto.Name,
+                    ShortName = partnerDto.ShortName,
+                });
             }
             else
             {
-                _repo.PostAsync(partnerDto);
+                _repo.PostAsync(new PartnerAddDto()
+                {
+                    Address = partnerDto.Address,
+                    LocationId = partnerDto.Location.Id,
+                    Name = partnerDto.Name,
+                    ShortName = partnerDto.ShortName,
+                });
             }
         }
 

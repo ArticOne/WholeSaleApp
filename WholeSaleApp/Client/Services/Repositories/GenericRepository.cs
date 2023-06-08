@@ -7,7 +7,7 @@ using WholeSaleApp.Shared.DTOs;
 
 namespace WholeSaleApp.Client.Services.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseDto
+    public class GenericRepository<TResponseDto, TRequestDto> : IGenericRepository<TResponseDto, TRequestDto> where TResponseDto : BaseDto where TRequestDto : class
     {
         protected IConfiguration _configuration;
         protected HttpClient _httpClient;
@@ -17,32 +17,32 @@ namespace WholeSaleApp.Client.Services.Repositories
         {
             _configuration = configuration;
             _httpClient = httpClientFactory.CreateClient();
-            _url = new Uri(_configuration["BaseApiUrl"] + UrlResolver.GetUrlSectionForType<T>());
+            _url = new Uri(_configuration["BaseApiUrl"] + UrlResolver.GetUrlSectionForType<TResponseDto>());
         }
-        public async Task<List<T>> GetAsync()
+        public async Task<List<TResponseDto>> GetAsync()
         {
             var response = await _httpClient.GetAsync(_url);
             var jsonString = await response.Content.ReadAsStringAsync();
-            var deserialisedResult = JsonSerializer.Deserialize<List<T>>(jsonString);
-            return deserialisedResult == null ? new List<T>() : deserialisedResult;
+            var deserialisedResult = JsonSerializer.Deserialize<List<TResponseDto>>(jsonString);
+            return deserialisedResult == null ? new List<TResponseDto>() : deserialisedResult;
         }
 
-        public async Task<List<T>> GetPaginatedAsync()
+        public async Task<List<TResponseDto>> GetPaginatedAsync()
         {
             var response = await _httpClient.GetAsync($"{_url}/avion/ghj");
             var jsonString = await response.Content.ReadAsStringAsync();
-            var deserialisedResult = JsonSerializer.Deserialize<List<T>>(jsonString);
-            return deserialisedResult == null ? new List<T>() : deserialisedResult;
+            var deserialisedResult = JsonSerializer.Deserialize<List<TResponseDto>>(jsonString);
+            return deserialisedResult == null ? new List<TResponseDto>() : deserialisedResult;
         }
 
-        public async Task<T> GetAsync(int id)
+        public async Task<TResponseDto> GetAsync(int id)
         {
             var response = await _httpClient.GetAsync($"{_url}/{id}");
             var jsonString = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(jsonString);
+            return JsonSerializer.Deserialize<TResponseDto>(jsonString);
         }
 
-        public async Task<bool> PostAsync(T dtoToPost)
+        public async Task<bool> PostAsync(TRequestDto dtoToPost)
         {
             var response = await _httpClient.PostAsync(_url,
                                                                         new StringContent(JsonSerializer.Serialize(dtoToPost),
@@ -51,7 +51,7 @@ namespace WholeSaleApp.Client.Services.Repositories
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> PutAsync(int id, T dtoToPut)
+        public async Task<bool> PutAsync(int id, TRequestDto dtoToPut)
         {
             var response = await _httpClient.PutAsync($"{_url}/{id}",
                                                                         new StringContent(JsonSerializer.Serialize(dtoToPut),

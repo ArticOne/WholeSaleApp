@@ -10,6 +10,7 @@ using WholeSaleApp.Client.Helpers;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Client.Services;
 using WholeSaleApp.Shared.DTOs;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 using static MudBlazor.CategoryTypes;
 
 
@@ -18,7 +19,8 @@ namespace WholeSaleApp.Client.Components.Common.Browser
     public partial class BrowserComponent<T> where T : BaseDto
     {
         [Inject] private IDialogService DialogService { get; set; }
-        [Inject] private IGenericRepository<T> Repository { get; set; }
+#warning "FIX THIS!"
+        [Inject] private IGenericRepository<T, PartnerAddDto> Repository { get; set; }
 
         [Inject] private NavigationManager NavManager { get; set; }
         private ObservableCollection<T> GridSource { get; set; }

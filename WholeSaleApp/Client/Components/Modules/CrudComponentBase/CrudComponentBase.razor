@@ -1,0 +1,17 @@
+﻿@typeparam T
+@inherits ComponentBase
+
+<MudContainer>
+    <MudContainer MaxWidth="MaxWidth.False" Class="p-1 boxRow boxHeader">
+        <MudPaper Elevation="25" MaxWidth="100%">
+            <MudToolBar Class="p-0">
+                <MudTooltip Text="Snimi">
+                    <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="Save()"/>
+                </MudTooltip>
+            </MudToolBar>
+        </MudPaper>
+    </MudContainer>
+    <MudContainer>
+        @ChildContent
+    </MudContainer>
+</MudContainer>

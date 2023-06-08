@@ -1,6 +1,9 @@
 ﻿@page "/Locations/{Id:int}"
 @page "/Locations/New"
-@inherits CrudComponentBase<WholeSaleApp.Shared.DTOs.CodeBook.LocationDto>
+@using WholeSaleApp.Shared.DTOs.CodeBook
+@using WholeSaleApp.Client.Components.Modules.CrudComponentBase
+
+@inherits CrudComponentBase<LocationDto>
 
 <MudPaper Class="pa-4 m-4">
     <MudForm @ref="LocationInputForm">

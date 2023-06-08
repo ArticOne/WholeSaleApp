@@ -1,11 +1,12 @@
-﻿@typeparam T
+﻿@typeparam TResponseDto
+@typeparam TRequestDto
 @using WholeSaleApp.Client.Components.Common.Browser
 @using WholeSaleApp.Shared.DTOs.CodeBook
 <div>
     <MudDialog>
         <DialogContent>
             <MudContainer Class="p-1 boxRow boxContent" MaxWidth="MaxWidth.False">
-                <MudDataGrid @ref="_dataGrid" T="T" Items="@GridSource" Hover="true"
+                <MudDataGrid @ref="_dataGrid" T="TResponseDto" Items="@GridSource" Hover="true"
                              FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
                              FixedHeader="true"
                              Style="max-height: 100%">

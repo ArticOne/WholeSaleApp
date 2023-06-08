@@ -7,7 +7,7 @@ namespace WholeSaleApp.Shared.DTOs.Maps
 {
     public static class MapperMapsExtensions
     {
-        public static GoodDto ToDto(this Good good)
+        public static GoodDto ToResponseDto(this Good good)
         {
             return new GoodDto()
             {
@@ -17,7 +17,7 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 UnitOfMeasureId = good.UnitOfMeasureId
             };
         }
-        public static PartnerDto ToDto(this Partner partner)
+        public static PartnerDto ToResponseDto(this Partner partner)
         {
             return new PartnerDto()
             {
@@ -25,10 +25,11 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 Id = partner.Id,
                 Name = partner.Name,
                 LocationId = partner.LocationId,
+                Location = partner.Location.ToResponseDto(),
                 ShortName = partner.ShortName
             };
         }
-        public static LocationDto ToDto(this Location location)
+        public static LocationDto ToResponseDto(this Location location)
         {
             return new LocationDto()
             {
@@ -38,7 +39,7 @@ namespace WholeSaleApp.Shared.DTOs.Maps
             };
         }
 
-        public static MenuItemDto ToDto(this MenuItem menuItem)
+        public static MenuItemDto ToResponseDto(this MenuItem menuItem)
         {
             return new MenuItemDto()
             {
