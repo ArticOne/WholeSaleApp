@@ -9,9 +9,6 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 {
     public partial class PartnerComponent : CrudComponentBase<PartnerDto>
     {
-        [Parameter]
-        public int Id { get; set; }
-
         MudForm? partnerInputForm;
         private PartnerDto partnerDto = new();
 

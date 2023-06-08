@@ -1,6 +1,11 @@
 ﻿@page "/GoodsReceivedNote/{Id:int}"
 @page "/GoodsReceivedNote/New"
 
+@using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents
+@using WholeSaleApp.Client.Components.Modules.CrudComponentBase
+
+@inherits CrudComponentBase<GoodsReceivedNoteDto>
+
 <h3>GoodsReceivedNoteComponent</h3>
 
 @code {

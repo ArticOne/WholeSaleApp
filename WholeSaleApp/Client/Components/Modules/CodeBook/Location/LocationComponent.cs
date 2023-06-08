@@ -11,9 +11,6 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Location
 {
     public partial class LocationComponent : CrudComponentBase<LocationDto>
     {
-        [Parameter]
-        public int Id { get; set; }
-
         MudForm? LocationInputForm;
         private LocationDto locationDto = new();
 

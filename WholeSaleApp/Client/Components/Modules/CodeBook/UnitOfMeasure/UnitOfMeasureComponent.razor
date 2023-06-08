@@ -1,5 +1,9 @@
-﻿@page "/UnitsOfMeasure/{Id:int}"
-@page "/UnitsOfMeasure/New"
+﻿@page "/UnitsOfMeasure"
+
+@using WholeSaleApp.Shared.DTOs.CodeBook
+@using WholeSaleApp.Client.Components.Modules.CrudComponentBase
+
+@inherits CrudComponentBase<UnitOfMeasureDto>
 
 <h3>UnitOfMeasureComponent</h3>
 
