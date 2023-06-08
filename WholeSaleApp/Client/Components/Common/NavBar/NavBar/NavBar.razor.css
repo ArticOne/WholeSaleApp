@@ -15,12 +15,11 @@
     transform: translate(-100%);
     padding: 0;
     margin: 0;
-    max-width: 200px;
     top: 0;
     left: 0;
     transition: all 0.25s ease-in-out 0s !important;
     z-index: 1;
-    width: 200px;
+    width: auto;
     pointer-events: none;
     opacity: 0;
     background: #2e2e36;
