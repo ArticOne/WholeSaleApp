@@ -10,5 +10,7 @@ namespace WholeSaleApp.Shared.Model.CodeBook
     {
         public string ZipCode { get; set; }
         public string Name { get; set; }
+        public List<PartnerOffice> PartnerOffices { get; set; }
+        public List<Partner> Partners { get; set; }
     }
 }

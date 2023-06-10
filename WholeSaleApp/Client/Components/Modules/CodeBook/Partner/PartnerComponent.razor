@@ -4,6 +4,7 @@
 @using WholeSaleApp.Shared.DTOs.CodeBook
 @using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook
 @using WholeSaleApp.Client.Components.Modules.CrudComponentBase
+@using System.Security.Cryptography.X509Certificates
 
 @inherits CrudComponentBase<PartnerDto>
 <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
@@ -18,5 +19,12 @@
         </LookUpComponent>
 
         <MudTextField @bind-Text="partnerDto.Address" T="string" Label="Adresa partnera" Required="true" RequiredError="Adresa partnera je obavezno polje!" />
+        
+        
+        <MudDataGrid T="PartnerOfficeDto" Items="@partnerDto.PartnerOffices">
+            <Columns>
+                <PropertyColumn  Property="x => x.Name"></PropertyColumn>
+            </Columns>
+        </MudDataGrid>
     </MudForm>
 </MudPaper>

@@ -9,7 +9,7 @@ namespace WholeSaleApp.Shared.Model.CodeBook
     public class PartnerOffice : BaseModel
     {
         public string Code { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public int PartnerId { get; set; }
         public Partner Partner { get; set; }
         public int? LocationId { get; set; }

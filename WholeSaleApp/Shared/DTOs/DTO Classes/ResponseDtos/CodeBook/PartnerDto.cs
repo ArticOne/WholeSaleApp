@@ -15,5 +15,6 @@ namespace WholeSaleApp.Shared.DTOs.CodeBook
         public int LocationId { get; set; }
         public LocationDto Location { get; set; }
         public string Address { get; set; }
+        public List<PartnerOfficeDto> PartnerOffices { get; set; } = new();
     }
 }

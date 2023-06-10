@@ -13,5 +13,6 @@ namespace WholeSaleApp.Shared.Model.CodeBook
         public int LocationId { get; set; }
         public Location Location { get; set; }
         public string Address { get; set; }
+        public List<PartnerOffice> PartnerOffices { get; set; } = new();
     }
 }

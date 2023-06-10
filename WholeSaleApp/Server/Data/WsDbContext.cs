@@ -48,11 +48,22 @@ namespace WholeSaleApp.Server.Data
                 .WithOne();
             modelBuilder.Entity<PartnerOffice>()
                 .HasOne<Partner>(po => po.Partner)
-                .WithOne()
+                .WithMany(x => x.PartnerOffices)
                 .IsRequired();
             modelBuilder.Entity<Vat>()
                 .HasOne<VatType>(v => v.VatType)
                 .WithOne()
+                .IsRequired();
+
+            modelBuilder.Entity<Location>()
+                .HasMany<PartnerOffice>(x => x.PartnerOffices)
+                .WithOne(x => x.Location)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+
+            modelBuilder.Entity<Location>()
+                .HasMany<Partner>(x => x.Partners)
+                .WithOne(x => x.Location)
                 .IsRequired();
 
             modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
