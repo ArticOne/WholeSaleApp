@@ -7,24 +7,67 @@
 @using System.Security.Cryptography.X509Certificates
 
 @inherits CrudComponentBase<PartnerDto>
-<MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
+<div>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
 
-<MudPaper Class="pa-4 m-4" MaxWidth="500px">
-    <MudForm @ref="partnerInputForm">
-        <MudTextField @bind-Text="partnerDto.Name" T="string" Label="Naziv partnera" Required="true" RequiredError="Naziv partnera je obavezno polje!" />
-        <MudTextField @bind-Text="partnerDto.ShortName" T="string" Label="Skraćeni naziv partnera" Required="true" RequiredError="Skraćeni naziv partnera je obavezno polje!" />
-        <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Mesto" DialogTitle="Izaberite Mesto" TResponseDto="LocationDto" TRequestDto="LocationAddDto" SelectedItem="dto => partnerDto.Location = dto">
-            <MudField Style="padding: 5px" Label="Naziv mesta">@partnerDto?.Location?.Name</MudField>
-            <MudField Style="padding: 5px" Label="PTT Broj">@partnerDto?.Location?.ZipCode</MudField>
-        </LookUpComponent>
+    <MudPaper Class="pa-4 m-4" MaxWidth="800px">
+        <MudForm @ref="partnerInputForm">
+            <MudTextField @bind-Text="PartnerDto.Name" T="string" Label="Naziv partnera" Required="true" RequiredError="Naziv partnera je obavezno polje!" />
+            <MudTextField @bind-Text="PartnerDto.ShortName" T="string" Label="Skraćeni naziv partnera" Required="true" RequiredError="Skraćeni naziv partnera je obavezno polje!" />
+            <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Mesto" DialogTitle="Izaberite Mesto" TResponseDto="LocationDto" TRequestDto="LocationAddDto" SelectedItem="dto => PartnerDto.Location = dto">
+                <MudField Style="padding: 5px" Label="Naziv mesta">@PartnerDto?.Location?.Name</MudField>
+                <MudField Style="padding: 5px" Label="PTT Broj">@PartnerDto?.Location?.ZipCode</MudField>
+            </LookUpComponent>
 
-        <MudTextField @bind-Text="partnerDto.Address" T="string" Label="Adresa partnera" Required="true" RequiredError="Adresa partnera je obavezno polje!" />
-        
-        
-        <MudDataGrid T="PartnerOfficeDto" Items="@partnerDto.PartnerOffices">
-            <Columns>
-                <PropertyColumn  Property="x => x.Name"></PropertyColumn>
-            </Columns>
-        </MudDataGrid>
-    </MudForm>
-</MudPaper>
+            <MudTextField @bind-Text="PartnerDto.Address" T="string" Label="Adresa partnera" Required="true" RequiredError="Adresa partnera je obavezno polje!" />
+
+
+            <MudDataGrid MultiSelection="true"
+                         SelectedItems="@SelectedPartnerOffices"
+                         ReadOnly="false"
+                         Hover="true"
+                         Class="mt-5 p-0" T="PartnerOfficeDto"
+                         Items="@PartnerDto.PartnerOffices"
+                         Elevation="7"
+                         EditMode="DataGridEditMode.Form"
+                         EditTrigger="DataGridEditTrigger.OnRowClick"
+                         >
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6" Class="p-0">Poslovnice</MudText>
+                    <MudToolBar Class="p-0">
+                        <MudTooltip Text="Novi unos">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="AddPartnerOffice" />
+                        </MudTooltip>
+                        <MudTooltip Text="Briši">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Remove" OnClick="DeletePartnerOffice" />
+                        </MudTooltip>
+                    </MudToolBar>
+                </ToolBarContent>
+
+                <Columns>
+                    <SelectColumn T="PartnerOfficeDto" ShowInFooter="false" ShowInHeader="false" />
+                    <PropertyColumn Property="x => x.Code"/>
+                    <PropertyColumn Property="x => x.Name"/>
+                    <PropertyColumn Property="x => x.Location">
+                        <EditTemplate>
+                            <MudAutocomplete T="LocationDto" Label="Odaberite mesto poslovnice"
+                                             @bind-Value="@context.Item.Location"
+                                             SearchFunc="@SearchLocations"
+                                             Variant="Variant.Outlined"
+                                             ShowProgressIndicator="false"
+                                             ToStringFunc="@(loc => loc?.Name)"
+                                             OnClearButtonClick="() => context.Item.Location = null"
+                                             Required
+                                             RequiredError="Morate odabrati mesto"
+                                             Clearable="true"/>
+                        </EditTemplate>
+                    </PropertyColumn>
+                    <PropertyColumn Property="x => x.Address"/>
+                </Columns>
+            </MudDataGrid>
+        </MudForm>
+    </MudPaper>
+
+
+
+</div>

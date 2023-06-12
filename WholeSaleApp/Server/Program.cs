@@ -19,7 +19,8 @@ namespace WholeSaleApp
             builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<WsDbContext>();
-            builder.Services.AddScoped<IMapperService,MapperService>();
+            builder.Services.AddScoped<IMapperService, MapperService>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -67,6 +67,9 @@ namespace WholeSaleApp.Server.Data
                 .IsRequired();
 
             modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
+            modelBuilder.Entity<Partner>().Navigation(x => x.PartnerOffices).AutoInclude();
+            modelBuilder.Entity<PartnerOffice>().Navigation(x => x.Location).AutoInclude();
+            modelBuilder.Entity<PartnerOffice>().Navigation(x => x.Partner).AutoInclude();
         }
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System.Linq.Dynamic.Core;
+using AutoMapper;
+using Json.Patch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Server.Interfaces;
 using WholeSaleApp.Server.Services;
 using WholeSaleApp.Shared.DTOs;
 using WholeSaleApp.Shared.Model;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WholeSaleApp.Server.Controllers
 {
@@ -17,19 +21,21 @@ namespace WholeSaleApp.Server.Controllers
     {
         protected readonly WsDbContext _db;
         protected readonly IMapperService _mapperService;
+        private readonly IMapper _mapper;
 
 
-
-        public BaseController(IMapperService mapperService, WsDbContext db)
+        public BaseController(IMapperService mapperService, WsDbContext db, IMapper mapper)
         {
             _db = db;
             _mapperService = mapperService;
+            _mapper = mapper;
         }
 
         [HttpGet("/api/[controller]")]
         public async Task<ActionResult<IEnumerable<BaseDto>>> Get()
         {
-            return await _db.Set<TModel>().Select(x => _mapperService.ToDto<TModel, TResponseDto>(x)).ToListAsync();
+            var result = await _db.Set<TModel>().Select(x => _mapperService.ToDto<TModel, TResponseDto>(x)).ToListAsync();
+            return result;
         }
 
         [HttpGet("/api/[controller]/{id}")]
@@ -55,6 +61,49 @@ namespace WholeSaleApp.Server.Controllers
             _db.Update<TModel>(modelToUpdate);
             await _db.SaveChangesAsync();
             return Ok();
+        }
+
+        //[HttpPatch("/api/[controller]/{id}")]
+        //public async Task<ActionResult> Patch(int id, [FromBody] JsonPatch patchDocument)
+        //{
+        //    var entity = await _db.Set<TModel>().FindAsync(id);
+
+        //    var entityDto = _mapperService.ToRequestDto<TModel, TRequestDto>(entity);
+        //    var lol = patchDocument.Apply(entityDto);
+        //    var a = _mapperService.ToModel<TModel, TRequestDto>(lol);
+        //    var jsonPatch2 = entity.CreatePatch(a);
+        //    jsonPatch2.Apply(entity);
+        //    a.Id = id;
+        //  //  _db.Entry(entity).CurrentValues.SetValues(a);
+        //  _db.Set<TModel>().Update(a);
+        //    await _db.SaveChangesAsync();
+        //    return Ok();
+        //}
+
+        [HttpPatch("/api/[controller]/{id}")]
+        public async Task<ActionResult> Patch(int id, [FromBody] JsonPatch patchDocument)
+        {
+            // Load the entity from the database
+                var entity = await _db.Set<TModel>().FindAsync(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            // Map the entity to a DTO
+            var requestDto = _mapper.Map<TRequestDto>(entity);
+
+
+           var appliedPatch =  patchDocument.Apply(requestDto);
+
+           // Map the DTO back to the entity
+            _mapper.Map(appliedPatch, entity);
+
+
+            // Save the changes
+            await _db.SaveChangesAsync();
+
+            return NoContent();
         }
 
         [HttpDelete("/api/[controller]/{id}")]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Server.Interfaces;
@@ -11,7 +12,7 @@ namespace WholeSaleApp.Server.Controllers.Documents
 {
     public class MenuItemsController : BaseController<MenuItemDto, MenuItemAddDto, MenuItem>
     {
-        public MenuItemsController(IMapperService mapperService, WsDbContext db) : base(mapperService, db)
+        public MenuItemsController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
         {
         }
 

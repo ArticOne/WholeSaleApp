@@ -12,7 +12,7 @@ using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Shared.DTOs.Maps
 {
-    public static class ReverseMapperMapsExtensions
+    public static class RequestToModelMapperExtensions
     {
         #region CodeBook
         public static Good FromRequestDto(this GoodAddDto goodDto)
@@ -39,7 +39,20 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 Name = partnerDto.Name,
                 Address = partnerDto.Address,
                 LocationId = partnerDto.LocationId,
-                ShortName = partnerDto.ShortName
+                ShortName = partnerDto.ShortName,
+                PartnerOffices = partnerDto.PartnerOffices.Select(x => x.FromRequestDto()).ToList()
+            };
+        }
+
+        public static PartnerOffice FromRequestDto(this PartnerOfficeAddDto partnerOfficeDto)
+        {
+            return new PartnerOffice()
+            {
+                Name = partnerOfficeDto.Name,
+                Address = partnerOfficeDto.Address,
+                LocationId = partnerOfficeDto.LocationId,
+                PartnerId = partnerOfficeDto.PartnerId,
+                Code = partnerOfficeDto.Code,
             };
         }
         public static MenuItem FromRequestDto(this MenuItemAddDto menuItemDto)

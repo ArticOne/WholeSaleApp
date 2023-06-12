@@ -8,7 +8,7 @@ using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Shared.DTOs.Maps
 {
-    public static class MapperMapsExtensions
+    public static class ModelToResponseMapperExtensions
     {
         #region MenuItem
         public static MenuItemDto ToResponseDto(this MenuItem menuItem)
@@ -45,9 +45,9 @@ namespace WholeSaleApp.Shared.DTOs.Maps
                 Address = partner.Address,
                 Id = partner.Id,
                 Name = partner.Name,
-                LocationId = partner.LocationId,
                 Location = partner.Location.ToResponseDto(),
-                ShortName = partner.ShortName
+                ShortName = partner.ShortName,
+                PartnerOffices = partner.PartnerOffices.Select(x => x.ToResponseDto()).ToList()
             };
         }
         public static LocationDto ToResponseDto(this Location location)
@@ -64,11 +64,12 @@ namespace WholeSaleApp.Shared.DTOs.Maps
             return new PartnerOfficeDto()
             {
                 Id = partnerOffice.Id,
+                Code = partnerOffice.Code,
                 Name = partnerOffice.Name,
                 PartnerId = partnerOffice.PartnerId,
-                Partner = partnerOffice.Partner.ToResponseDto(),
                 LocationId = partnerOffice.LocationId,
-                Location = partnerOffice.Location.ToResponseDto()
+                Location = partnerOffice.Location.ToResponseDto(),
+                Address = partnerOffice.Address,
             };
         }
         public static UnitOfMeasureDto ToResponseDto(this UnitOfMeasure unitOfMeasure)

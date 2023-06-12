@@ -2,10 +2,51 @@
     background-color: #1E88E5 !important;
 }
 
-::deep .selected > td {
-    color: white !important;
+    ::deep .selected > td {
+        color: white !important;
+    }
+
+        ::deep .selected > td .mud-input {
+            color: white !important;
+        }
+
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 }
 
-::deep .selected > td .mud-input {
-    color: white !important;
+::deep .boxRow.boxHeader {
+    flex: 0 1 auto;
+}
+
+::deep .boxRow.boxContent {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+::deep div.mud-table-container {
+    max-height: 100%;
+}
+
+::deep .boxRow.boxFooter {
+    flex: 0 1 40px;
+}
+
+::deep .mud-table {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+::deep .mud-table-container {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+::deep .mud-table-pagination {
+    flex-shrink: 0;
 }

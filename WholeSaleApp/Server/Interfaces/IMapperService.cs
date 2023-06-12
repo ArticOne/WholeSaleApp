@@ -6,6 +6,7 @@ namespace WholeSaleApp.Server.Interfaces
     public interface IMapperService
     {
         TDto ToDto<TModel, TDto>(TModel model) where TModel : BaseModel where TDto : BaseDto;
-        TModel ToModel<TModel, TRequestDto>(TRequestDto dto) where TModel : BaseModel where TRequestDto : class;
+        TModel ToModel<TModel, TRequestDto>(TRequestDto dto) where TModel : BaseModel where TRequestDto : class; 
+        TRequestDto ToRequestDto<TModel, TRequestDto>(TModel input)where TModel : BaseModel where TRequestDto : class;
     }
 }

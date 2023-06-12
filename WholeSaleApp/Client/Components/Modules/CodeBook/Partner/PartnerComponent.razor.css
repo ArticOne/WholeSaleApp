@@ -1,0 +1,15 @@
+﻿::deep .mud-table-row {
+    cursor: pointer;
+}
+
+::deep .selected {
+    background-color: #1E88E5 !important;
+}
+
+::deep .selected > td {
+    color: white !important;
+}
+
+::deep .selected > td .mud-input {
+    color: white !important;
+}

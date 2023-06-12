@@ -1,9 +1,11 @@
 ﻿using System.Reflection;
 using System.Text;
-using System.Text.Json;
+using Json.Patch;
+using Newtonsoft.Json;
 using WholeSaleApp.Client.Helpers;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Shared.DTOs;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace WholeSaleApp.Client.Services.Repositories
 {
@@ -60,7 +62,26 @@ namespace WholeSaleApp.Client.Services.Repositories
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+
+        public async Task<bool> PatchAsync(int id, JsonPatch createPatch)
+        {
+            var jsonSettings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            var ser2 = JsonConvert.SerializeObject(createPatch, jsonSettings );
+            var ser = JsonSerializer.Serialize(createPatch);
+            var a = new StringContent(ser,
+                Encoding.UTF8,
+                "application/json-patch+json");
+
+            var response = await _httpClient.PatchAsync($"{_url}/{id}",a);
+            return response.IsSuccessStatusCode;
+        }
+
+
+
+    public async Task<bool> DeleteAsync(int id)
         {
             var response = await _httpClient.DeleteAsync($"{_url}/{id}");
             return response.IsSuccessStatusCode;

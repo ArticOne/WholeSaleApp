@@ -1,21 +1,36 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System;
+using Json.Patch;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Shared.DTOs.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
+using WholeSaleApp.Shared.DTOs.Maps;
+using static MudBlazor.Colors;
+using static MudBlazor.CategoryTypes;
 
 namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 {
     public partial class PartnerComponent : CrudComponentBase<PartnerDto>
     {
         MudForm? partnerInputForm;
-        private PartnerDto partnerDto = new();
 
 
+        private Lazy<Task<List<LocationDto>>> _allLocations;
         [Inject]
         public IGenericRepository<PartnerDto, PartnerAddDto> _repo { get; set; }
-        private void Save()
+        [Inject]
+        public IGenericRepository<LocationDto, LocationAddDto> _LocationsRepo { get; set; }
+
+        private PartnerDto PartnerDto { get; set; } = new();
+
+        private PartnerDto? PartnerDtoOriginal { get; set; }
+        public HashSet<PartnerOfficeDto> SelectedPartnerOffices { get; set; } = new();
+
+        private async Task Save()
         {
             partnerInputForm.Validate();
 
@@ -23,32 +38,64 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 
             if (Id != 0)
             {
-                _repo.PutAsync(Id, new PartnerAddDto()
-                {
-                    Address = partnerDto.Address,
-                    LocationId = partnerDto.Location.Id,
-                    Name = partnerDto.Name,
-                    ShortName = partnerDto.ShortName,
-                });
+                var parDtoAdd = PartnerDtoOriginal.ToRequestDto();
+                var izmenjenAdd = PartnerDto.ToRequestDto();
+
+
+                var proba2 = parDtoAdd.CreatePatch(izmenjenAdd);
+
+                var rez = await _repo.PatchAsync(Id, proba2);
+                //_repo.PutAsync(Id, new PartnerAddDto()
+                //{
+                //    Address = partnerDto.Address,
+                //    LocationId = partnerDto.Location.Id,
+                //    Name = partnerDto.Name,
+                //    ShortName = partnerDto.ShortName,
+                //});
+
             }
             else
             {
                 _repo.PostAsync(new PartnerAddDto()
                 {
-                    Address = partnerDto.Address,
-                    LocationId = partnerDto.Location.Id,
-                    Name = partnerDto.Name,
-                    ShortName = partnerDto.ShortName,
+                    Address = PartnerDto.Address,
+                    LocationId = PartnerDto.Location.Id,
+                    Name = PartnerDto.Name,
+                    ShortName = PartnerDto.ShortName,
                 });
             }
         }
 
         protected override async Task OnInitializedAsync()
         {
+            await Load();
+            _allLocations = new Lazy<Task<List<LocationDto>>>(async () => await _LocationsRepo.GetAsync());
+        }
+
+        private async Task Load()
+        {
             if (Id != 0)
             {
-                partnerDto = await _repo.GetAsync(Id);
+                PartnerDto = await _repo.GetAsync(Id);
+                PartnerDtoOriginal = PartnerDto.Copy();
             }
+        }
+
+        private async Task<IEnumerable<LocationDto>> SearchLocations(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return await _allLocations.Value;
+
+            return (await _allLocations.Value).Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        private void AddPartnerOffice()
+        {
+            PartnerDto.PartnerOffices.Add(new PartnerOfficeDto());
+        }
+        private void DeletePartnerOffice(MouseEventArgs obj)
+        {
+            PartnerDto.PartnerOffices.RemoveAll(x => SelectedPartnerOffices.Contains(x));
         }
     }
 }

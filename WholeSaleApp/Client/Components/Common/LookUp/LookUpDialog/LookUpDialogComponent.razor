@@ -7,9 +7,10 @@
         <DialogContent>
             <MudContainer Class="p-1 boxRow boxContent" MaxWidth="MaxWidth.False">
                 <MudDataGrid @ref="_dataGrid" T="TResponseDto" Items="@GridSource" Hover="true"
-                             FilterMode="DataGridFilterMode.Simple" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
+                             FilterMode="DataGridFilterMode.ColumnFilterMenu" Filterable="true" RowClick="RowClicked" MultiSelection="false" RowClassFunc="SelectedRowClassFunc"
                              FixedHeader="true"
-                             Style="max-height: 100%">
+                             Style="max-height: 75vh">
+                    @*ANALIZIRATI KAKO OVO RADI*@
                     <Columns>
                         @foreach (var property in GetPropertiesForDisplay())
                         {
