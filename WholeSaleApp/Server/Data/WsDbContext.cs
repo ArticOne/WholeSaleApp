@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using WholeSaleApp.Shared.Model.CodeBook;
 using WholeSaleApp.Shared.Model.Documents.Invoices;
 using WholeSaleApp.Shared.Model.UI;
@@ -37,39 +38,41 @@ namespace WholeSaleApp.Server.Data
         {
             modelBuilder.Entity<Good>()
                 .HasOne<UnitOfMeasure>(g => g.UnitOfMeasure)
-                .WithOne()
+                .WithMany()
                 .IsRequired();
+
             modelBuilder.Entity<Partner>()
                 .HasOne<Location>(p => p.Location)
-                .WithOne()
+                .WithMany(l => l.Partners)
                 .IsRequired();
+
             modelBuilder.Entity<PartnerOffice>()
                 .HasOne<Location>(po => po.Location)
-                .WithOne();
+                .WithMany(l => l.PartnerOffices)
+                .OnDelete(DeleteBehavior.Restrict);
+                
             modelBuilder.Entity<PartnerOffice>()
                 .HasOne<Partner>(po => po.Partner)
                 .WithMany(x => x.PartnerOffices)
                 .IsRequired();
+
             modelBuilder.Entity<Vat>()
                 .HasOne<VatType>(v => v.VatType)
-                .WithOne()
+                .WithMany()
                 .IsRequired();
 
-            modelBuilder.Entity<Location>()
-                .HasMany<PartnerOffice>(x => x.PartnerOffices)
-                .WithOne(x => x.Location)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-
-            modelBuilder.Entity<Location>()
-                .HasMany<Partner>(x => x.Partners)
-                .WithOne(x => x.Location)
+            modelBuilder.Entity<Good>()
+                .HasOne<Vat>(g => g.Vat)
+                .WithMany()
                 .IsRequired();
 
             modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<Partner>().Navigation(x => x.PartnerOffices).AutoInclude();
             modelBuilder.Entity<PartnerOffice>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<PartnerOffice>().Navigation(x => x.Partner).AutoInclude();
+            modelBuilder.Entity<Warehouse>().Navigation(x => x.Location).AutoInclude();
+            modelBuilder.Entity<Good>().Navigation(x => x.UnitOfMeasure).AutoInclude();
+            modelBuilder.Entity<Good>().Navigation(x => x.Vat).AutoInclude();
         }
     }
 }

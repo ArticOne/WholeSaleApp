@@ -9,7 +9,7 @@ namespace WholeSaleApp.Server.Controllers.CodeBook
 {
     public class UnitsOfMeasureController : BaseController<UnitOfMeasureDto, UnitOfMeasureAddDto, UnitOfMeasure>
     {
-        public UnitsOfMeasureController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
+        public UnitsOfMeasureController(WsDbContext db, IMapper mapper) : base(db, mapper)
         {
         }
     }

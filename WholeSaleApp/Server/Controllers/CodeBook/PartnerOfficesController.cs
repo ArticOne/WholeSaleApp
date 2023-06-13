@@ -9,7 +9,7 @@ namespace WholeSaleApp.Server.Controllers.CodeBook
 {
     public class PartnerOfficesController : BaseController<PartnerOfficeDto, PartnerOfficeAddDto, PartnerOffice>
     {
-        public PartnerOfficesController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
+        public PartnerOfficesController(WsDbContext db, IMapper mapper) : base(db, mapper)
         {
         }
     }

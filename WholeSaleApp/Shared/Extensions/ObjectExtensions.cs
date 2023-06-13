@@ -6,7 +6,6 @@
  * Original source:
  * https://github.com/Burtsev-Alexey/net-object-deep-copy
  *
- * Please ensure that this usage complies with the original license.
  */
 
 using System.Reflection;

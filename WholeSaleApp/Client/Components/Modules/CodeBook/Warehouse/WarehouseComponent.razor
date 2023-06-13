@@ -3,11 +3,25 @@
 
 @using WholeSaleApp.Shared.DTOs.CodeBook
 @using WholeSaleApp.Client.Components.Modules.CrudComponentBase
+@using WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
+@using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook
 
 @inherits CrudComponentBase<WarehouseDto>
 
-<h3>WarehouseComponent</h3>
+<MudPaper Class="pa-4 m-4" MaxWidth="300px">
+    <MudForm @ref="WarehouseInputForm">
+        <MudTextField @bind-Text="warehouseDto.Code" T="string" Label="Šifra magacina" Required="true" RequiredError="Šifra magacina je obavezno polje!" />
+        <MudTextField @bind-Text="warehouseDto.Name" T="string" Label="Naziv magacina" Required="true" RequiredError="Naziv magacina je obavezno polje!" />
+        
+        <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Mesto" DialogTitle="Izaberite Mesto" TResponseDto="LocationDto" TRequestDto="LocationAddDto" SelectedItem="dto => warehouseDto.Location = dto">
+            <MudField Style="padding: 5px" Label="Naziv mesta">@warehouseDto?.Location?.Name</MudField>
+            <MudField Style="padding: 5px" Label="PTT Broj">@warehouseDto?.Location?.ZipCode</MudField>
+        </LookUpComponent>
 
-@code {
+        <MudTextField @bind-Text="warehouseDto.Address" T="string" Label="Adresa magacina" Required="true" RequiredError="Adresa magacina je obavezno polje!" />
 
-}
+        <div class="d-flex align-center justify-space-between">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
+        </div>
+    </MudForm>
+</MudPaper>

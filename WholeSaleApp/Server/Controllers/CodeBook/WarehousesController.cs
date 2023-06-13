@@ -9,7 +9,7 @@ namespace WholeSaleApp.Server.Controllers.CodeBook
 {
     public class WarehousesController : BaseController<WarehouseDto, WarehouseAddDto, Warehouse>
     {
-        public WarehousesController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
+        public WarehousesController(WsDbContext db, IMapper mapper) : base(db, mapper)
         {
         }
     }

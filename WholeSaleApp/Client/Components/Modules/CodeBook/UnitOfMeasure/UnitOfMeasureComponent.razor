@@ -5,8 +5,13 @@
 
 @inherits CrudComponentBase<UnitOfMeasureDto>
 
-<h3>UnitOfMeasureComponent</h3>
-
-@code {
-
-}
+<MudPaper Class="pa-4 m-4" MaxWidth="300px">
+    <MudForm @ref="UnitOfMeasureInputForm">
+        <MudTextField @bind-Text="unitOfMeasureDto.Name" T="string" Label="Naziv jedinice mere" Required="true" RequiredError="Naziv jedinice mere je obavezno polje!" />
+        <MudTextField @bind-Text="unitOfMeasureDto.ShortName" T="string" Label="Oznaka jedinice mere" Required="true" RequiredError="Oznaka jedinice mere je obavezno polje!" />
+        
+        <div class="d-flex align-center justify-space-between">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
+        </div>
+    </MudForm>
+</MudPaper>

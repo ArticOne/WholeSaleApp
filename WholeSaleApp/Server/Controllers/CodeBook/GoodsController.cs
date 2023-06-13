@@ -9,7 +9,7 @@ namespace WholeSaleApp.Server.Controllers.CodeBook
 {
     public class GoodsController : BaseController<GoodDto, GoodAddDto, Good>
     {
-        public GoodsController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
+        public GoodsController(WsDbContext db, IMapper mapper) : base(db, mapper)
         {
         }
     }

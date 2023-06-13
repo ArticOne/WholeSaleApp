@@ -9,7 +9,7 @@ namespace WholeSaleApp.Server.Controllers.CodeBook
 {
     public class VatController : BaseController<VatDto, VatAddDto,Vat>
     {
-        public VatController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
+        public VatController(WsDbContext db, IMapper mapper) : base(db, mapper)
         {
         }
     }

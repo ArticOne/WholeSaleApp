@@ -5,7 +5,7 @@
 
 @inherits CrudComponentBase<LocationDto>
 
-<MudPaper Class="pa-4 m-4">
+<MudPaper Class="pa-4 m-4" MaxWidth="300px">
     <MudForm @ref="LocationInputForm">
         <MudTextField @bind-Text="locationDto.Name" T="string" Label="Naziv mesta" Required="true" RequiredError="Naziv mesta je obavezno polje!"/>
         <MudTextField @bind-Text="locationDto.ZipCode" T="string" Label="Poštanski kod" Required="true" RequiredError="Poštanski kod je obavezno polje!"/>

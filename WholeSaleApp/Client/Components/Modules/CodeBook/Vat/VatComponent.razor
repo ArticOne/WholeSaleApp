@@ -3,11 +3,44 @@
 
 @using WholeSaleApp.Shared.DTOs.CodeBook
 @using WholeSaleApp.Client.Components.Modules.CrudComponentBase
+@using System.Globalization
 
 @inherits CrudComponentBase<VatDto>
 
-<h3>VatComponent</h3>
-
-@code {
-
-}
+<div>
+    <MudPaper Class="pa-4 m-4" MaxWidth="300px">
+        <MudForm @ref="VatInputForm" >
+            <MudTextField @bind-Text="VatDto.Code" T="string" Label="Šifra poreza" Required="true" RequiredError="Šifra poreza je obavezno polje!" />
+            <MudTextField @bind-Text="VatDto.Name" T="string" Label="Naziv poreza" Required="true" RequiredError="Naziv poreza je obavezno polje!" />
+            <MudAutocomplete T="VatTypeDto" Label="Vrsta poreza"
+                             @bind-Value="@VatDto.VatType"
+                             SearchFunc="@SearchVatTypes"
+                             Variant="Variant.Text"
+                             ShowProgressIndicator="true"
+                             ToStringFunc="@(loc => loc?.Name)"
+                             OnClearButtonClick="() => VatDto.VatType = null"
+                             Required="true"
+                             RequiredError="Morate odabrati vrstu poreza"
+                             Clearable="true"
+                             FullWidth="false" />
+            <MudNumericField HideSpinButtons="true"
+                             Adornment="@Adornment.End"
+                             AdornmentIcon="@Icons.Material.Filled.Percent"
+                             Culture="@(CultureInfo.GetCultureInfo("de-DE"))"
+                             @bind-Value="VatDto.Value" 
+                             Label="Procenat poreza" 
+                             Required="true" 
+                             RequiredError="Procenat poreza je obavezno polje!"
+                             Variant="Variant.Text" Min="0" />
+            <MudDatePicker 
+                @bind-Date="VatDto.StartDate"
+                Label="Važi od" 
+                Required="true"
+                RequiredError="Datum važenja je obavezno polje!"
+                Culture="@(CultureInfo.GetCultureInfo("de-DE"))"/>
+            <div class="d-flex align-center justify-space-between">
+                <MudButton Variant="Variant.Filled"  Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
+            </div>
+        </MudForm>
+    </MudPaper>
+</div>

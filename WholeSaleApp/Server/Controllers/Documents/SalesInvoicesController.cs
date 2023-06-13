@@ -9,7 +9,7 @@ namespace WholeSaleApp.Server.Controllers.Documents
 {
     public class SalesInvoicesController : BaseController<SalesInvoiceDto, VatAddDto, SalesInvoice>
     {
-        public SalesInvoicesController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
+        public SalesInvoicesController(WsDbContext db, IMapper mapper) : base(db, mapper)
         {
         }
     }

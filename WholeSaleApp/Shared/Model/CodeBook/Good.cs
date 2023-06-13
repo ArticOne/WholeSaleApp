@@ -13,5 +13,7 @@ namespace WholeSaleApp.Shared.Model.CodeBook
         public string Name { get; set; }
         public int UnitOfMeasureId { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
+        public int VatId { get; set; }
+        public Vat Vat { get; set; }
     }
 }

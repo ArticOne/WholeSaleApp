@@ -4,7 +4,6 @@
 @using WholeSaleApp.Shared.DTOs.CodeBook
 @using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook
 @using WholeSaleApp.Client.Components.Modules.CrudComponentBase
-@using System.Security.Cryptography.X509Certificates
 
 @inherits CrudComponentBase<PartnerDto>
 <div>
@@ -31,6 +30,7 @@
                          Elevation="7"
                          EditMode="DataGridEditMode.Form"
                          EditTrigger="DataGridEditTrigger.OnRowClick"
+                         EditDialogOptions="new DialogOptions() {MaxWidth = MaxWidth.False}"
                          >
                 <ToolBarContent>
                     <MudText Typo="Typo.h6" Class="p-0">Poslovnice</MudText>
@@ -50,14 +50,14 @@
                     <PropertyColumn Property="x => x.Name"/>
                     <PropertyColumn Property="x => x.Location">
                         <EditTemplate>
-                            <MudAutocomplete T="LocationDto" Label="Odaberite mesto poslovnice"
+                            <MudAutocomplete T="LocationDto" Label="Mesto"
                                              @bind-Value="@context.Item.Location"
                                              SearchFunc="@SearchLocations"
                                              Variant="Variant.Outlined"
-                                             ShowProgressIndicator="false"
+                                             ShowProgressIndicator="true"
                                              ToStringFunc="@(loc => loc?.Name)"
                                              OnClearButtonClick="() => context.Item.Location = null"
-                                             Required
+                                             Required="true"
                                              RequiredError="Morate odabrati mesto"
                                              Clearable="true"/>
                         </EditTemplate>

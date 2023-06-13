@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WholeSaleApp.Server.Data;
 
@@ -11,9 +12,11 @@ using WholeSaleApp.Server.Data;
 namespace WholeSaleApp.Server.Migrations
 {
     [DbContext(typeof(WsDbContext))]
-    partial class WsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230613202516_AddedVatInGood")]
+    partial class AddedVatInGood
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,8 @@ namespace WholeSaleApp.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitOfMeasureId");
+                    b.HasIndex("UnitOfMeasureId")
+                        .IsUnique();
 
                     b.HasIndex("VatId");
 
@@ -188,7 +192,8 @@ namespace WholeSaleApp.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VatTypeId");
+                    b.HasIndex("VatTypeId")
+                        .IsUnique();
 
                     b.ToTable("Vats");
                 });
@@ -302,8 +307,8 @@ namespace WholeSaleApp.Server.Migrations
             modelBuilder.Entity("WholeSaleApp.Shared.Model.CodeBook.Good", b =>
                 {
                     b.HasOne("WholeSaleApp.Shared.Model.CodeBook.UnitOfMeasure", "UnitOfMeasure")
-                        .WithMany()
-                        .HasForeignKey("UnitOfMeasureId")
+                        .WithOne()
+                        .HasForeignKey("WholeSaleApp.Shared.Model.CodeBook.Good", "UnitOfMeasureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -351,8 +356,8 @@ namespace WholeSaleApp.Server.Migrations
             modelBuilder.Entity("WholeSaleApp.Shared.Model.CodeBook.Vat", b =>
                 {
                     b.HasOne("WholeSaleApp.Shared.Model.CodeBook.VatType", "VatType")
-                        .WithMany()
-                        .HasForeignKey("VatTypeId")
+                        .WithOne()
+                        .HasForeignKey("WholeSaleApp.Shared.Model.CodeBook.Vat", "VatTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

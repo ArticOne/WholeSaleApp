@@ -14,6 +14,6 @@ namespace WholeSaleApp.Shared.DTOs.CodeBook
         public decimal Value { get; set; }
         public int VatTypeId { get; set; }
         public VatTypeDto VatType { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
     }
 }

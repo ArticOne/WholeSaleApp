@@ -12,7 +12,7 @@ namespace WholeSaleApp.Server.Controllers.Documents
 {
     public class MenuItemsController : BaseController<MenuItemDto, MenuItemAddDto, MenuItem>
     {
-        public MenuItemsController(IMapperService mapperService, WsDbContext db, IMapper mapper) : base(mapperService, db, mapper)
+        public MenuItemsController(WsDbContext db, IMapper mapper) : base(db, mapper)
         {
         }
 
@@ -20,7 +20,7 @@ namespace WholeSaleApp.Server.Controllers.Documents
         public async Task<ActionResult<IEnumerable<MenuItemDto>>> GetMenuItemsAtLevel(int level)
         {
             var items = await _db.MenuItems.Where(x => x.HierarchyId.GetLevel() == level)
-                                                            .Select(x => _mapperService.ToDto<MenuItem, MenuItemDto>(x))
+                                                            .Select(x => _mapper.Map<MenuItemDto>(x))
                                                             .ToListAsync();
             return items;
         }
@@ -30,7 +30,7 @@ namespace WholeSaleApp.Server.Controllers.Documents
         {
             var root = await _db.MenuItems.FirstOrDefaultAsync(x => x.Id == id);
             var items = await _db.MenuItems.Where(x => x.HierarchyId.IsDescendantOf(root.HierarchyId) && x.Id != id)
-                .Select(x => _mapperService.ToDto<MenuItem, MenuItemDto>(x))
+                .Select(x => _mapper.Map<MenuItemDto>(x))
                 .ToListAsync();
             return items;
         }

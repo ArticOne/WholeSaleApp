@@ -6,8 +6,12 @@
 
 @inherits CrudComponentBase<VatTypeDto>
 
-<h3>VatTypeComponent</h3>
-
-@code {
-
-}
+<MudPaper Class="pa-4 m-4">
+    <MudForm @ref="VatTypeInputForm">
+        <MudTextField @bind-Text="vatTypeDto.Code" T="string" Label="Šifra vreste poreza" Required="true" RequiredError="Šifra vrste poreza je obavezno polje!" />
+        <MudTextField @bind-Text="vatTypeDto.Name" T="string" Label="Naziv vrste poreza" Required="true" RequiredError="Naziv vrste poreza je obavezno polje!" />
+        <div class="d-flex align-center justify-space-between">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
+        </div>
+    </MudForm>
+</MudPaper>
