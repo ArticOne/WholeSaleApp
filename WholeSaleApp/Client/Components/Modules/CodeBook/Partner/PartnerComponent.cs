@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using Json.Patch;
+﻿using Json.Patch;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore;
+using MudBlazor;
 using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Shared.DTOs.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 using WholeSaleApp.Shared.DTOs.Maps;
-using static MudBlazor.Colors;
-using static MudBlazor.CategoryTypes;
 
 namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 {

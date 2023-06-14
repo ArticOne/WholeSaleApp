@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using WholeSaleApp.Client.Components.Common.Browser;
 using WholeSaleApp.Client.Helpers;
-using WholeSaleApp.Client.Services;
-using WholeSaleApp.Shared.DTOs.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Common.MainWindow
 {
@@ -27,7 +25,7 @@ namespace WholeSaleApp.Client.Components.Common.MainWindow
         private RenderFragment CreateComponent() => builder =>
         {
             var dtoType = UrlResolver.GetTypeForUrl(TypeName);
-            var dtoAddType = UrlResolver.GetTypeForUrl(TypeName,true);
+            var dtoAddType = UrlResolver.GetTypeForUrl(TypeName, true);
             builder.OpenComponent(0, typeof(BrowserComponent<,>).MakeGenericType(new Type[] { dtoType, dtoAddType }));
             builder.CloseComponent();
         };

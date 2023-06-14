@@ -61,7 +61,7 @@ namespace WholeSaleApp.Client.Helpers
                 case "UnitsOfMeasure":
                     return !isAddDto ? typeof(UnitOfMeasureDto) : typeof(UnitOfMeasureAddDto);
                 //case "GoodsReceivedNotes":
-                    //return !isAddDto ? typeof(PartnerDto) : typeof(PartnerAddDto);
+                //return !isAddDto ? typeof(PartnerDto) : typeof(PartnerAddDto);
                 //    return typeof(GoodsReceivedNoteDto);
                 case "SalesInvoices":
                     return !isAddDto ? typeof(SalesInvoiceDto) : typeof(SalesInvoiceAddDto);

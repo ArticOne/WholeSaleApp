@@ -6,8 +6,45 @@
 
 @inherits CrudComponentBase<GoodDto>
 
-<h3>GoodComponent</h3>
+<MudPaper Class="pa-4 m-4" MaxWidth="350px">
+    <MudForm @ref="GoodInputForm">
+        <MudTextField @bind-Text="goodDto.Code" T="string" Label="Šifra robe" Required="true" RequiredError="Šifra robe je obavezno polje!" />
+        <MudTextField @bind-Text="goodDto.Name" T="string" Label="Naziv robe" Required="true" RequiredError="Naziv robe je obavezno polje!" />
+        
+        <MudAutocomplete T="UnitOfMeasureDto" Label="Jedinica mere"
+                         @bind-Value="@goodDto.UnitOfMeasure"
+                         SearchFunc="@SearchUnitsOfMeasure"
+                         Variant="Variant.Text"
+                         ShowProgressIndicator="true"
+                         ToStringFunc="@(UoM => UoM == null ? "" : UoM.ShortName + " (" + UoM.Name + ")")"
+                         OnClearButtonClick="() => goodDto.UnitOfMeasure = null"
+                         Required="true"
+                         RequiredError="Morate odabrati jedinicu mere"
+                         Clearable="true"
+                         FullWidth="false" />
+        
+        
+        <MudAutocomplete T="VatTypeDto" Label="Vrsta poreza"
+        @bind-Value="@goodDto.VatType"
+                         SearchFunc="@SearchVatTypes"
+                         Variant="Variant.Text"
+                         ShowProgressIndicator="true"
+                         ToStringFunc="@(vt => vt.Name)"
+                         OnClearButtonClick="() => goodDto.UnitOfMeasure = null"
+                         Required="true"
+                         RequiredError="Morate odabrati vrstu poreza"
+                         Clearable="true"
+                         FullWidth="false" />
 
-@code {
+        <div class="d-flex align-center justify-space-between">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
+        </div>
+    </MudForm>
+</MudPaper>
 
-}
+@*public string Code { get; set; }
+public string Name { get; set; }
+public int UnitOfMeasureId { get; set; }
+public UnitOfMeasureDto UnitOfMeasure { get; set; }
+public int VatId { get; set; }
+public VatDto Vat { get; set; }*@

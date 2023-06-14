@@ -5,5 +5,6 @@
         public string Code { get; set; }
         public string Name { get; set; }
         public int UnitOfMeasureId { get; set; }
+        public int VatTypeId { get; set; }
     }
 }

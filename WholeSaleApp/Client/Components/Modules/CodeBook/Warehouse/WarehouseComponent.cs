@@ -1,8 +1,8 @@
-﻿using WholeSaleApp.Shared.DTOs.CodeBook;
-using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
+using WholeSaleApp.Shared.DTOs.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Modules.CodeBook.Warehouse

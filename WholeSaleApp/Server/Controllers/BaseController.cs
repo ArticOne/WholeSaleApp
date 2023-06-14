@@ -1,15 +1,10 @@
-﻿using System.Linq.Dynamic.Core;
-using AutoMapper;
+﻿using AutoMapper;
 using Json.Patch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WholeSaleApp.Server.Data;
-using WholeSaleApp.Server.Interfaces;
-using WholeSaleApp.Server.Services;
 using WholeSaleApp.Shared.DTOs;
 using WholeSaleApp.Shared.Model;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WholeSaleApp.Server.Controllers
 {

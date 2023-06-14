@@ -2,11 +2,10 @@
 using MudBlazor;
 using WholeSaleApp.Client.Components.Common.LookUp.LookUpDialog;
 using WholeSaleApp.Shared.DTOs;
-using WholeSaleApp.Shared.DTOs.CodeBook;
 
 namespace WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
 {
-    public partial class LookUpComponent<TResponseDto,TRequestDto> : MudComponentBase where TResponseDto : BaseDto where TRequestDto : class
+    public partial class LookUpComponent<TResponseDto, TRequestDto> : MudComponentBase where TResponseDto : BaseDto where TRequestDto : class
     {
         private async Task OpenDialog()
         {
@@ -27,7 +26,7 @@ namespace WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
         public string LookUpComponentTitle { get; set; }
         [Parameter]
         public string DialogTitle { get; set; }
-        [Parameter] 
+        [Parameter]
         public RenderFragment ChildContent { get; set; }
 
     }

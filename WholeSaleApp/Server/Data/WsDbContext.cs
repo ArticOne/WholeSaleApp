@@ -62,9 +62,10 @@ namespace WholeSaleApp.Server.Data
                 .IsRequired();
 
             modelBuilder.Entity<Good>()
-                .HasOne<Vat>(g => g.Vat)
+                .HasOne<VatType>(g => g.VatType)
                 .WithMany()
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<Partner>().Navigation(x => x.PartnerOffices).AutoInclude();
@@ -72,7 +73,7 @@ namespace WholeSaleApp.Server.Data
             modelBuilder.Entity<PartnerOffice>().Navigation(x => x.Partner).AutoInclude();
             modelBuilder.Entity<Warehouse>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<Good>().Navigation(x => x.UnitOfMeasure).AutoInclude();
-            modelBuilder.Entity<Good>().Navigation(x => x.Vat).AutoInclude();
+            modelBuilder.Entity<Good>().Navigation(x => x.VatType).AutoInclude();
         }
     }
 }

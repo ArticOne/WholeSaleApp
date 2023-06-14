@@ -1,11 +1,5 @@
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using System.Text.Json;
-using WholeSaleApp.Client;
 using WholeSaleApp.Server.Data;
-using WholeSaleApp.Server.Interfaces;
-using WholeSaleApp.Server.Services;
+using WholeSaleApp.Shared.Model;
 
 namespace WholeSaleApp
 {
@@ -19,8 +13,7 @@ namespace WholeSaleApp
             builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<WsDbContext>();
-            builder.Services.AddScoped<IMapperService, MapperService>();
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAutoMapper(typeof(BaseModel).Assembly);
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

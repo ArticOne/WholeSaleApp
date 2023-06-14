@@ -24,7 +24,7 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.VatType
             {
                 _repo.PutAsync(Id, new VatTypeAddDto()
                 {
-                    Name =  vatTypeDto.Name,
+                    Name = vatTypeDto.Name,
                     Code = vatTypeDto.Code,
                 });
             }

@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WholeSaleApp.Server.Data;
-using WholeSaleApp.Server.Interfaces;
-using WholeSaleApp.Server.Services;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.UI;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
 using WholeSaleApp.Shared.Model.UI;

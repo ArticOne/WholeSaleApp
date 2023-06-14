@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
-using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Client.Helpers
 {

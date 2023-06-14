@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
@@ -44,7 +43,7 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Vat
                     Code = VatDto.Code,
                     VatTypeId = VatDto.VatType.Id,
                     StartDate = (DateTime)VatDto.StartDate,
-                    Value= VatDto.Value
+                    Value = VatDto.Value
                 });
             }
         }
