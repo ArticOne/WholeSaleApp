@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WholeSaleApp.Shared.Model;
 
-namespace WholeSaleApp.Shared.DTOs.Documents.Invoices
+namespace WholeSaleApp.Shared.DTOs.AutoMapperMaps.Documents.Invoices
 {
-    public class PurchaseInvoiceDto : BaseDto
+    internal class SalesInvoicesItemProfile
     {
     }
 }

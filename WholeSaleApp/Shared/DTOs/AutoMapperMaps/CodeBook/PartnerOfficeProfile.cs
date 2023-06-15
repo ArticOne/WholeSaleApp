@@ -13,7 +13,11 @@ namespace WholeSaleApp.Shared.DTOs.AutoMapperMaps.CodeBook
             CreateMap<PartnerOffice, PartnerOfficeDto>();
             CreateMap<PartnerOffice, PartnerOfficeAddDto>();
             CreateMap<PartnerOfficeAddDto, PartnerOffice>();
-            CreateMap<PartnerOfficeDto, PartnerOfficeAddDto>();
+            CreateMap<PartnerOfficeDto, PartnerOfficeAddDto>()
+                .ForMember(
+                    dest => dest.LocationId,
+                    opt => opt.MapFrom(src => src.Location != null ? src.Location.Id : (int?)null)
+                );
         }
     }
 }

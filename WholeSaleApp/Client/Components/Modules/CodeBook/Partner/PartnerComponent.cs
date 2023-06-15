@@ -6,8 +6,6 @@ using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Shared.DTOs.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
-using WholeSaleApp.Shared.DTOs.Maps;
-
 namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 {
     public partial class PartnerComponent : CrudComponentBase<PartnerDto>
@@ -34,31 +32,14 @@ namespace WholeSaleApp.Client.Components.Modules.CodeBook.Partner
 
             if (Id != 0)
             {
-                var parDtoAdd = PartnerDtoOriginal.ToRequestDto();
-                var izmenjenAdd = PartnerDto.ToRequestDto();
+                var originalAsAddDto = _mapper.Map<PartnerAddDto>(PartnerDtoOriginal);
+                var updatedAddDto = _mapper.Map<PartnerAddDto>(PartnerDto);
 
-
-                var proba2 = parDtoAdd.CreatePatch(izmenjenAdd);
-
-                var rez = await _repo.PatchAsync(Id, proba2);
-                //_repo.PutAsync(Id, new PartnerAddDto()
-                //{
-                //    Address = partnerDto.Address,
-                //    LocationId = partnerDto.Location.Id,
-                //    Name = partnerDto.Name,
-                //    ShortName = partnerDto.ShortName,
-                //});
-
+                var rez = await _repo.PatchAsync(Id, originalAsAddDto.CreatePatch(updatedAddDto));
             }
             else
             {
-                _repo.PostAsync(new PartnerAddDto()
-                {
-                    Address = PartnerDto.Address,
-                    LocationId = PartnerDto.Location.Id,
-                    Name = PartnerDto.Name,
-                    ShortName = PartnerDto.ShortName,
-                });
+                _repo.PostAsync(_mapper.Map<PartnerAddDto>(PartnerDto));
             }
         }
 

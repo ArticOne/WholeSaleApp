@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WholeSaleApp.Shared.Model.Documents.Invoices
+namespace WholeSaleApp.Shared.DTOs.AutoMapperMaps.Documents.GoodsReceivedNotes
 {
-    public class InvoiceBase : BaseModel
+    internal class GoodsReceivedNoteProfile
     {
     }
 }
