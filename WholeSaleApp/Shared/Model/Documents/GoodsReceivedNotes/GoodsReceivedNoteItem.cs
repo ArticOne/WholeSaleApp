@@ -1,11 +1,11 @@
 ﻿using WholeSaleApp.Shared.Model.CodeBook;
 
-namespace WholeSaleApp.Shared.Model.Documents.Invoices
+namespace WholeSaleApp.Shared.Model.Documents.GoodsReceivedNotes
 {
-    public class SalesInvoiceItem : BaseModel
+    public class GoodsReceivedNoteItem : BaseModel
     {
-        public int SalesInvoiceId { get; set; }
-        public SalesInvoice SalesInvoice { get; set; }
+        public int GoodsReceivedNoteId { get; set; }
+        public GoodsReceivedNote GoodsReceivedNote { get; set; }
         public int OrdinalNumber { get; set; }
         public int GoodId { get; set; }
         public Good Good { get; set; }

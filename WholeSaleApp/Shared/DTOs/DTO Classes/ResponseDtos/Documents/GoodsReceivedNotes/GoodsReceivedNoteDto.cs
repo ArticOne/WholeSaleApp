@@ -1,8 +1,7 @@
 ﻿using WholeSaleApp.Shared.DTOs.CodeBook;
-
-namespace WholeSaleApp.Shared.DTOs.Documents.Invoices
+namespace WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsReceivedNotes
 {
-    public class SalesInvoiceDto : BaseDto
+    public class GoodsReceivedNoteDto : BaseDto
     {
         public string Code { get; set; }
         public DateTime DateTime { get; set; }
@@ -11,6 +10,6 @@ namespace WholeSaleApp.Shared.DTOs.Documents.Invoices
         public int? PartnerOfficeId { get; set; }
         public PartnerOfficeDto PartnerOffice { get; set; }
         public string Note { get; set; }
-        public List<SalesInvoiceItemDto> SalesInvoiceItems { get; set; }
+        public List<GoodsReceivedNoteItemDto> GoodsReceivedNoteItems { get; set; }
     }
 }

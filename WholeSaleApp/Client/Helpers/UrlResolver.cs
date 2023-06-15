@@ -3,6 +3,7 @@ using WholeSaleApp.Shared.DTOs.CodeBook;
 using WholeSaleApp.Shared.DTOs.Documents.Invoices;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.Invoice;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.UI;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
 

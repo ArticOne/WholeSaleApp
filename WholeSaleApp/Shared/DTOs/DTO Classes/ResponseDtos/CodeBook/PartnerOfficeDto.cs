@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WholeSaleApp.Shared.DTOs;
-
-namespace WholeSaleApp.Shared.DTOs.CodeBook
+﻿namespace WholeSaleApp.Shared.DTOs.CodeBook
 {
     public class PartnerOfficeDto : BaseDto
     {

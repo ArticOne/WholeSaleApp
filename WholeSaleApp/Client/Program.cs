@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Client.Services.Repositories;
+using WholeSaleApp.Shared.DTOs;
 
 namespace WholeSaleApp.Client
 {
@@ -18,6 +19,7 @@ namespace WholeSaleApp.Client
             builder.Services.AddHttpClient();
             builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             builder.Services.AddScoped<IMenuItemsRepository, MenuItemsRepository>();
+            builder.Services.AddAutoMapper(typeof(BaseDto).Assembly);
             builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();

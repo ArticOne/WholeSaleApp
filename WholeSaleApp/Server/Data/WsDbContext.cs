@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using WholeSaleApp.Shared.Model.CodeBook;
+using WholeSaleApp.Shared.Model.Documents.GoodsReceivedNotes;
 using WholeSaleApp.Shared.Model.Documents.Invoices;
 using WholeSaleApp.Shared.Model.UI;
 
@@ -18,7 +18,7 @@ namespace WholeSaleApp.Server.Data
         public DbSet<VatType> VatTypes { get; set; }
         public DbSet<Vat> Vats { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
-        public DbSet<PurchaseInvoice> PurchaseInvoices { get; set; }
+        public DbSet<GoodsReceivedNote> GoodsReceivedNotes { get; set; }
         public DbSet<SalesInvoice> SalesInvoices { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
 
