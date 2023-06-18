@@ -1,11 +1,11 @@
 ﻿using WholeSaleApp.Shared.Model.CodeBook;
 
-namespace WholeSaleApp.Shared.Model.Documents.Invoices
+namespace WholeSaleApp.Shared.Model.Documents.Invoice
 {
     public class SalesInvoice : BaseModel 
     {
         public string Code { get;  set; }
-        public DateTime DateTime { get;  set; }
+        public DateTime Date { get;  set; }
         public int PartnerId{ get; set; }
         public Partner Partner { get;  set; }
         public int? PartnerOfficeId { get; set; }

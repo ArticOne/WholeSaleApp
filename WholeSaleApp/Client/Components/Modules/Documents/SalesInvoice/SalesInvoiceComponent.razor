@@ -1,10 +1,8 @@
 ﻿@page "/SalesInvoices/{Id:int}"
 @page "/SalesInvoices/New"
-
-@using WholeSaleApp.Shared.DTOs.Documents.Invoices
 @using WholeSaleApp.Client.Components.Modules.CrudComponentBase
 
-@inherits CrudComponentBase<SalesInvoiceDto>
+@inherits CrudComponentBase<WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.Invoice.SalesInvoiceDto>
 
 <h3>SalesInvoiceComponent</h3>
 

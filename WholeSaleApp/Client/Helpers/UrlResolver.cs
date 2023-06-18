@@ -1,10 +1,11 @@
 ﻿using WholeSaleApp.Shared.DTOs;
 using WholeSaleApp.Shared.DTOs.CodeBook;
-using WholeSaleApp.Shared.DTOs.Documents.Invoices;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
-using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.GoodsReceivedNote;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.Invoice;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.UI;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsReceivedNote;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.Invoice;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
 
 namespace WholeSaleApp.Client.Helpers
@@ -32,8 +33,8 @@ namespace WholeSaleApp.Client.Helpers
                     return "Goods";
                 case Type unitOfMeasureDto when unitOfMeasureDto == typeof(UnitOfMeasureDto):
                     return "UnitsOfMeasure";
-                //case Type goodsReceivedNoteDto when goodsReceivedNoteDto == typeof(GoodsReceivedNoteDto):
-                //    return "GoodsReceivedNotes";
+                case Type goodsReceivedNoteDto when goodsReceivedNoteDto == typeof(GoodsReceivedNoteDto):
+                    return "GoodsReceivedNotes";
                 case Type salesInvoiceDto when salesInvoiceDto == typeof(SalesInvoiceDto):
                     return "SalesInvoices";
                 default:
@@ -61,9 +62,8 @@ namespace WholeSaleApp.Client.Helpers
                     return !isAddDto ? typeof(GoodDto) : typeof(GoodAddDto);
                 case "UnitsOfMeasure":
                     return !isAddDto ? typeof(UnitOfMeasureDto) : typeof(UnitOfMeasureAddDto);
-                //case "GoodsReceivedNotes":
-                //return !isAddDto ? typeof(PartnerDto) : typeof(PartnerAddDto);
-                //    return typeof(GoodsReceivedNoteDto);
+                case "GoodsReceivedNotes":
+                    return !isAddDto ? typeof(GoodsReceivedNoteDto) : typeof(GoodsReceivedNoteAddDto);
                 case "SalesInvoices":
                     return !isAddDto ? typeof(SalesInvoiceDto) : typeof(SalesInvoiceAddDto);
 

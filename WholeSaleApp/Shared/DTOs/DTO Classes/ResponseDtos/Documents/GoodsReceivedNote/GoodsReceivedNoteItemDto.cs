@@ -1,11 +1,11 @@
 ﻿using WholeSaleApp.Shared.DTOs.CodeBook;
 
-namespace WholeSaleApp.Shared.DTOs.Documents.Invoices
+namespace WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsReceivedNote
 {
-    public class SalesInvoiceItemDto : BaseDto
+    public class GoodsReceivedNoteItemDto : BaseDto
     {
-        public int SalesInvoiceId { get; set; }
-        public SalesInvoiceDto SalesInvoice { get; set; }
+        public int GoodsReceivedNoteId { get; set; }
+        public GoodsReceivedNoteDto GoodsReceivedNote { get; set; }
         public int OrdinalNumber { get; set; }
         public int GoodId { get; set; }
         public GoodDto Good { get; set; }

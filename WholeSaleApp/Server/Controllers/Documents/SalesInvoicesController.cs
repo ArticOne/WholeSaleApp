@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Server.Interfaces;
-using WholeSaleApp.Shared.DTOs.Documents.Invoices;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
-using WholeSaleApp.Shared.Model.Documents.Invoices;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.Invoice;
+using WholeSaleApp.Shared.Model.Documents.Invoice;
 
 namespace WholeSaleApp.Server.Controllers.Documents
 {

@@ -1,6 +1,6 @@
 ﻿using WholeSaleApp.Shared.Model.CodeBook;
 
-namespace WholeSaleApp.Shared.Model.Documents.GoodsReceivedNotes
+namespace WholeSaleApp.Shared.Model.Documents.GoodsReceivedNote
 {
     public class GoodsReceivedNoteItem : BaseModel
     {

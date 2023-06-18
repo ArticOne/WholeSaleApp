@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WholeSaleApp.Shared.Model.CodeBook;
-using WholeSaleApp.Shared.Model.Documents.GoodsReceivedNotes;
-using WholeSaleApp.Shared.Model.Documents.Invoices;
+using WholeSaleApp.Shared.Model.Documents.GoodsReceivedNote;
+using WholeSaleApp.Shared.Model.Documents.Invoice;
 using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Server.Data
@@ -26,7 +26,7 @@ namespace WholeSaleApp.Server.Data
         {
             _config = config;
         }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
            .UseSqlServer(_config.GetConnectionString("Db"), conf =>
@@ -50,7 +50,7 @@ namespace WholeSaleApp.Server.Data
                 .HasOne<Location>(po => po.Location)
                 .WithMany(l => l.PartnerOffices)
                 .OnDelete(DeleteBehavior.Restrict);
-                
+
             modelBuilder.Entity<PartnerOffice>()
                 .HasOne<Partner>(po => po.Partner)
                 .WithMany(x => x.PartnerOffices)
@@ -67,13 +67,42 @@ namespace WholeSaleApp.Server.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<SalesInvoice>()
+                .HasMany(x => x.SalesInvoiceItems)
+                .WithOne(x => x.SalesInvoice)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<GoodsReceivedNote>()
+                .HasMany(x => x.GoodsReceivedNoteItems)
+                .WithOne(x => x.GoodsReceivedNote)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SalesInvoice>()
+                .Property(e => e.Date)
+                .HasDefaultValueSql("getDate()");
+
+            modelBuilder.Entity<GoodsReceivedNote>()
+                .Property(e => e.Date)
+                .HasDefaultValueSql("getDate()");
+
             modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<Partner>().Navigation(x => x.PartnerOffices).AutoInclude();
+
             modelBuilder.Entity<PartnerOffice>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<PartnerOffice>().Navigation(x => x.Partner).AutoInclude();
+
             modelBuilder.Entity<Warehouse>().Navigation(x => x.Location).AutoInclude();
+
             modelBuilder.Entity<Good>().Navigation(x => x.UnitOfMeasure).AutoInclude();
             modelBuilder.Entity<Good>().Navigation(x => x.VatType).AutoInclude();
+
+            modelBuilder.Entity<SalesInvoice>().Navigation(x => x.SalesInvoiceItems).AutoInclude();
+            modelBuilder.Entity<SalesInvoice>().Navigation(x => x.Partner).AutoInclude();
+            modelBuilder.Entity<SalesInvoice>().Navigation(x => x.PartnerOffice).AutoInclude();
+
+            modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.GoodsReceivedNoteItems).AutoInclude();
+            modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.Partner).AutoInclude();
+            modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.PartnerOffice).AutoInclude();
         }
     }
 }

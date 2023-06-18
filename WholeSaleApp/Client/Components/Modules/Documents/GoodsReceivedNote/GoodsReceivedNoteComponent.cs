@@ -1,6 +1,6 @@
 ﻿using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents;
-using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsReceivedNotes;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsReceivedNote;
 
 namespace WholeSaleApp.Client.Components.Modules.Documents.GoodsReceivedNote
 {
