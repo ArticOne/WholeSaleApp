@@ -1,11 +1,82 @@
 ﻿@page "/SalesInvoices/{Id:int}"
 @page "/SalesInvoices/New"
 @using WholeSaleApp.Client.Components.Modules.CrudComponentBase
+@using WholeSaleApp.Shared.DTOs.CodeBook
+@using Microsoft.AspNetCore.Components
+@using Microsoft.EntityFrameworkCore
+@using WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
+@using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook
+@using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice
+@using WholeSaleApp.Shared.Validation.Documents.SalesInvoice
 
-@inherits CrudComponentBase<WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.Invoice.SalesInvoiceDto>
+@inherits CrudComponentBase<WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice.SalesInvoiceDto>
 
-<h3>SalesInvoiceComponent</h3>
+<div>
+    <MudPaper Class="pa-4 m-4">
+        <MudForm Model="SalesInvoiceDto" @ref="salesInvoiceInputForm" Validation="@(salesInvoiceDtoValidator.ValidateValue)" ValidationDelay="0">
+            <MudTextField @bind-Text="SalesInvoiceDto.Code" T="string" Label="Broj računa" Required="true" RequiredError="Broj računa je obavezno polje!"/>
+            <MudDatePicker @bind-Date="SalesInvoiceDto.Date" Label="Datum računa" Required="true" RequiredError="Datum računa je obavezno polje!"/>
+            <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Partner" DialogTitle="Izaberite partnera" TResponseDto="PartnerDto" TRequestDto="PartnerAddDto" SelectedItem="dto => SalesInvoiceDto.Partner = dto">
+                <MudField Style="padding: 5px" Label="Naziv partnera">@SalesInvoiceDto?.Partner?.Name</MudField>
+                
+                <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Poslovnica" DialogTitle="Izaberite poslovnicu" TResponseDto="PartnerOfficeDto" TRequestDto="PartnerOfficeAddDto" SelectedItem="dto => SalesInvoiceDto.PartnerOffice = dto">
+                    <MudField Style="padding: 5px" Label="Naziv poslovnice">@SalesInvoiceDto?.PartnerOffice?.Name</MudField>
+                </LookUpComponent>
 
-@code {
+            </LookUpComponent>
+            <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Magacin" DialogTitle="Izaberite magacin" TResponseDto="WarehouseDto" TRequestDto="WarehouseAddDto" SelectedItem="dto => SalesInvoiceDto.Warehouse = dto">
+                <MudField Style="padding: 5px" Label="Naziv magacina">@SalesInvoiceDto?.Warehouse?.Name</MudField>
+            </LookUpComponent>
+            <MudTextField For="() => SalesInvoiceDto.Note" @bind-Text="SalesInvoiceDto.Note" T="string" Label="Napomena"/>
 
-}
+            <MudDataGrid @ref="_dataGrid"
+                         MultiSelection="true"
+                         ReadOnly="false"
+                         Hover="true"
+                         Class="mt-5 p-0" T="SalesInvoiceItemDto"
+                         Items="@SalesInvoiceDto.SalesInvoiceItems"
+                         Elevation="7"
+                         EditMode="DataGridEditMode.Cell"
+                         >
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6" Class="p-0">Stavke</MudText>
+                    <MudToolBar Class="p-0">
+                        <MudTooltip Text="Novi unos">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="AddSalesInvoiceItem"/>
+                        </MudTooltip>
+                        <MudTooltip Text="Briši">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Remove" OnClick="DeleteSelectedSalesInvoiceItems"/>
+                        </MudTooltip>
+                    </MudToolBar>
+                </ToolBarContent>
+
+                <Columns>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="int" Property="x => x.OrdinalNumber"/>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="GoodDto" Property="x => x.Good">
+                        <EditTemplate>
+                            <LookUpComponent Mini="true" TRequestDto="GoodAddDto" TResponseDto="GoodDto" SelectedItem="(x) => context.Item.Good = x">
+                                <MudField Style="padding: 5px">@context.Item.Good?.Name</MudField>
+                            </LookUpComponent>
+                        </EditTemplate>
+                    </PropertyColumn>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="string" Property="x => x.Good == null ? null : x.Good.UnitOfMeasure.ShortName" IsEditable="false" Title="JM"/>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="decimal" Property="x => x.Quantity">
+                        <EditTemplate>
+                            <MudForm Model="@context.Item">
+                                <MudNumericField For="() => context.Item.Quantity" T="decimal" Validation="@(salesInvoiceItemDtoValidator.ValidateValue)" Immediate="true" @bind-Value="context.Item.Quantity" />
+                            </MudForm>
+                        </EditTemplate>
+                    </PropertyColumn>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="decimal" Property="x => x.Price"/>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="decimal" Property="x => x.Price * x.Quantity" IsEditable="false" Title="Vrednost"/>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="decimal" Property="x => x.Good == null ? 0 : x.Good.VatType.Vats.OrderByDescending(x => x.StartDate).First(x => SalesInvoiceDto.Date >= x.StartDate).Value" Title="Procenat poreza" IsEditable="false"/>
+                    <PropertyColumn T="SalesInvoiceItemDto" TProperty="decimal" Property="x => x.Good == null ? 0 : x.Price * x.Quantity * (1 + x.Good.VatType.Vats.OrderByDescending(x => x.StartDate).First(x => SalesInvoiceDto.Date >= x.StartDate).Value / 100)" IsEditable="false" Title="Ukupna vrednost sa porezom"/>
+                </Columns>
+            </MudDataGrid>
+        </MudForm>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3" OnClick="Save">Sačuvaj</MudButton>
+    </MudPaper>
+
+
+
+</div>

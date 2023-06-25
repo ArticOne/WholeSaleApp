@@ -28,6 +28,8 @@ namespace WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
         public string DialogTitle { get; set; }
         [Parameter]
         public RenderFragment ChildContent { get; set; }
+        [Parameter]
+        public bool Mini { get; set; } = false;
 
     }
 }

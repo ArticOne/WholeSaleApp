@@ -2,25 +2,28 @@
 @inject IDialogService DialogService
 @typeparam TResponseDto
 @typeparam TRequestDto
-<MudPaper Style="@("padding: 1rem; margin: 20px 0 20px 0; " + Style)" Elevation="7" Square="true">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <MudText Typo="Typo.h6">@LookUpComponentTitle</MudText>
-        @*        <MudIcon @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary" Icon="@Icons.Material.Filled.Outbound" style="align-self: flex-start;"></MudIcon>*@
-        <MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary" EndIcon="@Icons.Material.Filled.Outbound">Izbor</MudButton>
-    </div>
-    <MudPaper Elevation="0">
-        @ChildContent
-    </MudPaper>
-</MudPaper>
-
-
-
-
-@*<MudPaper>
-    <MudText Typo="Typo.h6">@LookUpComponentTitle</MudText>
-    <MudIcon @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary" Icon="@Icons.Material.Filled.Outbound">
-    </MudIcon>
-    <MudPaper>
-        @ChildContent
-    </MudPaper>
-</MudPaper>*@
+<div>
+    @if (Mini)
+    {
+        <MudPaper Class="mini-flex-container" Style="@("padding: 0.2rem; margin: 5px 0 5px 0; " + Style)" Elevation="0" Square="true">
+            <MudPaper Class="mini-flex-item" Elevation="0">
+                @ChildContent
+            </MudPaper>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <MudIcon @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary" Icon="@Icons.Material.Filled.Outbound" style="align-self: flex-start;"></MudIcon>
+            </div>
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Style="@("padding: 1rem; margin: 20px 0 20px 0; " + Style)" Elevation="7" Square="true">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <MudText Typo="Typo.h6">@LookUpComponentTitle</MudText>
+                <MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary" EndIcon="@Icons.Material.Filled.Outbound">Izbor</MudButton>
+            </div>
+            <MudPaper Elevation="0">
+                @ChildContent
+            </MudPaper>
+        </MudPaper>
+    }
+</div>

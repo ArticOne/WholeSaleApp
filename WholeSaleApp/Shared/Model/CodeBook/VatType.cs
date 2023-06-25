@@ -10,5 +10,6 @@ namespace WholeSaleApp.Shared.Model.CodeBook
     {
         public string Code { get; set; }
         public string Name { get; set; }
+        public List<Vat> Vats { get; set; }
     }
 }

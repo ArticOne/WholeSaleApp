@@ -1,4 +1,4 @@
-﻿namespace WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.Invoice
+﻿namespace WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.SalesInvoice
 {
     public class SalesInvoiceItemAddDto
     {

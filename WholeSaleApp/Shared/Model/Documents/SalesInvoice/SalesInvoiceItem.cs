@@ -1,6 +1,6 @@
 ﻿using WholeSaleApp.Shared.Model.CodeBook;
 
-namespace WholeSaleApp.Shared.Model.Documents.Invoice
+namespace WholeSaleApp.Shared.Model.Documents.SalesInvoice
 {
     public class SalesInvoiceItem : BaseModel
     {

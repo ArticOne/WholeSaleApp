@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WholeSaleApp.Shared.Model.CodeBook;
 using WholeSaleApp.Shared.Model.Documents.GoodsReceivedNote;
-using WholeSaleApp.Shared.Model.Documents.Invoice;
+using WholeSaleApp.Shared.Model.Documents.SalesInvoice;
 using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Server.Data
@@ -58,7 +58,7 @@ namespace WholeSaleApp.Server.Data
 
             modelBuilder.Entity<Vat>()
                 .HasOne<VatType>(v => v.VatType)
-                .WithMany()
+                .WithMany(x => x.Vats)
                 .IsRequired();
 
             modelBuilder.Entity<Good>()
@@ -76,6 +76,16 @@ namespace WholeSaleApp.Server.Data
                 .HasMany(x => x.GoodsReceivedNoteItems)
                 .WithOne(x => x.GoodsReceivedNote)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SalesInvoice>()
+                .HasOne(x => x.Warehouse)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<GoodsReceivedNote>()
+                .HasOne(x => x.Warehouse)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<SalesInvoice>()
                 .Property(e => e.Date)
@@ -99,10 +109,16 @@ namespace WholeSaleApp.Server.Data
             modelBuilder.Entity<SalesInvoice>().Navigation(x => x.SalesInvoiceItems).AutoInclude();
             modelBuilder.Entity<SalesInvoice>().Navigation(x => x.Partner).AutoInclude();
             modelBuilder.Entity<SalesInvoice>().Navigation(x => x.PartnerOffice).AutoInclude();
+            modelBuilder.Entity<SalesInvoice>().Navigation(x => x.Warehouse).AutoInclude();
+            modelBuilder.Entity<SalesInvoiceItem>().Navigation(x => x.Good).AutoInclude();
+
 
             modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.GoodsReceivedNoteItems).AutoInclude();
             modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.Partner).AutoInclude();
+            modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.Warehouse).AutoInclude();
             modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.PartnerOffice).AutoInclude();
+
+            modelBuilder.Entity<VatType>().Navigation(x => x.Vats).AutoInclude();
         }
     }
 }

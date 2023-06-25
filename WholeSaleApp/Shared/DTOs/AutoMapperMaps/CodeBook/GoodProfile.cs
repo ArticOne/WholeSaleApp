@@ -9,10 +9,10 @@ namespace WholeSaleApp.Shared.DTOs.AutoMapperMaps.CodeBook
     {
         public GoodProfile()
         {
-            CreateMap<Good, GoodDto>();
-            CreateMap<Good, GoodAddDto>();
-            CreateMap<GoodAddDto, Good>();
-            CreateMap<GoodDto, GoodAddDto>();
+            CreateMap<Good, GoodDto>().MaxDepth(2);
+            CreateMap<Good, GoodAddDto>().MaxDepth(2);
+            CreateMap<GoodAddDto, Good>().MaxDepth(2);
+            CreateMap<GoodDto, GoodAddDto>().MaxDepth(2);
         }
     }
 }

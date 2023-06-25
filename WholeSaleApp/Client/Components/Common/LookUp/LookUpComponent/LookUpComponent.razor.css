@@ -1,0 +1,10 @@
+﻿::deep .mini-flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+::deep .mini-flex-item {
+    flex-grow: 1;
+}
+/* LOOOLZ*/

@@ -27,8 +27,11 @@ namespace WholeSaleApp.Server.Controllers
         [HttpGet("/api/[controller]")]
         public async Task<ActionResult<IEnumerable<BaseDto>>> Get()
         {
-            var result = await _db.Set<TModel>().Select(x => _mapper.Map<TResponseDto>(x)).ToListAsync();
-            return result;
+            var rez1 = await _db.Set<TModel>().ToListAsync();
+            var rez2 = rez1.Select(x => _mapper.Map<TResponseDto>(x)).ToList();
+            return rez2;
+            //var result = await _db.Set<TModel>().Select(x => _mapper.Map<TResponseDto>(x)).ToListAsync();
+            //return result;
         }
 
         [HttpGet("/api/[controller]/{id}")]

@@ -1,6 +1,6 @@
 ﻿using WholeSaleApp.Shared.DTOs.CodeBook;
 
-namespace WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.Invoice
+namespace WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice
 {
     public class SalesInvoiceItemDto : BaseDto
     {

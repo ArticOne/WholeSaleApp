@@ -2,10 +2,10 @@
 using WholeSaleApp.Shared.DTOs.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.GoodsReceivedNote;
-using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.Invoice;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.SalesInvoice;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.UI;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsReceivedNote;
-using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.Invoice;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
 
 namespace WholeSaleApp.Client.Helpers

@@ -10,6 +10,8 @@ namespace WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsRecei
         public PartnerDto Partner { get; set; }
         public int? PartnerOfficeId { get; set; }
         public PartnerOfficeDto PartnerOffice { get; set; }
+        public int WarehouseId { get; set; }
+        public WarehouseDto Warehouse { get; set; }
         public string Note { get; set; }
         public List<GoodsReceivedNoteItemDto> GoodsReceivedNoteItems { get; set; }
     }

@@ -49,6 +49,7 @@ namespace WholeSaleApp.Client.Services.Repositories
                                                                         new StringContent(JsonSerializer.Serialize(dtoToPost),
                                                                         Encoding.UTF8,
                                                                         "application/json"));
+            var proba = await response.Content.ReadAsStringAsync();
             return response.IsSuccessStatusCode;
         }
 

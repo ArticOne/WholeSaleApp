@@ -9,10 +9,10 @@ namespace WholeSaleApp.Shared.DTOs.AutoMapperMaps.CodeBook
     {
         public VatProfile()
         {
-            CreateMap<Vat, VatDto>();
-            CreateMap<Vat, VatAddDto>();
-            CreateMap<VatAddDto, Vat>();
-            CreateMap<VatDto, VatAddDto>();
+            CreateMap<Vat, VatDto>().MaxDepth(2);
+            CreateMap<Vat, VatAddDto>().MaxDepth(2);
+            CreateMap<VatAddDto, Vat>().MaxDepth(2);
+            CreateMap<VatDto, VatAddDto>().MaxDepth(2);
         }
     }
 }

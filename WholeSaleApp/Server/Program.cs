@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using WholeSaleApp.Server.Data;
 using WholeSaleApp.Shared.Model;
 
@@ -12,7 +13,11 @@ namespace WholeSaleApp
 
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<WsDbContext>();
             builder.Services.AddAutoMapper(typeof(BaseModel).Assembly);
