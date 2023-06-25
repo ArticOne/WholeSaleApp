@@ -15,61 +15,40 @@ namespace WholeSaleApp.Client.Helpers
 #warning "THIS SHOULD BE DONE BETTER"
         public static string GetUrlSectionForType<T>() where T : BaseDto
         {
-            switch (typeof(T))
+            return typeof(T) switch
             {
-                case Type locationDto when locationDto == typeof(LocationDto):
-                    return "Locations";
-                case Type partnerDto when partnerDto == typeof(PartnerDto):
-                    return "Partners";
-                case Type menuItemDto when menuItemDto == typeof(MenuItemDto):
-                    return "MenuItems";
-                case Type vatTypeDto when vatTypeDto == typeof(VatTypeDto):
-                    return "VatType";
-                case Type vatDto when vatDto == typeof(VatDto):
-                    return "Vat";
-                case Type warehouseDto when warehouseDto == typeof(WarehouseDto):
-                    return "Warehouses";
-                case Type goodDto when goodDto == typeof(GoodDto):
-                    return "Goods";
-                case Type unitOfMeasureDto when unitOfMeasureDto == typeof(UnitOfMeasureDto):
-                    return "UnitsOfMeasure";
-                case Type goodsReceivedNoteDto when goodsReceivedNoteDto == typeof(GoodsReceivedNoteDto):
-                    return "GoodsReceivedNotes";
-                case Type salesInvoiceDto when salesInvoiceDto == typeof(SalesInvoiceDto):
-                    return "SalesInvoices";
-                default:
-                    throw new Exception($"Url section is not configured for type{typeof(T).Name}");
-            }
+                Type locationDto when locationDto == typeof(LocationDto) => "Locations",
+                Type partnerDto when partnerDto == typeof(PartnerDto) => "Partners",
+                Type partnerOfficeDto when partnerOfficeDto == typeof(PartnerOfficeDto) => "PartnerOffices",
+                Type menuItemDto when menuItemDto == typeof(MenuItemDto) => "MenuItems",
+                Type vatTypeDto when vatTypeDto == typeof(VatTypeDto) => "VatType",
+                Type vatDto when vatDto == typeof(VatDto) => "Vat",
+                Type warehouseDto when warehouseDto == typeof(WarehouseDto) => "Warehouses",
+                Type goodDto when goodDto == typeof(GoodDto) => "Goods",
+                Type unitOfMeasureDto when unitOfMeasureDto == typeof(UnitOfMeasureDto) => "UnitsOfMeasure",
+                Type goodsReceivedNoteDto when goodsReceivedNoteDto == typeof(GoodsReceivedNoteDto) => "GoodsReceivedNotes",
+                Type salesInvoiceDto when salesInvoiceDto == typeof(SalesInvoiceDto) => "SalesInvoices",
+                _ => throw new Exception($"Url section is not configured for type {typeof(T).Name}")
+            };
         }
 
         public static Type GetTypeForUrl(string urlPart, bool isAddDto = false)
         {
-            switch (urlPart)
+            return urlPart switch
             {
-                case "Locations":
-                    return !isAddDto ? typeof(LocationDto) : typeof(LocationAddDto);
-                case "Partners":
-                    return !isAddDto ? typeof(PartnerDto) : typeof(PartnerAddDto);
-                case "MenuItems":
-                    return !isAddDto ? typeof(MenuItemDto) : typeof(MenuItemAddDto);
-                case "VatType":
-                    return !isAddDto ? typeof(VatTypeDto) : typeof(VatTypeAddDto);
-                case "Vat":
-                    return !isAddDto ? typeof(VatDto) : typeof(VatAddDto);
-                case "Warehouses":
-                    return !isAddDto ? typeof(WarehouseDto) : typeof(WarehouseAddDto);
-                case "Goods":
-                    return !isAddDto ? typeof(GoodDto) : typeof(GoodAddDto);
-                case "UnitsOfMeasure":
-                    return !isAddDto ? typeof(UnitOfMeasureDto) : typeof(UnitOfMeasureAddDto);
-                case "GoodsReceivedNotes":
-                    return !isAddDto ? typeof(GoodsReceivedNoteDto) : typeof(GoodsReceivedNoteAddDto);
-                case "SalesInvoices":
-                    return !isAddDto ? typeof(SalesInvoiceDto) : typeof(SalesInvoiceAddDto);
-
-                default:
-                    throw new Exception($"Type is not configured for Url part: {urlPart}");
-            }
+                "Locations" => !isAddDto ? typeof(LocationDto) : typeof(LocationAddDto),
+                "Partners" => !isAddDto ? typeof(PartnerDto) : typeof(PartnerAddDto),
+                "PartnerOffices" => !isAddDto ? typeof(PartnerOfficeDto) : typeof(PartnerOfficeAddDto),
+                "MenuItems" => !isAddDto ? typeof(MenuItemDto) : typeof(MenuItemAddDto),
+                "VatType" => !isAddDto ? typeof(VatTypeDto) : typeof(VatTypeAddDto),
+                "Vat" => !isAddDto ? typeof(VatDto) : typeof(VatAddDto),
+                "Warehouses" => !isAddDto ? typeof(WarehouseDto) : typeof(WarehouseAddDto),
+                "Goods" => !isAddDto ? typeof(GoodDto) : typeof(GoodAddDto),
+                "UnitsOfMeasure" => !isAddDto ? typeof(UnitOfMeasureDto) : typeof(UnitOfMeasureAddDto),
+                "GoodsReceivedNotes" => !isAddDto ? typeof(GoodsReceivedNoteDto) : typeof(GoodsReceivedNoteAddDto),
+                "SalesInvoices" => !isAddDto ? typeof(SalesInvoiceDto) : typeof(SalesInvoiceAddDto),
+                _ => throw new Exception($"Type is not configured for Url part: {urlPart}")
+            };
         }
     }
 }

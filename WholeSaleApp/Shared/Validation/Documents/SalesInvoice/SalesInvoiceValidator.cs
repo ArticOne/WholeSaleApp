@@ -9,7 +9,12 @@ namespace WholeSaleApp.Shared.Validation.Documents.SalesInvoice
         public SalesInvoiceDtoValidator()
         {
             RuleForEach(x => x.SalesInvoiceItems).SetValidator(new SalesInvoiceItemDtoValidator());
-            RuleFor(x => x.Note).NotNull().WithMessage("Napomena je obavezno polje PROBA OVO TREBA OBRISATI");
+            RuleFor(x => x.Partner).NotNull().WithMessage("Morate odabrati partnera");
+            RuleFor(x => x.PartnerOffice)
+                .NotNull()
+                .When(x => x.Partner.PartnerOffices.Any())
+                .WithMessage("PartnerOffice must not be null when Partner has any PartnerOffice");
+
         }
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model,propertyName) =>
         {

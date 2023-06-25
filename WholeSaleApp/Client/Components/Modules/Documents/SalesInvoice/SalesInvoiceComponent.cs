@@ -25,7 +25,7 @@ namespace WholeSaleApp.Client.Components.Modules.Documents.SalesInvoice
         private async Task Save()
         {
             salesInvoiceInputForm.Validate();
-
+            
             if (!salesInvoiceInputForm.IsValid) { return; }
 
             if (Id != 0)

@@ -13,7 +13,7 @@ namespace WholeSaleApp.Client.Components.Common.LookUp.LookUpDialog
 
     {
         [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
+        [Parameter] public List<TResponseDto>? Items { get; set; }
 
         void Submit() => MudDialog.Close(DialogResult.Ok((_dataGrid.SelectedItem)));
         void Cancel() => MudDialog.Cancel();
@@ -35,7 +35,7 @@ namespace WholeSaleApp.Client.Components.Common.LookUp.LookUpDialog
 
         protected override async Task OnInitializedAsync()
         {
-            GridSource = new ObservableCollection<TResponseDto>(await Repository.GetAsync());
+            GridSource = new ObservableCollection<TResponseDto>(Items ?? await Repository.GetAsync());
             await base.OnInitializedAsync();
         }
 
