@@ -8,10 +8,21 @@
             <MudPaper Class="mini-flex-container" Style="@("padding: 0.2rem; margin: 5px 0 5px 0; " + Style)" Elevation="0" Square="true">
                 <MudPaper Class="mini-flex-item" Style="background: transparent" Elevation="0">
                     @ChildContent
+                    @if (Error)
+                    {
+                        <div class="mud-input-control-helper-container">
+                            <p class="mud-input-helper-text mud-input-error">
+                                <div class="d-flex">
+                                    <div class="me-auto">@ErrorText</div>
+                                </div>
+                            </p>
+                        </div>
+                    }
                 </MudPaper>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <MudIcon @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary" Icon="@Icons.Material.Filled.Outbound" style="align-self: flex-start; cursor: pointer"></MudIcon>
                 </div>
+
             </MudPaper>
         }
         else
@@ -24,10 +35,11 @@
                 <MudPaper Elevation="0">
                     @ChildContent
                 </MudPaper>
+                @if(Error)
+                {
+                    <MudAlert Severity="Severity.Error">@ErrorText</MudAlert>
+                }
             </MudPaper>
         }
-    @if(Error)
-    {
-        <MudAlert Severity="Severity.Error">@ErrorText</MudAlert>
-    }
+
 </div>

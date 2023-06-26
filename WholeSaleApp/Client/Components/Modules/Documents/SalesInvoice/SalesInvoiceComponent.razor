@@ -3,11 +3,11 @@
 @using WholeSaleApp.Client.Components.Modules.CrudComponentBase
 @using WholeSaleApp.Shared.DTOs.CodeBook
 @using Microsoft.AspNetCore.Components
-@using Microsoft.EntityFrameworkCore
 @using WholeSaleApp.Client.Components.Common.LookUp.LookUpComponent
 @using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook
 @using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice
-@using WholeSaleApp.Shared.Validation.Documents.SalesInvoice
+@using WholeSaleApp.Client.Components.Common.InputValidationLabel
+
 
 @inherits CrudComponentBase<WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice.SalesInvoiceDto>
 
@@ -20,7 +20,7 @@
             <div class="flex-container">
                 <div class="flex-item">
                     <MudPaper Elevation="0">
-                        <LookUpComponent For="() => SalesInvoiceDto.Partner" Validation="@(salesInvoiceDtoValidator.ValidateValue)" Style="max-width: 300px" LookUpComponentTitle="Partner" DialogTitle="Izaberite partnera" TResponseDto="PartnerDto" TRequestDto="PartnerAddDto" SelectedItem="dto => { SalesInvoiceDto.PartnerOffice = null; SalesInvoiceDto.Partner = dto; }">
+                        <LookUpComponent Immediate="true" For="() => SalesInvoiceDto.Partner" Style="width: 300px" LookUpComponentTitle="Partner" DialogTitle="Izaberite partnera" TResponseDto="PartnerDto" TRequestDto="PartnerAddDto" SelectedItem="dto => { SalesInvoiceDto.PartnerOffice = null; SalesInvoiceDto.Partner = dto;  }">
                             <MudField Style="padding: 5px" Label="Naziv partnera">@SalesInvoiceDto?.Partner?.Name</MudField>
                         </LookUpComponent>
                     </MudPaper>
@@ -29,7 +29,7 @@
                 {
                     <div class="flex-item">
                         <MudPaper Elevation="0">
-                            <LookUpComponent For="() => SalesInvoiceDto.PartnerOffice" Validation="@(salesInvoiceDtoValidator.ValidateValue)" Items="SalesInvoiceDto.Partner.PartnerOffices" Style="max-width: 300px" LookUpComponentTitle="Poslovnica" DialogTitle="Izaberite poslovnicu" TResponseDto="PartnerOfficeDto" TRequestDto="PartnerOfficeAddDto" SelectedItem="dto => SalesInvoiceDto.PartnerOffice = dto">
+                            <LookUpComponent Immediate="true" For="() => SalesInvoiceDto.PartnerOffice" Items="SalesInvoiceDto.Partner.PartnerOffices" Style="width: 300px" LookUpComponentTitle="Poslovnica" DialogTitle="Izaberite poslovnicu" TResponseDto="PartnerOfficeDto" TRequestDto="PartnerOfficeAddDto" SelectedItem="dto => SalesInvoiceDto.PartnerOffice = dto">
                                 <MudField Style="padding: 5px" Label="Naziv poslovnice">@SalesInvoiceDto?.PartnerOffice?.Name</MudField>
                             </LookUpComponent>
                         </MudPaper>
@@ -37,11 +37,11 @@
                 }
             </div>
 
-            <LookUpComponent Style="max-width: 300px" LookUpComponentTitle="Magacin" DialogTitle="Izaberite magacin" TResponseDto="WarehouseDto" TRequestDto="WarehouseAddDto" SelectedItem="dto => SalesInvoiceDto.Warehouse = dto">
+            <LookUpComponent Immediate="true" For="() => SalesInvoiceDto.Warehouse" Style="max-width: 300px" LookUpComponentTitle="Magacin" DialogTitle="Izaberite magacin" TResponseDto="WarehouseDto" TRequestDto="WarehouseAddDto" SelectedItem="dto => SalesInvoiceDto.Warehouse = dto">
                 <MudField Style="padding: 5px" Label="Naziv magacina">@SalesInvoiceDto?.Warehouse?.Name</MudField>
             </LookUpComponent>
-            <MudTextField Lines="3" Style="max-width: 650px" For="() => SalesInvoiceDto.Note" @bind-Text="SalesInvoiceDto.Note" T="string" Label="Napomena" />
 
+            <MudTextField Style="max-width: 650px" For="() => SalesInvoiceDto.Note" @bind-Text="SalesInvoiceDto.Note" T="string" Label="Napomena" />
             <MudDataGrid @ref="_dataGrid"
                          MultiSelection="true"
                          ReadOnly="false"
@@ -62,6 +62,7 @@
                             <MudIconButton Icon="@Icons.Material.Outlined.Remove" OnClick="DeleteSelectedSalesInvoiceItems" />
                         </MudTooltip>
                     </MudToolBar>
+                    <InputValidationLabel Immediate="true" T="List<SalesInvoiceItemDto>" For="() => SalesInvoiceDto.SalesInvoiceItems"></InputValidationLabel>
                 </ToolBarContent>
 
                 <Columns>
@@ -74,9 +75,11 @@
                     </PropertyColumn>
                     <PropertyColumn Title="Roba" T="SalesInvoiceItemDto" TProperty="GoodDto" Property="x => x.Good">
                         <EditTemplate>
-                            <LookUpComponent Style="background: transparent" Mini="true" TRequestDto="GoodAddDto" TResponseDto="GoodDto" SelectedItem="(x) => context.Item.Good = x">
-                                <MudField Style="padding: 5px; background: transparent">@context.Item.Good?.Name</MudField>
-                            </LookUpComponent>
+                            <MudForm Model="@context.Item">
+                                <LookUpComponent For="() => context.Item.Good" Validation="@(salesInvoiceItemDtoValidator.ValidateValue)" Style="background: transparent" Mini="true" TRequestDto="GoodAddDto" TResponseDto="GoodDto" SelectedItem="(x) => {context.Item.Good = x;}">
+                                    <MudField Style="padding: 5px; background: transparent">@context.Item.Good?.Name</MudField>
+                                </LookUpComponent>
+                            </MudForm>
                         </EditTemplate>
                     </PropertyColumn>
                     <PropertyColumn T="SalesInvoiceItemDto" TProperty="string" Property="x => x.Good == null ? null : x.Good.UnitOfMeasure.ShortName" IsEditable="false" Title="JM" />
@@ -90,7 +93,7 @@
                     <PropertyColumn Title="Cena" T="SalesInvoiceItemDto" TProperty="decimal" Property="x => x.Price">
                         <EditTemplate>
                             <MudForm Model="@context.Item">
-                                <MudNumericField T="decimal" Immediate="true" @bind-Value="context.Item.Price" HideSpinButtons="true" />
+                                <MudNumericField T="decimal" For="() => context.Item.Price" Validation="@(salesInvoiceItemDtoValidator.ValidateValue)" Immediate="true" @bind-Value="context.Item.Price" HideSpinButtons="true" />
                             </MudForm>
                         </EditTemplate>
                     </PropertyColumn>

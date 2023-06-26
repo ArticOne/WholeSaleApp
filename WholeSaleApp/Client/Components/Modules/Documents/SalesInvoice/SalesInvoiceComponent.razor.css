@@ -13,9 +13,9 @@
 
 .flex-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .flex-item {
-    flex-grow: 1;
+    margin: 0 10px 0 0;
 }

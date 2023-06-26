@@ -8,13 +8,14 @@ namespace WholeSaleApp.Shared.Validation.Documents.SalesInvoice
     {
         public SalesInvoiceDtoValidator()
         {
-            RuleForEach(x => x.SalesInvoiceItems).SetValidator(new SalesInvoiceItemDtoValidator());
+          //  RuleForEach(x => x.SalesInvoiceItems).SetValidator(new SalesInvoiceItemDtoValidator());
             RuleFor(x => x.Partner).NotNull().WithMessage("Morate odabrati partnera");
             RuleFor(x => x.PartnerOffice)
                 .NotNull()
                 .When(x => x.Partner.PartnerOffices.Any())
-                .WithMessage("PartnerOffice must not be null when Partner has any PartnerOffice");
-
+                .WithMessage("Morate odabrati Poslovnicu");
+            RuleFor(x => x.Warehouse).NotNull().WithMessage("Morate odabrati magacin");
+            RuleFor(x => x.SalesInvoiceItems).NotNull().NotEmpty().WithMessage("Morate uneti barem jednu stavku").WithErrorCode("ItemCount");
         }
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model,propertyName) =>
         {
@@ -27,12 +28,15 @@ namespace WholeSaleApp.Shared.Validation.Documents.SalesInvoice
     {
         public SalesInvoiceItemDtoValidator()
         {
+            RuleFor(x => x.OrdinalNumber).GreaterThan(0).WithMessage("Redni broj mora biti veća od 0");
             RuleFor(x => x.Quantity).GreaterThan(0).WithMessage("Količina mora biti veća od 0");
+            RuleFor(x => x.Price).GreaterThan(0).WithMessage("Cena mora biti veća od 0");
+            RuleFor(x => x.Good).NotNull().WithMessage("Morate odabrati robu");
         }
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
         {
-            propertyName = "Quantity";
+            propertyName = propertyName.Replace("Item.", "");
             var result = await ValidateAsync(ValidationContext<SalesInvoiceItemDto>.CreateWithOptions((SalesInvoiceItemDto)model, x => x.IncludeProperties(propertyName)));
             return result.IsValid ? Array.Empty<string>() : result.Errors.Select(e => e.ErrorMessage);
         };

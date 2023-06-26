@@ -1,0 +1,6 @@
+﻿@typeparam T
+@inherits MudBaseInput<T>
+@if (Error)
+{
+    <MudAlert Severity="Severity.Error">@ErrorText</MudAlert>
+}

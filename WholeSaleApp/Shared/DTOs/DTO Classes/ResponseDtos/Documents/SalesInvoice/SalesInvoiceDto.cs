@@ -12,7 +12,7 @@ namespace WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoi
         public PartnerOfficeDto PartnerOffice { get; set; }
         public int WarehouseId { get; set; }
         public WarehouseDto Warehouse { get; set; }
-        public string Note { get; set; }
+        public string Note { get; set; } = "";
         public List<SalesInvoiceItemDto> SalesInvoiceItems { get; set; } = new();
     }
 }

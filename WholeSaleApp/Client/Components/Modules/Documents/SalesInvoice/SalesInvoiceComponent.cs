@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using WholeSaleApp.Client.Components.Modules.CrudComponentBase;
 using WholeSaleApp.Client.Interfaces;
-using WholeSaleApp.Shared.DTOs.CodeBook;
-using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.CodeBook;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.SalesInvoice;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice;
 using WholeSaleApp.Shared.Validation.Documents.SalesInvoice;
