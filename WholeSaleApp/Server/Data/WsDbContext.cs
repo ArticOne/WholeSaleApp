@@ -106,7 +106,7 @@ namespace WholeSaleApp.Server.Data
                 .HasIndex(x => x.Name).IsUnique();
 
             modelBuilder.Entity<EntityColumn>()
-                .HasIndex(x => new { x.EntityGridId, x.ColumnName}).IsUnique(false);
+                .HasIndex(x => new { x.EntityGridId, x.PropertyName}).IsUnique(false);
 
             modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<Partner>().Navigation(x => x.PartnerOffices).AutoInclude();
@@ -132,6 +132,8 @@ namespace WholeSaleApp.Server.Data
             modelBuilder.Entity<GoodsReceivedNote>().Navigation(x => x.PartnerOffice).AutoInclude();
 
             modelBuilder.Entity<VatType>().Navigation(x => x.Vats).AutoInclude();
+
+            modelBuilder.Entity<EntityGrid>().Navigation(x => x.EntityColumns).AutoInclude();
         }
     }
 }

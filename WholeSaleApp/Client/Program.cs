@@ -19,6 +19,7 @@ namespace WholeSaleApp.Client
             builder.Services.AddHttpClient();
             builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             builder.Services.AddScoped<IMenuItemsRepository, MenuItemsRepository>();
+            builder.Services.AddScoped<IEntityGridRepository, EntityGridRepository>();
             builder.Services.AddAutoMapper(typeof(BaseDto).Assembly);
             builder.Services.AddMudServices();
 

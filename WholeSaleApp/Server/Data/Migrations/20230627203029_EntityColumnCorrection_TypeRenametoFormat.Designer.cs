@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WholeSaleApp.Server.Data;
 
@@ -11,9 +12,11 @@ using WholeSaleApp.Server.Data;
 namespace WholeSaleApp.Server.Migrations
 {
     [DbContext(typeof(WsDbContext))]
-    partial class WsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230627203029_EntityColumnCorrection_TypeRenametoFormat")]
+    partial class EntityColumnCorrection_TypeRenametoFormat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -398,9 +401,9 @@ namespace WholeSaleApp.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ColumnDisplayName")
+                    b.Property<string>("ColumnName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("EntityGridId")
                         .HasColumnType("int");
@@ -408,10 +411,6 @@ namespace WholeSaleApp.Server.Migrations
                     b.Property<string>("Format")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PropertyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Visible")
                         .HasColumnType("bit");
@@ -421,7 +420,7 @@ namespace WholeSaleApp.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EntityGridId", "PropertyName");
+                    b.HasIndex("EntityGridId", "ColumnName");
 
                     b.ToTable("EntityColumns");
                 });

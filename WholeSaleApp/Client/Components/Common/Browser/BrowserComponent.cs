@@ -7,7 +7,7 @@ using System.Reflection;
 using WholeSaleApp.Client.Helpers;
 using WholeSaleApp.Client.Interfaces;
 using WholeSaleApp.Shared.DTOs;
-
+using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.UI;
 
 namespace WholeSaleApp.Client.Components.Common.Browser
 {
@@ -16,27 +16,35 @@ namespace WholeSaleApp.Client.Components.Common.Browser
         [Inject] private IDialogService DialogService { get; set; }
 #warning "FIX THIS!"
         [Inject] private IGenericRepository<T, TAddDto> Repository { get; set; }
-
+        [Inject] private IEntityGridRepository EntityGridRepository { get; set; }
         [Inject] private NavigationManager NavManager { get; set; }
         private ObservableCollection<T> GridSource { get; set; }
         private MudDataGrid<T> _dataGrid;
         private Dictionary<PropertyInfo, RenderFragment> columnFragments = new();
-
+        private EntityGridDto? EntityGrid { get; set; }
         protected override void OnInitialized()
         {
             GridSource = new ObservableCollection<T>();
             base.OnInitialized();
         }
 
+
         protected override async Task OnInitializedAsync()
         {
+            EntityGrid = await EntityGridRepository.GetByNameAsync(typeof(T).Name);
             GridSource = new ObservableCollection<T>(await Repository.GetAsync());
             await base.OnInitializedAsync();
+            StateHasChanged();
         }
 
         private IEnumerable<PropertyInfo> GetPropertiesForDisplay()
         {
-            return typeof(T).GetProperties();
+            if (EntityGrid == null) return Enumerable.Empty<PropertyInfo>();
+            var allProperties = typeof(T).GetProperties();
+            var propsToReturn = allProperties
+                .Where(x => EntityGrid.EntityColumns.Any(y => y.PropertyName == x.Name && y.Visible))
+                .ToList();
+            return propsToReturn;
         }
 
         private RenderFragment CreateComponent(PropertyInfo propInfo) => builder =>
@@ -53,7 +61,6 @@ namespace WholeSaleApp.Client.Components.Common.Browser
             //    // Create a lambda expression of the latest call & compile it
             //    return Expression.Lambda<Func<T, U>>(propertyObjExpr, objParameterExpr);
 
-
             var parameterExpression = Expression.Parameter(typeof(T), "x");
             var propertyAccess = Expression.Property(parameterExpression, propInfo.Name);
             var lambdaMethod = typeof(Expression).GetMethod("Lambda", 1,
@@ -67,6 +74,8 @@ namespace WholeSaleApp.Client.Components.Common.Browser
             builder.OpenComponent(0,
                 typeof(PropertyColumn<,>).MakeGenericType(new[] { typeof(T), propInfo.PropertyType }));
             builder.AddAttribute(1, "Property", expression);
+            var title = EntityGrid?.EntityColumns?.FirstOrDefault(x => x.PropertyName == propInfo.Name).ColumnDisplayName;
+            if (title != null) builder.AddAttribute(2, "Title", title);
             builder.CloseComponent();
 
         };

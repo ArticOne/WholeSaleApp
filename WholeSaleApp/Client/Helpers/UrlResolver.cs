@@ -6,7 +6,9 @@ using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.Documents.SalesInvoice;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.RequestDtos.UI;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.GoodsReceivedNote;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.Documents.SalesInvoice;
+using WholeSaleApp.Shared.DTOs.DTO_Classes.ResponseDtos.UI;
 using WholeSaleApp.Shared.DTOs.DTO_Classes.UI;
+using WholeSaleApp.Shared.Model.UI;
 
 namespace WholeSaleApp.Client.Helpers
 {
@@ -28,6 +30,7 @@ namespace WholeSaleApp.Client.Helpers
                 Type unitOfMeasureDto when unitOfMeasureDto == typeof(UnitOfMeasureDto) => "UnitsOfMeasure",
                 Type goodsReceivedNoteDto when goodsReceivedNoteDto == typeof(GoodsReceivedNoteDto) => "GoodsReceivedNotes",
                 Type salesInvoiceDto when salesInvoiceDto == typeof(SalesInvoiceDto) => "SalesInvoices",
+                Type entityGridDto when entityGridDto == typeof(EntityGridDto) => "EntityGrids",
                 _ => throw new Exception($"Url section is not configured for type {typeof(T).Name}")
             };
         }
@@ -47,6 +50,7 @@ namespace WholeSaleApp.Client.Helpers
                 "UnitsOfMeasure" => !isAddDto ? typeof(UnitOfMeasureDto) : typeof(UnitOfMeasureAddDto),
                 "GoodsReceivedNotes" => !isAddDto ? typeof(GoodsReceivedNoteDto) : typeof(GoodsReceivedNoteAddDto),
                 "SalesInvoices" => !isAddDto ? typeof(SalesInvoiceDto) : typeof(SalesInvoiceAddDto),
+                "EntityGrids" => !isAddDto ? typeof(EntityGridDto) : typeof(EntityGrid),
                 _ => throw new Exception($"Type is not configured for Url part: {urlPart}")
             };
         }
