@@ -52,9 +52,8 @@ namespace WholeSaleApp.Server.Controllers
         [HttpPut("/api/[controller]/{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] TRequestDto updatedDto)
         {
-            var modelToUpdate = _mapper.Map<TModel>(updatedDto);
-            modelToUpdate.Id = id;
-            _db.Update(modelToUpdate);
+            var entity = await _db.Set<TModel>().FindAsync(id);
+            _mapper.Map(updatedDto,entity);
             await _db.SaveChangesAsync();
             return Ok();
         }

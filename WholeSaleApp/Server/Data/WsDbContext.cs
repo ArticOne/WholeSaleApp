@@ -21,6 +21,8 @@ namespace WholeSaleApp.Server.Data
         public DbSet<GoodsReceivedNote> GoodsReceivedNotes { get; set; }
         public DbSet<SalesInvoice> SalesInvoices { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<EntityGrid> EntityGrids { get; set; }
+        public DbSet<EntityColumn> EntityColumns { get; set; }
 
         public WsDbContext(IConfiguration config)
         {
@@ -94,6 +96,17 @@ namespace WholeSaleApp.Server.Data
             modelBuilder.Entity<GoodsReceivedNote>()
                 .Property(e => e.Date)
                 .HasDefaultValueSql("getDate()");
+
+            modelBuilder.Entity<EntityGrid>()
+                .HasMany(x => x.EntityColumns)
+                .WithOne(x => x.EntityGrid)
+                .HasForeignKey(x => x.EntityGridId);
+
+            modelBuilder.Entity<EntityGrid>()
+                .HasIndex(x => x.Name).IsUnique();
+
+            modelBuilder.Entity<EntityColumn>()
+                .HasIndex(x => new { x.EntityGridId, x.ColumnName}).IsUnique(false);
 
             modelBuilder.Entity<Partner>().Navigation(x => x.Location).AutoInclude();
             modelBuilder.Entity<Partner>().Navigation(x => x.PartnerOffices).AutoInclude();
